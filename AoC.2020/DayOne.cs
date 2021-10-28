@@ -2,7 +2,7 @@
 
 namespace AoC._2020
 {
-    public class DayOne
+    public class DayOne: IDay
     {
         public string Title => "--- Day 1: Report Repair ---";
 
