@@ -2,7 +2,7 @@
 
 namespace AoC._2020
 {
-    public class DayOne: IDay
+    public class DayOne : IDay
     {
         public string Title => "--- Day 1: Report Repair ---";
 
@@ -40,7 +40,7 @@ namespace AoC._2020
                 {
                     var secondValue = inputAsInts[j];
 
-                    for (int k = 0; k < inputAsInts.Count(); k++)
+                    for (var k = 0; k < inputAsInts.Count(); k++)
                     {
                         var thirdValue = inputAsInts[k];
 
