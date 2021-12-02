@@ -43,7 +43,7 @@ namespace AoC.UnitTests.AoC._2020
 
             var actual = _underTest.PartOne(input);
 
-            actual.Should().Be(636);
+            actual.Should().Be(265);
         }
     }
 }

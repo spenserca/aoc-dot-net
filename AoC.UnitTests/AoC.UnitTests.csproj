@@ -22,6 +22,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\AoC.2020\AoC.2020.csproj" />
+        <ProjectReference Include="..\AoC.2021\AoC.2021.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -32,6 +33,9 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="AoC.2020\Data\DayThree.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="AoC.2021\Data\DayOne.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>
