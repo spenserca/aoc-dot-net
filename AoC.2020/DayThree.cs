@@ -1,4 +1,4 @@
-﻿using System;
+﻿using AoC.Common;
 
 namespace AoC._2020
 {
@@ -9,9 +9,6 @@ namespace AoC._2020
         public object PartOne(string[] input)
         {
             var x = 3;
-            var xSlope = 3;
-            var y = 0;
-            var ySlope = 1;
             var treeCount = 0;
 
             // start on second line
