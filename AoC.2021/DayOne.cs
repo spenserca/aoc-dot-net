@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AoC.Common;
 
@@ -27,7 +28,18 @@ namespace AoC._2021
 
         public object PartTwo(string[] input)
         {
-            throw new System.NotImplementedException();
+            var slidingWindowValues = new List<string>();
+
+            for (var i = 0; i < input.Length - 2; i++)
+            {
+                var firstValue = Convert.ToInt32(input[i]);
+                var secondValue = Convert.ToInt32(input[i + 1]);
+                var thirdValue = Convert.ToInt32(input[i + 2]);
+
+                slidingWindowValues.Add((firstValue + secondValue + thirdValue).ToString());
+            }
+
+            return PartOne(slidingWindowValues.ToArray());
         }
     }
 }
