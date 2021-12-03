@@ -6,7 +6,7 @@ namespace AoC.UnitTests.AoC._2021
 {
     public class DayOneTests
     {
-        private DayOne _underTest;
+        private readonly DayOne _underTest;
 
         public DayOneTests()
         {
