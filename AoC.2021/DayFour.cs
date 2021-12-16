@@ -17,7 +17,11 @@ public class DayFour : IDay
 
     public object PartTwo(string[] input)
     {
-        throw new NotImplementedException();
+        var bingoCards = new BingoGame(input).RunGame();
+        var firstWinnerTurn = bingoCards.Max(bc => bc.LastTurn);
+        var winningCard = bingoCards.Single(bc => bc.LastTurn == firstWinnerTurn);
+
+        return winningCard.GetScore();
     }
 
     private class BingoGame
