@@ -8,7 +8,11 @@ public class DayFour : IDay
 
     public object PartOne(string[] input)
     {
-        return new BingoGame(input).RunGame();
+        var bingoCards = new BingoGame(input).RunGame();
+        var firstWinnerTurn = bingoCards.Min(bc => bc.LastTurn);
+        var winningCard = bingoCards.Single(bc => bc.LastTurn == firstWinnerTurn);
+
+        return winningCard.GetScore();
     }
 
     public object PartTwo(string[] input)
@@ -44,27 +48,27 @@ public class DayFour : IDay
             }
         }
 
-        public int RunGame()
+        public List<BingoCard> RunGame()
         {
-            foreach (var bingoNumber in _bingoNumbers)
+            for (int i = 0; i < _bingoNumbers.Count; i++)
             {
+                var bingoNumber = _bingoNumbers[i];
                 foreach (var bingoBoard in _bingoCards)
                 {
-                    bingoBoard.MarkCardForBingoNumber(bingoNumber);
-
-                    if (bingoBoard.HasBingo())
+                    if (!bingoBoard.HasBingo())
                     {
-                        return bingoBoard.GetScore();
+                        bingoBoard.MarkCardForBingoNumber(bingoNumber, i);
                     }
                 }
             }
 
-            return -1;
+            return _bingoCards;
         }
     }
 
     private class BingoCard
     {
+        public int LastTurn;
         private const string Marker = "X";
         private readonly List<List<string>> _board = new();
         private int _lastMarkedNumber;
@@ -74,13 +78,14 @@ public class DayFour : IDay
             rows.ForEach(row => { _board.Add(row.Split(' ').Where(v => v != string.Empty).ToList()); });
         }
 
-        public void MarkCardForBingoNumber(string bingoNumber)
+        public void MarkCardForBingoNumber(string bingoNumber, int turn)
         {
             _board.ForEach(r =>
             {
                 var indexOfBingoNumber = r.IndexOf(bingoNumber);
                 if (indexOfBingoNumber != -1)
                 {
+                    LastTurn = turn;
                     _lastMarkedNumber = Convert.ToInt32(bingoNumber);
                     r[indexOfBingoNumber] = Marker;
                 }
