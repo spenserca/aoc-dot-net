@@ -1,48 +1,48 @@
-﻿using AoC.Common;
+﻿using System;
+using AoC.Common;
 
-namespace AoC._2020
+namespace AoC._2020;
+
+public class DayThree : IDay
 {
-    public class DayThree : IDay
+    public string Title => "--- Day 3: Toboggan Trajectory ---";
+
+    public object PartOne(string[] input)
     {
-        public string Title => "--- Day 3: Toboggan Trajectory ---";
+        var x = 3;
+        var treeCount = 0;
 
-        public object PartOne(string[] input)
+        // start on second line
+        for (var i = 1; i < input.Length; i++)
         {
-            var x = 3;
-            var treeCount = 0;
+            var line = input[i];
+            var location = line[x];
+            var tree = '#';
 
-            // start on second line
-            for (int i = 1; i < input.Length; i++)
+            if (location == tree)
             {
-                var line = input[i];
-                var location = line[x];
-                var tree = '#';
-
-                if (location == tree)
-                {
-                    treeCount++;
-                }
-
-                x = MoveHorizontally(x, line.Length);
+                treeCount++;
             }
 
-            return treeCount;
+            x = MoveHorizontally(x, line.Length);
         }
 
-        private static int MoveHorizontally(int currentLocation, int wrapPoint)
+        return treeCount;
+    }
+
+    public object PartTwo(string[] input)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static int MoveHorizontally(int currentLocation, int wrapPoint)
+    {
+        currentLocation += 3;
+        if (currentLocation >= wrapPoint)
         {
-            currentLocation += 3;
-            if (currentLocation >= wrapPoint)
-            {
-                currentLocation -= wrapPoint;
-            }
-
-            return currentLocation;
+            currentLocation -= wrapPoint;
         }
 
-        public object PartTwo(string[] input)
-        {
-            throw new System.NotImplementedException();
-        }
+        return currentLocation;
     }
 }

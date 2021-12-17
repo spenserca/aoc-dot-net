@@ -1,59 +1,58 @@
 ﻿using System.Linq;
 using AoC.Common;
 
-namespace AoC._2020
+namespace AoC._2020;
+
+public class DayOne : IDay
 {
-    public class DayOne : IDay
+    public string Title => "--- Day 1: Report Repair ---";
+
+    public object PartOne(string[] input)
     {
-        public string Title => "--- Day 1: Report Repair ---";
+        var inputAsInts = input.Select(int.Parse).ToList();
 
-        public object PartOne(string[] input)
+        for (var i = 0; i < inputAsInts.Count(); i++)
         {
-            var inputAsInts = input.Select(int.Parse).ToList();
+            var currentValue = inputAsInts[i];
 
-            for (var i = 0; i < inputAsInts.Count(); i++)
+            for (var j = i + 1; j < inputAsInts.Count(); j++)
             {
-                var currentValue = inputAsInts[i];
+                var nextValue = inputAsInts[j];
 
-                for (var j = i + 1; j < inputAsInts.Count(); j++)
+                if (currentValue + nextValue == 2020)
                 {
-                    var nextValue = inputAsInts[j];
+                    return currentValue * nextValue;
+                }
+            }
+        }
 
-                    if (currentValue + nextValue == 2020)
+        return -1;
+    }
+
+    public object PartTwo(string[] input)
+    {
+        var inputAsInts = input.Select(int.Parse).ToList();
+
+        for (var i = 0; i < inputAsInts.Count() - 2; i++)
+        {
+            var firstValue = inputAsInts[i];
+
+            for (var j = i + 1; j < inputAsInts.Count() - 1; j++)
+            {
+                var secondValue = inputAsInts[j];
+
+                for (var k = 0; k < inputAsInts.Count(); k++)
+                {
+                    var thirdValue = inputAsInts[k];
+
+                    if (firstValue + secondValue + thirdValue == 2020)
                     {
-                        return currentValue * nextValue;
+                        return firstValue * secondValue * thirdValue;
                     }
                 }
             }
-
-            return -1;
         }
 
-        public object PartTwo(string[] input)
-        {
-            var inputAsInts = input.Select(int.Parse).ToList();
-
-            for (var i = 0; i < inputAsInts.Count() - 2; i++)
-            {
-                var firstValue = inputAsInts[i];
-
-                for (var j = i + 1; j < inputAsInts.Count() - 1; j++)
-                {
-                    var secondValue = inputAsInts[j];
-
-                    for (var k = 0; k < inputAsInts.Count(); k++)
-                    {
-                        var thirdValue = inputAsInts[k];
-
-                        if (firstValue + secondValue + thirdValue == 2020)
-                        {
-                            return firstValue * secondValue * thirdValue;
-                        }
-                    }
-                }
-            }
-
-            return -1;
-        }
+        return -1;
     }
 }

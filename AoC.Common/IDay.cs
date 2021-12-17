@@ -1,9 +1,8 @@
-﻿namespace AoC.Common
+﻿namespace AoC.Common;
+
+public interface IDay
 {
-    public interface IDay
-    {
-        public string Title { get; }
-        public object PartOne(string[] input);
-        public object PartTwo(string[] input);
-    }   
+    public string Title { get; }
+    public object PartOne(string[] input);
+    public object PartTwo(string[] input);
 }

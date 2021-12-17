@@ -26,15 +26,15 @@ public class DayFour : IDay
 
     private class BingoGame
     {
-        private readonly List<string> _bingoNumbers;
         private readonly List<BingoCard> _bingoCards = new();
+        private readonly List<string> _bingoNumbers;
 
         public BingoGame(string[] input)
         {
             _bingoNumbers = input.First().Split(',').ToList();
 
             var rows = new List<string>();
-            for (int i = 2; i < input.Length; i++)
+            for (var i = 2; i < input.Length; i++)
             {
                 var row = input[i];
                 var isBingoRow = !row.Equals(string.Empty);
@@ -54,7 +54,7 @@ public class DayFour : IDay
 
         public List<BingoCard> RunGame()
         {
-            for (int i = 0; i < _bingoNumbers.Count; i++)
+            for (var i = 0; i < _bingoNumbers.Count; i++)
             {
                 var bingoNumber = _bingoNumbers[i];
                 foreach (var bingoBoard in _bingoCards)
@@ -72,10 +72,10 @@ public class DayFour : IDay
 
     private class BingoCard
     {
-        public int LastTurn;
         private const string Marker = "X";
         private readonly List<List<string>> _board = new();
         private int _lastMarkedNumber;
+        public int LastTurn;
 
         public BingoCard(List<string> rows)
         {
@@ -106,7 +106,7 @@ public class DayFour : IDay
 
         public bool HasBingo()
         {
-            for (int i = 0; i < _board.Count; i++)
+            for (var i = 0; i < _board.Count; i++)
             {
                 var row = _board[i];
                 var column = new List<string>();

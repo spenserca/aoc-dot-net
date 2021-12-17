@@ -36,7 +36,7 @@ public class DayFourTests
             "10 16 15  9 19",
             "18  8 23 26 20",
             "22 11 13  6  5",
-            "2  0 12  3  7",
+            "2  0 12  3  7"
         };
 
         var actual = _underTest.PartOne(input);
@@ -48,9 +48,9 @@ public class DayFourTests
     public void DayFourPartOneTest_Two()
     {
         var input = FileReader.ReadAllLines(@"AoC.2021/Data/DayFour.txt");
-    
+
         var actual = _underTest.PartOne(input);
-    
+
         actual.Should().Be(55770);
     }
 
@@ -77,21 +77,21 @@ public class DayFourTests
             "10 16 15  9 19",
             "18  8 23 26 20",
             "22 11 13  6  5",
-            "2  0 12  3  7",
+            "2  0 12  3  7"
         };
-    
+
         var actual = _underTest.PartTwo(input);
-    
+
         actual.Should().Be(1924);
     }
-    
+
     [Fact(DisplayName = "day four part two with puzzle input gets the correct answer")]
     public void DayFourPartTwoTest_Two()
     {
         var input = FileReader.ReadAllLines(@"AoC.2021/Data/DayFour.txt");
-    
+
         var actual = _underTest.PartTwo(input);
-    
+
         actual.Should().Be(2980);
     }
 }

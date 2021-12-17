@@ -18,11 +18,30 @@ public class DayFive : IDay
             .Count(c => c.Value >= 2);
     }
 
-    private static bool IsStraightLine(Line line) => IsVerticalLine(line) || IsHorizontalLine(line);
+    public object PartTwo(string[] input)
+    {
+        return input.Select(ToLine)
+            .Select(ToCoordinates)
+            .SelectMany(c => c)
+            .GroupBy(c => c.ToString())
+            .ToDictionary(g => g.Key, g => g.Count())
+            .Count(c => c.Value >= 2);
+    }
 
-    private static bool IsHorizontalLine(Line line) => line.Start.Y == line.End.Y;
+    private static bool IsStraightLine(Line line)
+    {
+        return IsVerticalLine(line) || IsHorizontalLine(line);
+    }
 
-    private static bool IsVerticalLine(Line line) => line.Start.X == line.End.X;
+    private static bool IsHorizontalLine(Line line)
+    {
+        return line.Start.Y == line.End.Y;
+    }
+
+    private static bool IsVerticalLine(Line line)
+    {
+        return line.Start.X == line.End.X;
+    }
 
     private static Line ToLine(string lineDefinition)
     {
@@ -57,8 +76,7 @@ public class DayFive : IDay
                 }
             }
         }
-
-        if (IsHorizontalLine(line))
+        else if (IsHorizontalLine(line))
         {
             var y = line.Start.Y;
             var endX = line.End.X;
@@ -78,6 +96,49 @@ public class DayFive : IDay
                 }
             }
         }
+        else
+        {
+            var startX = line.Start.X;
+            var endX = line.End.X;
+            if (startX < endX)
+            {
+                var startY = line.Start.Y;
+                var endY = line.End.Y;
+                if (startY < endY)
+                {
+                    for (var (x, y) = (startX, startY); x <= endX && y <= endY; x++, y++)
+                    {
+                        coordinates.Add(new Coordinate(x, y));
+                    }
+                }
+                else
+                {
+                    for (var (x, y) = (startX, startY); x <= endX && y >= endY; x++, y--)
+                    {
+                        coordinates.Add(new Coordinate(x, y));
+                    }
+                }
+            }
+            else
+            {
+                var startY = line.Start.Y;
+                var endY = line.End.Y;
+                if (startY < endY)
+                {
+                    for (var (x, y) = (startX, startY); x >= endX && y <= endY; x--, y++)
+                    {
+                        coordinates.Add(new Coordinate(x, y));
+                    }
+                }
+                else
+                {
+                    for (var (x, y) = (startX, startY); x >= endX && y >= endY; x--, y--)
+                    {
+                        coordinates.Add(new Coordinate(x, y));
+                    }
+                }
+            }
+        }
 
         return coordinates;
     }
@@ -88,11 +149,6 @@ public class DayFive : IDay
             .Select(v => Convert.ToInt32(v)).ToArray();
 
         return new Coordinate(values[0], values[1]);
-    }
-
-    public object PartTwo(string[] input)
-    {
-        throw new NotImplementedException();
     }
 
     private record Coordinate(int X, int Y);
