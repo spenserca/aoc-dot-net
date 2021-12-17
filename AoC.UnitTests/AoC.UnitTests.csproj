@@ -47,6 +47,9 @@
         <None Update="AoC.2021\Data\DayFour.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="AoC.2021\Data\DayFive.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>
