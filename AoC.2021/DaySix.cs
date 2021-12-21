@@ -20,45 +20,50 @@ public class DaySix : IDay
 
     public object PartTwo(string[] input)
     {
-        throw new NotImplementedException();
+        var lanternFishSchool = new LanternFishSchool(input);
+
+        for (var i = 0; i < 256; i++)
+        {
+            lanternFishSchool.SimulateDay();
+        }
+
+        return lanternFishSchool.Count();
     }
 
     private class LanternFishSchool
     {
-        private const int NewFishDaysToReproduce = 8;
-        private const int ExistingFishDaysToReproduce = 6;
-        private IEnumerable<int> _lanternFish;
+        private readonly List<long> _fishWithGivenDaysToReproduction;
 
         public LanternFishSchool(string[] lanternFish)
         {
-            _lanternFish = lanternFish.Select(i => Convert.ToInt32(i));
+            _fishWithGivenDaysToReproduction = new List<long>()
+            {
+                0L,
+                0L,
+                0L,
+                0L,
+                0L,
+                0L,
+                0L,
+                0L,
+                0L
+            };
+
+            lanternFish.Select(i => Convert.ToInt32(i)).ToList()
+                .ForEach(lf => { _fishWithGivenDaysToReproduction[lf] += 1; });
         }
 
         public void SimulateDay()
         {
-            var newSchool = new List<int>();
-
-            foreach (var i in _lanternFish)
-            {
-                if (i == 0)
-                {
-                    newSchool.Add(NewFishDaysToReproduce);
-                    newSchool.Add(ExistingFishDaysToReproduce);
-                }
-                else
-                {
-                    var daysToReproduction = i - 1;
-
-                    newSchool.Add(daysToReproduction);
-                }
-            }
-
-            _lanternFish = newSchool;
+            var countOfReproducingFish = _fishWithGivenDaysToReproduction[0];
+            _fishWithGivenDaysToReproduction.RemoveAt(0);
+            _fishWithGivenDaysToReproduction[6] += countOfReproducingFish;
+            _fishWithGivenDaysToReproduction.Add(countOfReproducingFish);
         }
 
-        public int Count()
+        public long Count()
         {
-            return _lanternFish.Count();
+            return _fishWithGivenDaysToReproduction.Sum();
         }
     }
 }

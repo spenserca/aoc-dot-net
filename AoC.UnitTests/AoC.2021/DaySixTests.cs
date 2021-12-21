@@ -40,36 +40,31 @@ public class DaySixTests
         actual.Should().Be(345793);
     }
     
-    // [Fact(DisplayName =
-    //     "day six part two counts the number of points that are overlapped by 2+ lines including diagonals")]
-    // public void DaySixPartTwoTest_One()
-    // {
-    //     var input = new[]
-    //     {
-    //         "0,9 -> 5,9",
-    //         "8,0 -> 0,8",
-    //         "9,4 -> 3,4",
-    //         "2,2 -> 2,1",
-    //         "7,0 -> 7,4",
-    //         "6,4 -> 2,0",
-    //         "0,9 -> 2,9",
-    //         "3,4 -> 1,4",
-    //         "0,0 -> 8,8",
-    //         "5,5 -> 8,2"
-    //     };
-    //
-    //     var actual = _underTest.PartTwo(input);
-    //
-    //     actual.Should().Be(12);
-    // }
-    //
-    // [Fact(DisplayName = "day six part two with puzzle input gets the correct answer")]
-    // public void DaySixPartTwoTest_Two()
-    // {
-    //     var input = FileReader.ReadAllLines(@"AoC.2021/Data/DaySix.txt");
-    //
-    //     var actual = _underTest.PartTwo(input);
-    //
-    //     actual.Should().Be(19663);
-    // }
+    [Fact(DisplayName =
+        "day six part two calculates the number of lanternfish after 256 days")]
+    public void DaySixPartTwoTest_One()
+    {
+        var input = new[]
+        {
+            "3",
+            "4",
+            "3",
+            "1",
+            "2"
+        };
+    
+        var actual = _underTest.PartTwo(input);
+    
+        actual.Should().Be(26984457539);
+    }
+    
+    [Fact(DisplayName = "day six part two with puzzle input gets the correct answer")]
+    public void DaySixPartTwoTest_Two()
+    {
+        var input = FileReader.ReadAllLines(@"AoC.2021/Data/DaySix.txt");
+    
+        var actual = _underTest.PartTwo(input);
+    
+        actual.Should().Be(1572643095893L);
+    }
 }
