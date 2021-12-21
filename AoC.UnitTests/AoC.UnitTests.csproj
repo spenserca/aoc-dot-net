@@ -7,9 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="6.2.0"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1"/>
-        <PackageReference Include="xunit" Version="2.4.1"/>
+        <PackageReference Include="FluentAssertions" Version="6.2.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+        <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -21,8 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AoC.2020\AoC.2020.csproj"/>
-        <ProjectReference Include="..\AoC.2021\AoC.2021.csproj"/>
+        <ProjectReference Include="..\AoC.2020\AoC.2020.csproj" />
+        <ProjectReference Include="..\AoC.2021\AoC.2021.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -49,6 +49,9 @@
         </None>
         <None Update="AoC.2021\Data\DayFive.txt">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="AoC.2021\Data\DaySix.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>
 
