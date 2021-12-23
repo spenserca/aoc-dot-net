@@ -43,7 +43,7 @@ public class DayEightTests
 
         var actual = _underTest.PartOne(input);
 
-        actual.Should().Be(348996);
+        actual.Should().Be(310);
     }
 
     // [Fact(DisplayName =
