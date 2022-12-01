@@ -6,7 +6,8 @@ namespace AoC.UnitTests.AoC._2022;
 
 public class DayOneTests
 {
-    private DayOne _underTest;
+    private readonly DayOne _underTest;
+    private const string TestDataFile = @"AoC.2022/Data/DayOne.txt";
 
     public DayOneTests()
     {
@@ -42,10 +43,46 @@ public class DayOneTests
     [Fact(DisplayName = "calculates the most calories held by a single elf with actual input")]
     public void DayOnePartOne_ActualInput()
     {
-        var input = FileReader.ReadAllLines(@"AoC.2022/Data/DayOne.txt");
+        var input = FileReader.ReadAllLines(TestDataFile);
 
         var actual = _underTest.PartOne(input);
 
-        actual.Should().Be(1);
+        actual.Should().Be(69206);
+    }
+
+    [Fact(DisplayName = "calculates the total calories held by the elves with the top 3 most calories with test input")]
+    public void DayOnePartTwo_TestInput()
+    {
+        var input = new[]
+        {
+            "1000",
+            "2000",
+            "3000",
+            "",
+            "4000",
+            "",
+            "5000",
+            "6000",
+            "",
+            "7000",
+            "8000",
+            "9000",
+            "",
+            "10000"
+        };
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(45000);
+    }
+
+    [Fact(DisplayName = "calculates the total calories held by the elves with the top 3 most calories with actual input")]
+    public void DayOnePartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(197400);
     }
 }
