@@ -11,7 +11,7 @@ public class DayOne : IDay
         var mostCalories = 0;
         var currentElfCalories = 0;
 
-        for (int i = 0; i < input.Length; i++)
+        for (var i = 0; i < input.Length; i++)
         {
             var elvesCalories = input[i];
             if (elvesCalories == string.Empty)
@@ -37,7 +37,7 @@ public class DayOne : IDay
         var summedElvesCalories = new List<int>();
         var currentElfCalories = 0;
 
-        for (int i = 0; i < input.Length; i++)
+        for (var i = 0; i < input.Length; i++)
         {
             var elvesCalories = input[i];
             if (elvesCalories == string.Empty)
