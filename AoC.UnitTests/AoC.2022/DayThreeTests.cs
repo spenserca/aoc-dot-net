@@ -39,6 +39,34 @@ public class DayThreeTests
 
         var actual = _underTest.PartOne(input);
 
-        actual.Should().Be(157);
+        actual.Should().Be(8085);
+    }
+    
+    [Fact(DisplayName = "calculates the sum of priorities of badges for the elf group with test input")]
+    public void DayThreePartTwo_TestInput()
+    {
+        var input = new[]
+        {
+            "vJrwpWtwJgWrhcsFMMfFFhFp",
+            "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+            "PmmdzqPrVvPwwTWBwg",
+            "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+            "ttgJtRGJQctTZtZT",
+            "CrZsJsPPZsGzwwsLwLmpwMDw",
+        };
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(70);
+    }
+    
+    [Fact(DisplayName = "calculates the sum of priorities of badges for the elf group with actual input")]
+    public void DayThreePartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(2515);
     }
 }
