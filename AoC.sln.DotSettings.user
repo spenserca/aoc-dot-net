@@ -4,8 +4,7 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.DayOneTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.DayTwoTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.DayThreeTests.DayThreePartOne_TestInput&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.DayThreeTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.Day04Tests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
