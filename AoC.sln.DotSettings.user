@@ -1,12 +1,12 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/SolutionBuilderNext/FileVerbosityLevel/@EntryValue">Diagnostic</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9e28ef1e_002Da502_002D47c9_002Da315_002D17286db82ba2/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.DayOneTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.DayTwoTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.Day04Tests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1ea63e23_002Df67c_002D4a7d_002Db9dc_002Ddc7a9f098a0a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;And&gt;&#xD;
+    &lt;Project Location="C:\Users\756316\developer\personal\aoc-dot-net\AoC.UnitTests" Presentation="&amp;lt;AoC.UnitTests&amp;gt;" /&gt;&#xD;
+    &lt;Namespace&gt;AoC.UnitTests.AoC._2022&lt;/Namespace&gt;&#xD;
+  &lt;/And&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
 	
 	
 	
