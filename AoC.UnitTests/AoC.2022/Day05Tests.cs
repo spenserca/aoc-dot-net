@@ -44,4 +44,35 @@ public class Day05Tests
 
         actual.Should().Be("PSNRGBTFT");
     }
+
+    [Fact(DisplayName = "determines which crates are on top after rearrangement using the CrateMover 9001 with test input")]
+    public void DayFivePartTwo_TestInput()
+    {
+        var input = new[]
+        {
+            "    [D]    ",
+            "[N] [C]    ",
+            "[Z] [M] [P]",
+            " 1   2   3 ",
+            "",
+            "move 1 from 2 to 1",
+            "move 3 from 1 to 3",
+            "move 2 from 2 to 1",
+            "move 1 from 1 to 2",
+        };
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be("MCD");
+    }
+
+    [Fact(DisplayName = "determines which crates are on top after rearrangement using the CrateMover 9001 with actual input")]
+    public void DayFivePartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestFilePath);
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be("BNTZFPMMW");
+    }
 }

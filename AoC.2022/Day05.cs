@@ -40,7 +40,38 @@ public class Day05 : IDay
 
     public object PartTwo(string[] input)
     {
-        throw new NotImplementedException();
+        var stacks = ParseStacks(input);
+
+        for (var i = Array.IndexOf(input, "") + 1; i < input.Length; i++)
+        {
+            var procedure = input[i];
+            var procedurePieces = procedure.Split(' ');
+            var numberOfContainersToMove = int.Parse(procedurePieces[1]);
+            var sourceContainer = int.Parse(procedurePieces[3]);
+            var destinationContainer = int.Parse(procedurePieces[5]);
+
+            var cratesToMove = new Stack<string>();
+            for (var j = 0; j < numberOfContainersToMove; j++)
+            {
+                var container = stacks[sourceContainer - 1].Pop();
+                cratesToMove.Push(container);
+            }
+
+            foreach (var crate in cratesToMove)
+            {
+                stacks[destinationContainer -1].Push(crate);
+            }
+        }
+
+        var topContainers = new StringBuilder();
+
+        foreach (var stack in stacks)
+        {
+            var topContainerForStack = stack.Pop();
+            topContainers.Append(topContainerForStack);
+        }
+
+        return topContainers.ToString();
     }
 
     private static List<Stack<string>> ParseStacks(string[] input)
