@@ -13,12 +13,10 @@ public class Day04 : IDay
         foreach (var elfPairs in input)
         {
             var rawRanges = elfPairs.Split(',');
-            var rawRangeOne = rawRanges[0].Split('-');
-            var rangeOne = new Range(int.Parse(rawRangeOne[0]), int.Parse(rawRangeOne[1]));
-            var rawRangeTwo = rawRanges[1].Split('-');
-            var rangeTwo = new Range(int.Parse(rawRangeTwo[0]), int.Parse(rawRangeTwo[1]));
+            var rangeOne = ParseRange(rawRanges[0]);
+            var rangeTwo = ParseRange(rawRanges[1]);
 
-            if (rangeOne.Contains(rangeTwo) || rangeTwo.Contains(rangeOne))
+            if (rangeOne.ContainsAllOf(rangeTwo) || rangeTwo.ContainsAllOf(rangeOne))
                 totalRangesContainingOtherRange++;
         }
 
@@ -27,14 +25,39 @@ public class Day04 : IDay
 
     public object PartTwo(string[] input)
     {
-        throw new NotImplementedException();
+        var totalRangesContainingPartOfOtherRange = 0;
+
+        foreach (var elfPairs in input)
+        {
+            var rawRanges = elfPairs.Split(',');
+            var rangeOne = ParseRange(rawRanges[0]);
+            var rangeTwo = ParseRange(rawRanges[1]);
+
+            if (rangeOne.ContainsPartOf(rangeTwo) || rangeTwo.ContainsPartOf(rangeOne))
+                totalRangesContainingPartOfOtherRange++;
+        }
+
+        return totalRangesContainingPartOfOtherRange;
+    }
+
+    private static Range ParseRange(string rawRange)
+    {
+        var rangeValues = rawRange.Split('-');
+
+        return new Range(int.Parse(rangeValues[0]), int.Parse(rangeValues[1]));
     }
 }
 
 public static class RangeExtensions
 {
-    public static bool Contains(this Range a, Range b)
+    public static bool ContainsAllOf(this Range a, Range b)
     {
         return a.Start.Value <= b.Start.Value && a.End.Value >= b.End.Value;
+    }
+
+    public static bool ContainsPartOf(this Range a, Range b)
+    {
+        return (b.Start.Value >= a.Start.Value && b.Start.Value <= a.End.Value) ||
+               (b.End.Value <= a.End.Value && b.End.Value >= a.Start.Value);
     }
 }

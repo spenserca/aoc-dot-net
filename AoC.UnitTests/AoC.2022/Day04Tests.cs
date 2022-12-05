@@ -1,4 +1,5 @@
-﻿using AoC._2022;
+﻿using System.IO;
+using AoC._2022;
 using FluentAssertions;
 using Xunit;
 
@@ -39,6 +40,34 @@ public class Day04Tests
 
         var actual = _underTest.PartOne(input);
 
-        actual.Should().Be(2);
+        actual.Should().Be(526);
+    }
+
+    [Fact(DisplayName = "calculates the number of pairs where one range contains any part of the other with test input")]
+    public void DayFourPartTwo_TestInput()
+    {
+        var input = new[]
+        {
+            "2-4,6-8",
+            "2-3,4-5",
+            "5-7,7-9",
+            "2-8,3-7",
+            "6-6,4-6",
+            "2-6,4-8",
+        };
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(4);
+    }
+
+    [Fact(DisplayName = "calculates the number of pairs where one range contains any part of the other with actual input")]
+    public void DayFourPartTwo_ActualInput()
+    {
+        var input = File.ReadAllLines(TestDataFile);
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(886);
     }
 }
