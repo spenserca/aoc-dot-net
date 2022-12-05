@@ -12,7 +12,7 @@ public class Day05 : IDay
     {
         var stacks = ParseStacks(input);
 
-        for (int i = Array.IndexOf(input, "") + 1; i < input.Length; i++)
+        for (var i = Array.IndexOf(input, "") + 1; i < input.Length; i++)
         {
             var procedure = input[i];
             var procedurePieces = procedure.Split(' ');
@@ -43,27 +43,26 @@ public class Day05 : IDay
         throw new NotImplementedException();
     }
 
-    private List<Stack<string>> ParseStacks(string[] input)
+    private static List<Stack<string>> ParseStacks(string[] input)
     {
         var numberOfStacks = (input[0].Length + 1) / 4;
         var stacks = new List<Stack<string>>(numberOfStacks);
-        for (int i = 0; i < stacks.Capacity; i++)
+        for (var i = 0; i < stacks.Capacity; i++)
         {
             stacks.Add(new Stack<string>());
         }
 
-
-        for (int i = Array.IndexOf(input, "") - 2; i >= 0; i--)
+        for (var i = Array.IndexOf(input, "") - 2; i >= 0; i--)
         {
             var current = input[i];
             var firstIndexOfCrate = current.IndexOf('[');
             const int numberOfCharsPerCrate = 4;
             var startingStackNumber = firstIndexOfCrate / numberOfCharsPerCrate;
 
-            for (int j = firstIndexOfCrate + 1; j < current.Length; j++)
+            for (var j = firstIndexOfCrate + 1; j < current.Length; j++)
             {
                 var currentValue = current[j].ToString();
-                if (currentValue == "[" || j % 4 == 0)
+                if (j % 4 == 0)
                 {
                     startingStackNumber++;
                 }
