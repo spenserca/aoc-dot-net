@@ -4,14 +4,14 @@ using Xunit;
 
 namespace AoC.UnitTests.AoC._2022;
 
-public class DayThreeTests
+public class Day03Tests
 {
-    private readonly DayThree _underTest;
-    private const string TestDataFile = @"AoC.2022/Data/DayThree.txt";
+    private readonly Day03 _underTest;
+    private const string TestDataFile = @"AoC.2022/Data/Day03.txt";
 
-    public DayThreeTests()
+    public Day03Tests()
     {
-        _underTest = new DayThree();
+        _underTest = new Day03();
     }
 
     [Fact(DisplayName = "calculates the sum of priorities of items included in both compartments with test input")]

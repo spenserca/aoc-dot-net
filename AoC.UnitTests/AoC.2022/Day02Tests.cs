@@ -4,14 +4,14 @@ using Xunit;
 
 namespace AoC.UnitTests.AoC._2022;
 
-public class DayTwoTests
+public class Day02Tests
 {
-    private readonly DayTwo _underTest;
-    private const string TestDataFile = @"AoC.2022/Data/DayTwo.txt";
+    private readonly Day02 _underTest;
+    private const string TestDataFile = @"AoC.2022/Data/Day02.txt";
 
-    public DayTwoTests()
+    public Day02Tests()
     {
-        _underTest = new DayTwo();
+        _underTest = new Day02();
     }
 
     [Fact(DisplayName = "calculates total score by following the action in the strategy guide with test input")]

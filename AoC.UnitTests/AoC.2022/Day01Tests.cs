@@ -4,14 +4,14 @@ using Xunit;
 
 namespace AoC.UnitTests.AoC._2022;
 
-public class DayOneTests
+public class Day01Tests
 {
-    private readonly DayOne _underTest;
-    private const string TestDataFile = @"AoC.2022/Data/DayOne.txt";
+    private readonly Day01 _underTest;
+    private const string TestDataFile = @"AoC.2022/Data/Day01.txt";
 
-    public DayOneTests()
+    public Day01Tests()
     {
-        _underTest = new DayOne();
+        _underTest = new Day01();
     }
 
     [Fact(DisplayName = "calculates the most calories held by a single elf with test input")]

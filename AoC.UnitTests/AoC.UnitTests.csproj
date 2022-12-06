@@ -60,13 +60,13 @@
         <None Update="AoC.2021\Data\DayEight.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="AoC.2022\Data\DayOne.txt">
+        <None Update="AoC.2022\Data\Day01.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="AoC.2022\Data\DayTwo.txt">
+        <None Update="AoC.2022\Data\Day02.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="AoC.2022\Data\DayThree.txt">
+        <None Update="AoC.2022\Data\Day03.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="AoC.2022\Data\Day04.txt">
