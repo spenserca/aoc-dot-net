@@ -75,6 +75,9 @@
         <None Update="AoC.2022\Data\Day05.txt">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
+        <None Update="AoC.2022\Data\Day06.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>
