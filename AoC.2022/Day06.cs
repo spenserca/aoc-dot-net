@@ -10,24 +10,45 @@ public class Day06 : IDay
     {
         const int numberOfCharsToCheck = 4;
         var value = input[0];
-        var charsProcessed = 0;
-        for (var i = 0; i < value.Length - (1 + numberOfCharsToCheck); i++)
-        {
-            var lastFourChars = value.Substring(i, numberOfCharsToCheck);
-            var distinctChars = string.Join("", lastFourChars.Distinct());
 
-            if (distinctChars.Length == 4)
-            {
-                charsProcessed = i + numberOfCharsToCheck;
-                break;
-            }
-        }
-
-        return charsProcessed;
+        return new UniqueSequenceFinder(numberOfCharsToCheck)
+            .GetNumberOfCharsProcessedBeforeUniqueSequenceIsFound(value);
     }
 
     public object PartTwo(string[] input)
     {
-        throw new NotImplementedException();
+        const int numberOfCharsToCheck = 14;
+        var value = input[0];
+
+        return new UniqueSequenceFinder(numberOfCharsToCheck)
+            .GetNumberOfCharsProcessedBeforeUniqueSequenceIsFound(value);
+    }
+
+    private class UniqueSequenceFinder
+    {
+        private readonly int _numberOfCharsToCheck;
+
+        public UniqueSequenceFinder(int numberOfCharsToCheck)
+        {
+            _numberOfCharsToCheck = numberOfCharsToCheck;
+        }
+
+        public int GetNumberOfCharsProcessedBeforeUniqueSequenceIsFound(string value)
+        {
+            var charsProcessed = 0;
+            for (var i = 0; i < value.Length - (1 + _numberOfCharsToCheck); i++)
+            {
+                var lastFourChars = value.Substring(i, _numberOfCharsToCheck);
+                var distinctChars = string.Join("", lastFourChars.Distinct());
+
+                if (distinctChars.Length == _numberOfCharsToCheck)
+                {
+                    charsProcessed = i + _numberOfCharsToCheck;
+                    break;
+                }
+            }
+
+            return charsProcessed;
+        }
     }
 }
