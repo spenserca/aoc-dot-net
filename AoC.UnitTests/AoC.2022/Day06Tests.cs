@@ -68,6 +68,6 @@ public class Day06Tests
 
         var actual = _underTest.PartTwo(input);
 
-        actual.Should().Be(1);
+        actual.Should().Be(2564);
     }
 }
