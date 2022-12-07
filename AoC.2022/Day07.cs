@@ -39,9 +39,12 @@ public class Day07 : IDay
             }
         }
 
-        var partOne = directories.Where(d => d.Value.GetDirectorySize(directories) <= 100000)
-            .Sum(s => s.Value.GetDirectorySize(directories));
-        return partOne;
+        return directories.Select(d =>
+        {
+            var directorySize = d.Value.GetDirectorySize(directories);
+
+            return directorySize <= 100000 ? directorySize : 0;
+        }).Sum();
     }
 
     private static bool IsDotDotCommand(string terminalOutput)
