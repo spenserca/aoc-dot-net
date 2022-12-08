@@ -75,6 +75,16 @@ public class Day07 : IDay
 
         public int GetDirectorySize(IReadOnlyDictionary<string, Directory> directories)
         {
+            if (FileSize > 100000)
+            {
+                return 0;
+            }
+
+            if (!SubDirectories.Any())
+            {
+                return FileSize;
+            }
+
             return FileSize + SubDirectories.Select(sd => directories[sd].GetDirectorySize(directories)).Sum();
         }
     }
