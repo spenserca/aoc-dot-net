@@ -24,14 +24,8 @@ public class Day08 : IDay
             for (var j = 0; j < row.Length; j++)
             {
                 var isLeftEdgeOutsideTopAndBottomRowOfTrees = j == 0 && i != input.Length - 1;
-                if (isLeftEdgeOutsideTopAndBottomRowOfTrees)
-                {
-                    visibleTreeCount++;
-                    continue;
-                }
-
                 var isRightEdgeOutsideOfTopAndBottomRowOfTrees = j == row.Length - 1 && i != input.Length - 1;
-                if (isRightEdgeOutsideOfTopAndBottomRowOfTrees)
+                if (isLeftEdgeOutsideTopAndBottomRowOfTrees || isRightEdgeOutsideOfTopAndBottomRowOfTrees)
                 {
                     visibleTreeCount++;
                     continue;
@@ -86,6 +80,73 @@ public class Day08 : IDay
 
     public object PartTwo(string[] input)
     {
-        throw new NotImplementedException();
+        var highestScenicScore = 0;
+
+        for (var i = 0; i < input.Length; i++)
+        {
+            var row = input[i];
+
+            var isTopOrBottomRowOfTrees = i == 0 || i == input.Length - 1;
+            if (isTopOrBottomRowOfTrees)
+            {
+                continue;
+            }
+
+            for (var j = 0; j < row.Length; j++)
+            {
+                var isLeftEdgeOutsideTopAndBottomRowOfTrees = j == 0 && i != input.Length - 1;
+                var isRightEdgeOutsideOfTopAndBottomRowOfTrees = j == row.Length - 1 && i != input.Length - 1;
+
+                if (isLeftEdgeOutsideTopAndBottomRowOfTrees || isRightEdgeOutsideOfTopAndBottomRowOfTrees)
+                {
+                    continue;
+                }
+
+                var scenicScore = CalculateScenicScore(input, i, j);
+
+                if (scenicScore > highestScenicScore) highestScenicScore = scenicScore;
+            }
+        }
+
+        return highestScenicScore;
+    }
+
+    private int CalculateScenicScore(string[] input, int i, int j)
+    {
+        var scenicScoreLookingUp = 0;
+        var scenicScoreLookingDown = 0;
+        var scenicScoreLookingLeft = 0;
+        var scenicScoreLookingRight = 0;
+        var currentHeight = int.Parse(input[i][j].ToString());
+
+        for (var y = i - 1; y >= 0; y--)
+        {
+            var treeHeight = int.Parse(input[y][j].ToString());
+            scenicScoreLookingUp++;
+            if (treeHeight >= currentHeight) break;
+        }
+
+        for (var y = i + 1; y < input.Length; y++)
+        {
+            var treeHeight = int.Parse(input[y][j].ToString());
+            scenicScoreLookingDown++;
+            if (treeHeight >= currentHeight) break;
+        }
+
+        for (var x = j - 1; x >= 0; x--)
+        {
+            var treeHeight = int.Parse(input[i][x].ToString());
+            scenicScoreLookingLeft++;
+            if (treeHeight >= currentHeight) break;
+        }
+
+        for (var x = j + 1; x < input[i].Length; x++)
+        {
+            var treeHeight = int.Parse(input[i][x].ToString());
+            scenicScoreLookingRight++;
+            if (treeHeight >= currentHeight) break;
+        }
+
+        return scenicScoreLookingDown * scenicScoreLookingUp * scenicScoreLookingLeft * scenicScoreLookingRight;
     }
 }
