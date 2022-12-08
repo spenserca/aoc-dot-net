@@ -6,86 +6,194 @@ public class Day07 : IDay
 {
     public string Title => "--- Day 7: No Space Left On Device ---";
 
+    private static readonly Directory Root = new("/");
+    private Directory _currentWorkingDirectory = Root;
+
     public object PartOne(string[] input)
     {
-        var currentDirectory = string.Empty;
-        var directories = new Dictionary<string, Directory>();
-
-        foreach (var terminalOutput in input)
+        for (var i = 0; i < input.Length; i++)
         {
-            if (IsChangeDirectoryCommand(terminalOutput) && !IsDotDotCommand(terminalOutput))
+            var terminalOutput = input[i];
+            var args = new Args(terminalOutput);
+
+            if (args.IsCommand())
             {
-                currentDirectory = terminalOutput.Split(' ')[2];
-                if (!directories.ContainsKey(currentDirectory))
+                if (args.IsChangeDirectoryCommand())
                 {
-                    directories.Add(currentDirectory, new Directory());
-                }
-            }
-
-            if (IsDirectory(terminalOutput))
-            {
-                var subDirectory = terminalOutput.Split(' ')[1];
-                if (!directories.ContainsKey(subDirectory))
+                    var changeDirectoryCommand = args.ToChangeDirectoryCommand;
+                    if (changeDirectoryCommand.GetDirectoryToChangeTo() == "/")
+                    {
+                        _currentWorkingDirectory = Root;
+                    }
+                    else if (changeDirectoryCommand.IsDotDotCommand())
+                    {
+                        _currentWorkingDirectory = _currentWorkingDirectory.Parent;
+                    }
+                    else
+                    {
+                        _currentWorkingDirectory =
+                            _currentWorkingDirectory.GetDirectory(changeDirectoryCommand
+                                .GetDirectoryToChangeTo());
+                    }
+                } else if (args.IsListCommand())
                 {
-                    directories.Add(subDirectory, new Directory());
+                    var operations = new List<string>();
+
+                    for (var j = i + 1; j < input.Length; j++)
+                    {
+                        var operation = input[j];
+                        if (operation.StartsWith("$")) break;
+
+                        operations.Add(operation);
+                    }
+
+                    ExecuteList(operations);
                 }
-
-                directories[currentDirectory].SubDirectories.Add(subDirectory);
-            }
-
-            if (IsFile(terminalOutput, out var size))
-            {
-                directories[currentDirectory].FileSize += size;
             }
         }
 
-        return directories.Select(d =>
+        return Root.TotalSizeUnderThreshold;
+    }
+
+    private void ExecuteList(List<string> operations)
+    {
+        foreach (var operation in operations)
         {
-            var directorySize = d.Value.GetDirectorySize(directories);
+            var args = new Args(operation);
 
-            return directorySize <= 100000 ? directorySize : 0;
-        }).Sum();
+            if (args.IsDirectoryListing())
+            {
+                var dir = args.ToDirectoryListing;
+                _currentWorkingDirectory.SubDirectories.Add(new Directory(dir.DirectoryName)
+                {
+                    Parent = _currentWorkingDirectory
+                });
+            }
+            else
+            {
+                var file = args.ToFileListing;
+                _currentWorkingDirectory.SizeOfAllFiles += file.Size;
+            }
+        }
     }
 
-    private static bool IsDotDotCommand(string terminalOutput)
+    private class Args
     {
-        return terminalOutput == "$ cd ..";
+        protected readonly List<string> _args = new();
+
+        public Args(string terminalOutput)
+        {
+            _args.AddRange(terminalOutput.Split(' '));
+        }
+
+        public bool IsCommand()
+        {
+            return _args.Contains("$");
+        }
+
+        public bool IsChangeDirectoryCommand()
+        {
+            return IsCommand() && _args.Contains("cd");
+        }
+
+        public ChangeDirectoryCommand ToChangeDirectoryCommand => new(_args);
+        public DirectoryListing ToDirectoryListing => new(_args);
+        public FileListing ToFileListing => new(_args);
+
+        public bool IsFileListing()
+        {
+            return !IsCommand() && !_args.Contains("dir");
+        }
+
+        public bool IsDirectoryListing()
+        {
+            return !IsCommand() && _args.Contains("dir");
+        }
+
+        public bool IsListCommand()
+        {
+            return IsCommand() && _args.Contains("ls");
+        }
     }
 
-    private bool IsFile(string terminalOutput, out int size)
+    private class DirectoryListing
     {
-        var split = terminalOutput.Split(' ');
-        return int.TryParse(split[0], out size);
+        private readonly List<string> _args;
+
+        public DirectoryListing(List<string> args)
+        {
+            _args = args;
+        }
+
+        public string DirectoryName => _args.Single(a => a != "dir");
     }
 
-    private bool IsDirectory(string terminalOutput)
+    private class FileListing
     {
-        return terminalOutput.StartsWith("dir ");
+        private readonly List<string> _args;
+
+        public FileListing(List<string> args)
+        {
+            _args = args;
+        }
+
+        public int Size => int.Parse(_args.FirstOrDefault());
     }
 
-    private bool IsChangeDirectoryCommand(string terminalOutput)
+    private class ChangeDirectoryCommand
     {
-        return terminalOutput.StartsWith("$ cd");
+        private readonly List<string> _args;
+
+        public ChangeDirectoryCommand(List<string> args)
+        {
+            _args = args;
+        }
+
+        public bool IsDotDotCommand()
+        {
+            return _args.Contains("..");
+        }
+
+        public string GetDirectoryToChangeTo()
+        {
+            return _args.Single(a => a != "$" && a != "cd");
+        }
     }
 
     private class Directory
     {
-        public List<string> SubDirectories { get; } = new();
-        public int FileSize { get; set; } = 0;
+        public string Name { get; }
 
-        public int GetDirectorySize(IReadOnlyDictionary<string, Directory> directories)
+        public Directory(string name)
         {
-            if (FileSize > 100000)
+            Name = name;
+        }
+
+        public List<Directory> SubDirectories { get; } = new();
+        public int SizeOfAllFiles { get; set; } = 0;
+        public Directory Parent { get; set; }
+
+        private bool HasOnlyFiles => !SubDirectories.Any();
+        public int TotalSizeUnderThreshold => CalculateDirectorySizeIfUnderThreshold();
+
+        private int CalculateDirectorySizeIfUnderThreshold()
+        {
+            if (HasOnlyFiles) return SizeOfAllFiles <= 100000 ? SizeOfAllFiles : 0;
+
+            var totalSize = SizeOfAllFiles <= 100000 ? SizeOfAllFiles : 0;
+
+            foreach (var directory in SubDirectories)
             {
-                return 0;
+                var directorySize = directory.CalculateDirectorySizeIfUnderThreshold();
+                totalSize += directorySize;
             }
 
-            if (!SubDirectories.Any())
-            {
-                return FileSize;
-            }
+            return totalSize;
+        }
 
-            return FileSize + SubDirectories.Select(sd => directories[sd].GetDirectorySize(directories)).Sum();
+        public Directory GetDirectory(string directoryToChangeTo)
+        {
+            return SubDirectories.Single(sd => sd.Name == directoryToChangeTo);
         }
     }
 
