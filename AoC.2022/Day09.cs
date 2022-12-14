@@ -41,7 +41,15 @@ public class Day09 : IDay
     }
 }
 
-public record Coordinate(int X, int Y);
+public record Coordinate(int X, int Y)
+{
+    public Coordinate MoveUp() => this with { Y = Y + 1 };
+
+    public Coordinate MoveDown() => this with { Y = Y - 1 };
+
+    public Coordinate MoveLeft() => this with { X = X - 1 };
+    public Coordinate MoveRight() => this with { X = X + 1 };
+};
 
 public static class CoordinateExtensions
 {
@@ -52,38 +60,28 @@ public static class CoordinateExtensions
 
     public static Coordinate MoveTowards(this Coordinate a, Coordinate b)
     {
-        // same row
-        if (a.X == b.X)
+        var isInSameRow = a.X == b.X;
+        var isBelowHead = a.Y < b.Y;
+
+        if (isInSameRow)
         {
-            if (a.Y < b.Y) return a with { Y = a.Y + 1 };
-            return a with { Y = a.Y - 1 };
+            return isBelowHead ? a.MoveUp() : a.MoveDown();
         }
 
-        // same column
-        if (a.Y == b.Y)
+        var isInSameColumn = a.Y == b.Y;
+        var isLeftOfHead = a.X < b.X;
+
+        if (isInSameColumn)
         {
-            if (a.X < b.X) return a with { X = a.X + 1 };
-            return a with { X = a.X - 1 };
+            return isLeftOfHead ? a.MoveRight() : a.MoveLeft();
         }
 
-        // diagonal
-        // tail is to the left of head
-        if (a.X < b.X)
+        if (isLeftOfHead)
         {
-            var x = a.X + 1;
-            // tail is below the head
-            if (a.Y < b.Y) return new Coordinate(x, a.Y + 1);
-
-            // tail is above the head
-            return new Coordinate(x, a.Y - 1);
+            return isBelowHead ? a.MoveRight().MoveUp() : a.MoveRight().MoveDown();
         }
 
-        // else: tail is to the right of head
-        // tail is below the head
-        if (a.Y < b.Y) return new Coordinate(a.X - 1, a.Y + 1);
-
-        // tail is above the head
-        return new Coordinate(a.X - 1, a.Y - 1);
+        return isBelowHead ? a.MoveLeft().MoveUp() : a.MoveLeft().MoveDown();
     }
 
     public static Coordinate IncrementPosition(this Coordinate currentPosition, string direction)
