@@ -14,18 +14,14 @@ public class Day09 : IDay
 
         foreach (var motion in input)
         {
-            var motionPieces = motion.Split(' ');
-            var direction = motionPieces[0];
-            var steps = int.Parse(motionPieces[1]);
+            var (direction, steps) = ParseMotion(motion);
 
             for (var i = 0; i < steps; i++)
             {
-                // update head position
-                headPosition = headPosition.IncrementPosition(direction);
+                headPosition = headPosition.MoveInDirection(direction);
 
                 while (!headPosition.IsAdjacentTo(tailPosition))
                 {
-                    // move tail towards the head
                     tailPosition = tailPosition.MoveTowards(headPosition);
                     uniqueTailPositions.Add(tailPosition);
                 }
@@ -37,7 +33,57 @@ public class Day09 : IDay
 
     public object PartTwo(string[] input)
     {
-        throw new NotImplementedException();
+        var uniqueTailPositions = new HashSet<Coordinate>() { new(0, 0) };
+        var knotPositions = new Coordinate[]
+        {
+            new(0, 0),
+            new(0, 0),
+            new(0, 0),
+            new(0, 0),
+            new(0, 0),
+            new(0, 0),
+            new(0, 0),
+            new(0, 0),
+            new(0, 0),
+            new(0, 0)
+        };
+
+        foreach (var motion in input)
+        {
+            var (direction, steps) = ParseMotion(motion);
+
+            for (var i = 0; i < steps; i++)
+            {
+                knotPositions[0] = knotPositions[0].MoveInDirection(direction);
+
+                for (var j = 1; j < knotPositions.Length; j++)
+                {
+                    var positionToFollow = knotPositions[j - 1];
+
+                    while (!knotPositions[j].IsAdjacentTo(positionToFollow))
+                    {
+                        knotPositions[j] = knotPositions[j].MoveTowards(positionToFollow);
+
+                        var isTailOfRope = j == knotPositions.Length - 1;
+                        if (isTailOfRope)
+                        {
+                            uniqueTailPositions.Add(knotPositions[j]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return uniqueTailPositions.Count;
+    }
+
+    private static (string direction, int steps) ParseMotion(string motion)
+    {
+        var motionPieces = motion.Split(' ');
+        var direction = motionPieces[0];
+        var steps = int.Parse(motionPieces[1]);
+
+        return (direction, steps);
     }
 }
 
@@ -84,14 +130,14 @@ public static class CoordinateExtensions
         return isBelowHead ? a.MoveLeft().MoveUp() : a.MoveLeft().MoveDown();
     }
 
-    public static Coordinate IncrementPosition(this Coordinate currentPosition, string direction)
+    public static Coordinate MoveInDirection(this Coordinate currentPosition, string direction)
     {
         return direction switch
         {
-            "R" => currentPosition with { X = currentPosition.X + 1 },
-            "L" => currentPosition with { X = currentPosition.X - 1 },
-            "U" => currentPosition with { Y = currentPosition.Y + 1 },
-            "D" => currentPosition with { Y = currentPosition.Y - 1 },
+            "R" => currentPosition.MoveRight(),
+            "L" => currentPosition.MoveLeft(),
+            "U" => currentPosition.MoveUp(),
+            "D" => currentPosition.MoveDown(),
             _ => currentPosition
         };
     }

@@ -42,4 +42,34 @@ public class Day09Tests
 
         actual.Should().Be(6311);
     }
+
+    [Fact(DisplayName = "gets the number of locations the tail visited at least once (with 10 knots) with test input")]
+    public void DayNinePartTwo_TestInput()
+    {
+        var input = new[]
+        {
+            "R 5",
+            "U 8",
+            "L 8",
+            "D 3",
+            "R 17",
+            "D 10",
+            "L 25",
+            "U 20",
+        };
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(36);
+    }
+
+    [Fact(DisplayName = "gets the number of locations the tail visited at least once (with 10 knots) with actual input")]
+    public void DayNinePartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(@"AoC.2022/Data/Day09.txt");
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(2482);
+    }
 }
