@@ -3,6 +3,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1ea63e23_002Df67c_002D4a7d_002Db9dc_002Ddc7a9f098a0a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.Day09Tests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.Day10Tests.DayTenPartTwo_TestInput&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	
