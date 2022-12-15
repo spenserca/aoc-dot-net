@@ -66,25 +66,22 @@ public class Day10 : IDay
     public object PartTwo(string[] input)
     {
         var registerValue = 1;
-        var screenLinePosition = 0;
         var valueToAdd = 0;
         var screen = BuildScreen();
         var cycles = BuildCycles(input);
-        var screenLineIndex = 0;
-
-        // if the register value (+-1) is equal to the current cycle
-        // then draw the sprite
 
         for (var i = 1; i <= cycles.Count; i++)
         {
-            var isRegisterInSpriteRange = registerValue == screenLinePosition - 1 ||
-                                          registerValue == screenLinePosition ||
-                                          registerValue == screenLinePosition + 1;
-            if (isRegisterInSpriteRange)
+            var row = (i - 1) / 40;
+            var column = (i - 1) % 40;
+
+            var shouldDrawSprite = Math.Abs(registerValue - column) <= 1;
+            if (shouldDrawSprite)
             {
-                var screenLine = screen[screenLineIndex].ToCharArray();
-                screenLine[screenLinePosition] = '#';
-                screen[screenLineIndex] = string.Join("", screenLine);
+                var rowValue = screen[row];
+                var columns = rowValue.ToCharArray();
+                columns[column] = '#';
+                screen[row] = string.Join("", columns);
             }
 
             var cycleInstruction = cycles[i - 1];
@@ -99,15 +96,11 @@ public class Day10 : IDay
                 var value = int.Parse(cycleInstruction.Split(" ")[1]);
                 valueToAdd = value;
             }
+        }
 
-            // reset screen line position for next line
-            if (screenLinePosition == 40)
-            {
-                screenLineIndex++;
-                screenLinePosition = 0;
-            }
-
-            screenLinePosition++;
+        foreach (var line in screen)
+        {
+            Console.WriteLine(line);
         }
 
         return screen.ToArray();
@@ -117,12 +110,12 @@ public class Day10 : IDay
     {
         var screenLines = new List<string>()
         {
-            "........................................",
-            "........................................",
-            "........................................",
-            "........................................",
-            "........................................",
-            "........................................",
+            "________________________________________",
+            "________________________________________",
+            "________________________________________",
+            "________________________________________",
+            "________________________________________",
+            "________________________________________",
         };
 
         return screenLines;

@@ -178,7 +178,7 @@ public class Day10Tests
 
         var actual = _underTest.PartOne(input);
 
-        actual.Should().Be(13140);
+        actual.Should().Be(15880);
     }
 
     [Fact(DisplayName = "draws the correct image with test input")]
@@ -186,16 +186,36 @@ public class Day10Tests
     {
         var expected = new[]
         {
-            "##..##..##..##..##..##..##..##..##..##..",
-            "###...###...###...###...###...###...###.",
-            "####....####....####....####....####....",
-            "#####.....#####.....#####.....#####.....",
-            "######......######......######......####",
-            "#######.......#######.......#######....."
+            "##__##__##__##__##__##__##__##__##__##__",
+            "###___###___###___###___###___###___###_",
+            "####____####____####____####____####____",
+            "#####_____#####_____#####_____#####_____",
+            "######______######______######______####",
+            "#######_______#######_______#######_____"
         };
 
         var actual = _underTest.PartTwo(_testInput);
 
-        actual.Should().Be(expected);
+        actual.Should().BeEquivalentTo(expected);
+    }
+    
+    [Fact(DisplayName = "draws the correct image with actual input")]
+    public void DayTenPartTwo_ActualInput()
+    {
+        var expected = new[]
+        {
+            "###__#_____##__####_#__#__##__####__##__",
+            "#__#_#____#__#_#____#_#__#__#____#_#__#_",
+            "#__#_#____#____###__##___#__#___#__#____",
+            "###__#____#_##_#____#_#__####__#___#_##_",
+            "#____#____#__#_#____#_#__#__#_#____#__#_",
+            "#____####__###_#____#__#_#__#_####__###_"
+        };
+
+        var input = FileReader.ReadAllLines(@"AoC.2022/Data/Day10.txt");
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().BeEquivalentTo(expected); // PLGFKAZG
     }
 }

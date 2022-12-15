@@ -1,11 +1,12 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/SolutionBuilderNext/FileVerbosityLevel/@EntryValue">Diagnostic</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1ea63e23_002Df67c_002D4a7d_002Db9dc_002Ddc7a9f098a0a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.Day09Tests&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.Day10Tests.DayTenPartTwo_TestInput&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7c2d17f2_002D9e2f_002D4112_002D9887_002D3b7a5b8359a2/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;And&gt;
+    &lt;Namespace&gt;AoC.UnitTests.AoC._2022&lt;/Namespace&gt;
+    &lt;Project Location="/Users/spenserca/repos/personal/aoc-dot-net/AoC.UnitTests" Presentation="&amp;lt;AoC.UnitTests&amp;gt;" /&gt;
+  &lt;/And&gt;
 &lt;/SessionState&gt;</s:String>
+	
 	
 	
 	
