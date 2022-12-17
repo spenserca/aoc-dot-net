@@ -10,9 +10,8 @@ public class Day12 : IDay
     public object PartOne(string[] input)
     {
         const string heights = "abcdefghijklmnopqrstuvwxyz";
-        var currentPoint = new Coordinate(0, 0);
-        var currentHeight = heights.IndexOf('a');
-        var highestPoint = GetHighestPoint(input);
+        var currentPoint = new Coordinate(0, 0, heights.IndexOf('a'));
+        var highestPoint = GetHighestPoint(input, heights.IndexOf('z'));
         var steps = 0;
 
         // option 1:
@@ -23,7 +22,7 @@ public class Day12 : IDay
         {
             steps++;
             var surroundingPoints = GetSurroundingPoints(currentPoint, input)
-                .Where(c => Math.Abs(heights.IndexOf(input[c.Y][c.X]) - currentHeight) <= 1)
+                .Where(c => Math.Abs(heights.IndexOf(input[c.Y][c.X]) - currentPoint.Z) <= 1)
                 .ToList();
             var coordinateClosestToHighestPoint = GetPointClosestToHighestPoint(surroundingPoints, highestPoint);
 
@@ -128,13 +127,13 @@ public class Day12 : IDay
         return (a.X - b.X, a.Y - b.Y);
     }
 
-    private static Coordinate GetHighestPoint(IReadOnlyList<string> input)
+    private static Coordinate GetHighestPoint(IReadOnlyList<string> input, int maxHeight)
     {
         for (var y = 0; y < input.Count; y++)
         {
             for (var x = 0; x < input[0].Length; x++)
             {
-                if (input[y][x] == 'E') return new Coordinate(x, y);
+                if (input[y][x] == 'E') return new Coordinate(x, y, maxHeight);
             }
         }
 
@@ -145,6 +144,14 @@ public class Day12 : IDay
     {
         throw new NotImplementedException();
     }
+
+    private record Coordinate(int X, int Y, int Z)
+    {
+        public Coordinate MoveUp() => this with { Y = Y + 1 };
+        public Coordinate MoveDown() => this with { Y = Y - 1 };
+        public Coordinate MoveLeft() => this with { X = X - 1 };
+        public Coordinate MoveRight() => this with { X = X + 1 };
+    };
 }
 
 internal class HighestPointNotFoundException : Exception
