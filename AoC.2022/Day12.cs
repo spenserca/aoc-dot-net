@@ -178,7 +178,14 @@ public class Day12 : IDay
         public Coordinate MoveDown() => this with { Y = Y - 1 };
         public Coordinate MoveLeft() => this with { X = X - 1 };
         public Coordinate MoveRight() => this with { X = X + 1 };
-    };
+    }
+
+    private class HeightMapNode
+    {
+        public Coordinate Location { get; set; }
+        
+        public List<HeightMapNode> AdjacentNodes { get; set; }
+    }
 }
 
 internal class HighestPointNotFoundException : Exception
