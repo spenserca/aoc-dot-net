@@ -10,23 +10,36 @@ public class Day12 : IDay
     public object PartOne(string[] input)
     {
         const string heights = "abcdefghijklmnopqrstuvwxyz";
-        var currentPoint = new Coordinate(0, 0, heights.IndexOf('a'));
-        var highestPoint = GetHighestPoint(input, heights.IndexOf('z'));
+        var (currentPosition, destination) = GetStartingAndEndingPoint(input, heights.IndexOf('z'));
         var steps = 0;
+
+        // find the slope from current point to the highest point
+        var (deltaX, deltaY) = CalculateSlope(currentPosition, destination);
+        
+        // find the surrounding points that are on that slope
+        var surroundingPoints = GetSurroundingPoints(currentPosition, input)
+            .Where(c => Math.Abs(heights.IndexOf(input[c.Y][c.X]) - currentPosition.Z) <= 1)
+            .ToList();
+        
+        
+        // for surrounding points on slope, find the one closest to highest point
+        // move to closest location on slope
+
+        // NOTE: if there is only 1 valid surrounding path, you must take it
 
         // option 1:
         // get all points that can be moved to
         // calculate the distance from each point to the highest point
         // move to the one that's closest
-        while (currentPoint != highestPoint)
+        while (currentPosition != destination)
         {
             steps++;
-            var surroundingPoints = GetSurroundingPoints(currentPoint, input)
-                .Where(c => Math.Abs(heights.IndexOf(input[c.Y][c.X]) - currentPoint.Z) <= 1)
-                .ToList();
-            var coordinateClosestToHighestPoint = GetPointClosestToHighestPoint(surroundingPoints, highestPoint);
+            // var surroundingPoints = GetSurroundingPoints(currentPosition, input)
+            //     .Where(c => Math.Abs(heights.IndexOf(input[c.Y][c.X]) - currentPosition.Z) <= 1)
+            //     .ToList();
+            var coordinateClosestToHighestPoint = GetPointClosestToHighestPoint(surroundingPoints, destination);
 
-            currentPoint = coordinateClosestToHighestPoint;
+            currentPosition = coordinateClosestToHighestPoint;
         }
 
         // option 2:
@@ -41,6 +54,14 @@ public class Day12 : IDay
         // if 
 
         return steps;
+    }
+
+    private static (int deltaX, int deltaY) CalculateSlope(Coordinate source, Coordinate destination)
+    {
+        var deltaX = destination.X - source.X;
+        var deltaY = destination.Y - source.Y;
+
+        return (deltaX, deltaY);
     }
 
     private static Coordinate GetPointClosestToHighestPoint(IEnumerable<Coordinate> sourcePoints,
@@ -127,17 +148,23 @@ public class Day12 : IDay
         return (a.X - b.X, a.Y - b.Y);
     }
 
-    private static Coordinate GetHighestPoint(IReadOnlyList<string> input, int maxHeight)
+    private static (Coordinate source, Coordinate destination) GetStartingAndEndingPoint(IReadOnlyList<string> input,
+        int maxHeight)
     {
-        for (var y = 0; y < input.Count; y++)
+        Coordinate? destination = null;
+        Coordinate? source = null;
+        for (var y = input.Count - 1; y >= 0; y--)
         {
             for (var x = 0; x < input[0].Length; x++)
             {
-                if (input[y][x] == 'E') return new Coordinate(x, y, maxHeight);
+                if (input[y][x] == 'E') destination = new Coordinate(x, y, maxHeight);
+                if (input[y][x] == 'S') source = new Coordinate(x, y, 0);
             }
         }
 
-        throw new HighestPointNotFoundException();
+        if (destination is null || source is null) throw new HighestPointNotFoundException();
+
+        return (source, destination);
     }
 
     public object PartTwo(string[] input)
