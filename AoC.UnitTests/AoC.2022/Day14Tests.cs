@@ -27,4 +27,15 @@ public class Day14Tests
 
         actual.Should().Be(24);
     }
+
+    [Fact(DisplayName =
+        "determines how many units of sand will fall before endlessly falling into the abyss with actual input")]
+    public void DayFourteenPartOne_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(@"AoC.2022/Data/Day14.txt");
+
+        var actual = _underTest.PartOne(input);
+
+        actual.Should().Be(24);
+    }
 }

@@ -8,13 +8,10 @@ public class Day14 : IDay
 
     public object PartOne(string[] input)
     {
-        // abyss point = lowest y value
         var flowPoint = new Coordinate(500, 0);
-        var pointOfNoReturn = new Coordinate(493, 9);
         var occupiedPoints = new HashSet<Coordinate>();
         var rockPaths = new List<RockPath>();
-
-        // set up initial rock paths/occupied points
+        
         foreach (var path in input)
         {
             var rockPath = new RockPath(path);
@@ -28,34 +25,42 @@ public class Day14 : IDay
 
         while (!isSandFallingIntoTheAbyss)
         {
-            // move down if possible
             if (!occupiedPoints.Contains(sandPosition.MoveUp()))
             {
                 sandPosition = sandPosition.MoveUp();
-                isSandFallingIntoTheAbyss = sandPosition == pointOfNoReturn;
+                
+                var hasOccupiedPointsBelow = occupiedPoints
+                    .Any(c => c.X == sandPosition.X && c.Y > sandPosition.Y);
+                
+                isSandFallingIntoTheAbyss = !hasOccupiedPointsBelow;
             }
-            // else move down and left if possible
             else if (!occupiedPoints.Contains(sandPosition.MoveUp().MoveLeft()))
             {
                 sandPosition = sandPosition.MoveUp().MoveLeft();
-                isSandFallingIntoTheAbyss = sandPosition == pointOfNoReturn;
+                var hasOccupiedPointsBelow = occupiedPoints
+                    .Any(c => c.X == sandPosition.X && c.Y > sandPosition.Y);
+                
+                isSandFallingIntoTheAbyss = !hasOccupiedPointsBelow;
             }
-            // else move down and right if possible
             else if (!occupiedPoints.Contains(sandPosition.MoveUp().MoveRight()))
             {
                 sandPosition = sandPosition.MoveUp().MoveRight();
-                isSandFallingIntoTheAbyss = sandPosition == pointOfNoReturn;
+                var hasOccupiedPointsBelow = occupiedPoints
+                    .Any(c => c.X == sandPosition.X && c.Y > sandPosition.Y);
+                
+                isSandFallingIntoTheAbyss = !hasOccupiedPointsBelow;
             }
-            // else sand stops -- reset sandPosition, increment sand counter
             else
             {
                 occupiedPoints.Add(sandPosition);
                 sandCount++;
-                isSandFallingIntoTheAbyss = sandPosition == pointOfNoReturn;
+                var hasOccupiedPointsBelow = occupiedPoints
+                    .Any(c => c.X == sandPosition.X && c.Y > sandPosition.Y);
+                
+                isSandFallingIntoTheAbyss = !hasOccupiedPointsBelow;
                 sandPosition = flowPoint;
             }
         }
-
 
         return sandCount;
     }
@@ -102,16 +107,14 @@ public class RockPath
         }
     }
 
-    private IEnumerable<Coordinate> MoveAlongYAxis(Coordinate start, Coordinate end)
+    private static IEnumerable<Coordinate> MoveAlongYAxis(Coordinate start, Coordinate end)
     {
-        // assumption: x always increases "down"
         var steps = new List<Coordinate>();
         var yDiff = Math.Abs(start.Y - end.Y);
         var nextStep = start;
 
         if (start.Y > end.Y)
         {
-            // move "up" -- decrement Y
             for (var i = 0; i < yDiff; i++)
             {
                 nextStep = nextStep.MoveDown();
@@ -120,7 +123,6 @@ public class RockPath
         }
         else
         {
-            // move "down" -- increment Y
             for (var i = 0; i < yDiff; i++)
             {
                 nextStep = nextStep.MoveUp();
@@ -140,7 +142,6 @@ public class RockPath
 
         if (start.X > end.X)
         {
-            // move left
             for (var i = 0; i < xDiff; i++)
             {
                 nextStep = nextStep.MoveLeft();
@@ -149,7 +150,6 @@ public class RockPath
         }
         else
         {
-            // move right
             for (var i = 0; i < xDiff; i++)
             {
                 nextStep = nextStep.MoveRight();
