@@ -28,38 +28,26 @@ public class Day14 : IDay
             if (!occupiedPoints.Contains(sandPosition.MoveUp()))
             {
                 sandPosition = sandPosition.MoveUp();
-                
-                var hasOccupiedPointsBelow = occupiedPoints
-                    .Any(c => c.X == sandPosition.X && c.Y > sandPosition.Y);
-                
-                isSandFallingIntoTheAbyss = !hasOccupiedPointsBelow;
             }
             else if (!occupiedPoints.Contains(sandPosition.MoveUp().MoveLeft()))
             {
                 sandPosition = sandPosition.MoveUp().MoveLeft();
-                var hasOccupiedPointsBelow = occupiedPoints
-                    .Any(c => c.X == sandPosition.X && c.Y > sandPosition.Y);
-                
-                isSandFallingIntoTheAbyss = !hasOccupiedPointsBelow;
             }
             else if (!occupiedPoints.Contains(sandPosition.MoveUp().MoveRight()))
             {
                 sandPosition = sandPosition.MoveUp().MoveRight();
-                var hasOccupiedPointsBelow = occupiedPoints
-                    .Any(c => c.X == sandPosition.X && c.Y > sandPosition.Y);
-                
-                isSandFallingIntoTheAbyss = !hasOccupiedPointsBelow;
             }
             else
             {
                 occupiedPoints.Add(sandPosition);
                 sandCount++;
-                var hasOccupiedPointsBelow = occupiedPoints
-                    .Any(c => c.X == sandPosition.X && c.Y > sandPosition.Y);
-                
-                isSandFallingIntoTheAbyss = !hasOccupiedPointsBelow;
                 sandPosition = flowPoint;
             }
+
+            var hasOccupiedPointsBelow = occupiedPoints
+                .Any(c => c.X == sandPosition.X && c.Y > sandPosition.Y);
+
+            isSandFallingIntoTheAbyss = !hasOccupiedPointsBelow;
         }
 
         return sandCount;
@@ -67,7 +55,49 @@ public class Day14 : IDay
 
     public object PartTwo(string[] input)
     {
-        throw new NotImplementedException();
+        var flowPoint = new Coordinate(500, 0);
+        var occupiedPoints = new HashSet<Coordinate>();
+        var rockPaths = new List<RockPath>();
+
+        foreach (var path in input)
+        {
+            var rockPath = new RockPath(path);
+            rockPaths.Add(rockPath);
+            rockPaths.ForEach(rp => rp.PathCoordinates.ToList().ForEach(pc => occupiedPoints.Add(pc)));
+        }
+
+        // add floor as rock path @ max Y + 2
+        var floorLevel = rockPaths.SelectMany(rp => rp.PathCoordinates.Select(pc => pc.Y))
+            .Max() + 2;
+
+        var isFlowPointBlocked = false;
+        var sandCount = 0;
+        var sandPosition = flowPoint;
+
+        while (!isFlowPointBlocked)
+        {
+            if (!occupiedPoints.Contains(sandPosition.MoveUp()) && sandPosition.MoveUp().Y < floorLevel)
+            {
+                sandPosition = sandPosition.MoveUp();
+            }
+            else if (!occupiedPoints.Contains(sandPosition.MoveUp().MoveLeft()) && sandPosition.MoveUp().Y < floorLevel)
+            {
+                sandPosition = sandPosition.MoveUp().MoveLeft();
+            }
+            else if (!occupiedPoints.Contains(sandPosition.MoveUp().MoveRight()) && sandPosition.MoveUp().Y < floorLevel)
+            {
+                sandPosition = sandPosition.MoveUp().MoveRight();
+            }
+            else
+            {
+                isFlowPointBlocked = sandPosition == flowPoint;
+                occupiedPoints.Add(sandPosition);
+                sandCount++;
+                sandPosition = flowPoint;
+            }
+        }
+
+        return sandCount;
     }
 }
 
@@ -129,7 +159,6 @@ public class RockPath
                 steps.Add(nextStep);
             }
         }
-
 
         return steps;
     }
