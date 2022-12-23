@@ -14,7 +14,7 @@ public class Day15Tests
         _underTest = new Day15();
     }
 
-    [Fact(DisplayName = "")]
+    [Fact(DisplayName = "gets the number of locations a beacon CANNOT be in in the row to inspect with test input")]
     public void DayFifteenPartOne_TestInput()
     {
         var input = new[]
@@ -39,5 +39,14 @@ public class Day15Tests
         var actual = _underTest.PartOne(input);
 
         actual.Should().Be(26);
+    }
+
+    [Fact(DisplayName = "gets the number of locations a beacon CANNOT be in in the row to inspect with actual input")]
+    public void DayFifteenPartOne_ActualInput()
+    {
+        _underTest.RowToInspect = 2000000;
+        var actual = _underTest.PartOne(_actualInput);
+
+        actual.Should().Be(26); // 4433028 too low
     }
 }

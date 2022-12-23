@@ -73,28 +73,31 @@ public class Day15 : IDay
 
             // if row to inspect is between the top and bottom point
             var sensorRangeCrossesRowToInspect = rowToInspect <= topPoint.Y && rowToInspect >= bottomPoint.Y;
-            if (sensorRangeCrossesRowToInspect)
+            if (!sensorRangeCrossesRowToInspect) return sensorCoverageInRowToInspect;
+
+            // find the closest distance from either point to the row to inspect
+
+            // add the distance * 2 + 1 to the
+
+            // find diff between closest of top or bottom point and the row to inspect
+            var distanceFromTopPoint = Math.Abs(topPoint.Y - rowToInspect); //  GetManhattanDistance(topPoint, topPoint with { Y = rowToInspect });
+            var distanceFromBottomPoint = Math.Abs(bottomPoint.Y - rowToInspect);//  GetManhattanDistance(bottomPoint, bottomPoint with { Y = rowToInspect });
+
+            // if (distanceFromBottomPoint == 0 && distanceFromTopPoint == 0) return 0;
+
+            // diff * 2 + 1
+            var shortestDistance = distanceFromTopPoint < distanceFromBottomPoint
+                ? distanceFromTopPoint
+                : distanceFromBottomPoint;
+
+            var numberOfCoordinatesInRow = shortestDistance * 2 + 1;
+
+            for (var i = 0; i < numberOfCoordinatesInRow; i++)
             {
-                // find the closest distance from either point to the row to inspect
-
-                // add the distance * 2 + 1 to the
-
-                // find diff between closest of top or bottom point and the row to inspect
-                var distanceFromTopPoint = Math.Abs(topPoint.Y - rowToInspect); //  GetManhattanDistance(topPoint, topPoint with { Y = rowToInspect });
-                var distanceFromBottomPoint = Math.Abs(bottomPoint.Y - rowToInspect);//  GetManhattanDistance(bottomPoint, bottomPoint with { Y = rowToInspect });
-
-                // if (distanceFromBottomPoint == 0 && distanceFromTopPoint == 0) return 0;
-
-                // diff * 2 + 1
-                var shortestDistance = distanceFromTopPoint < distanceFromBottomPoint
-                    ? distanceFromTopPoint
-                    : distanceFromBottomPoint;
-
-                var numberOfCoordinatesInRow = shortestDistance * 2 + 1;
-
-                for (var i = 0; i < numberOfCoordinatesInRow; i++)
+                var coordinate = new Coordinate(_closestBeacon.X + i, rowToInspect);
+                if (coordinate != _closestBeacon)
                 {
-                    sensorCoverageInRowToInspect.Add(new Coordinate(_closestBeacon.X + i, rowToInspect));
+                    sensorCoverageInRowToInspect.Add(coordinate);
                 }
             }
 
