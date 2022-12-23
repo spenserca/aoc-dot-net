@@ -23,7 +23,8 @@ public class Day15 : IDay
             sensors.Add(new Sensor(sensorLocation, beaconLocation, RowToInspect));
         }
 
-        var partOne = sensors.Select(s => s.NumberOfPointsInRowToInspect).Sum();
+        var partOne = sensors.SelectMany(s => s.CoordinatesInRowToInspect)
+            .ToHashSet().Count;
         return partOne;
     }
 
@@ -47,9 +48,7 @@ public class Day15 : IDay
     {
         private readonly Coordinate _location;
         private readonly Coordinate _closestBeacon;
-
-        public readonly int NumberOfPointsInRowToInspect;
-        // private readonly List<Coordinate> _coordinatesInRowToInspect;
+        public readonly List<Coordinate> CoordinatesInRowToInspect;
 
         private int ManhattanDistanceToBeacon => GetManhattanDistance(_location, _closestBeacon);
 
@@ -57,7 +56,7 @@ public class Day15 : IDay
         {
             _location = location;
             _closestBeacon = closestBeacon;
-            NumberOfPointsInRowToInspect = SetPointsThatExistInRowToInspect(rowToInspect);
+            CoordinatesInRowToInspect = SetPointsThatExistInRowToInspect(rowToInspect);
         }
 
         private static int GetManhattanDistance(Coordinate a, Coordinate b)
@@ -65,27 +64,41 @@ public class Day15 : IDay
             return Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y);
         }
 
-        private int SetPointsThatExistInRowToInspect(int rowToInspect)
+        private List<Coordinate> SetPointsThatExistInRowToInspect(int rowToInspect)
         {
             // use manhattan distance to determine the radius of the sensor
             var topPoint = _location.IncrementY(ManhattanDistanceToBeacon);
             var bottomPoint = _location.IncrementY(-ManhattanDistanceToBeacon);
+            var sensorCoverageInRowToInspect = new List<Coordinate>();
 
             // if row to inspect is between the top and bottom point
-            if (rowToInspect <= topPoint.Y && rowToInspect >= bottomPoint.Y)
+            var sensorRangeCrossesRowToInspect = rowToInspect <= topPoint.Y && rowToInspect >= bottomPoint.Y;
+            if (sensorRangeCrossesRowToInspect)
             {
+                // find the closest distance from either point to the row to inspect
+
+                // add the distance * 2 + 1 to the
+
                 // find diff between closest of top or bottom point and the row to inspect
-                var distanceFromTopPoint = GetManhattanDistance(topPoint, topPoint with { Y = rowToInspect });
-                var distanceFromBottomPoint = GetManhattanDistance(bottomPoint, bottomPoint with { Y = rowToInspect });
+                var distanceFromTopPoint = Math.Abs(topPoint.Y - rowToInspect); //  GetManhattanDistance(topPoint, topPoint with { Y = rowToInspect });
+                var distanceFromBottomPoint = Math.Abs(bottomPoint.Y - rowToInspect);//  GetManhattanDistance(bottomPoint, bottomPoint with { Y = rowToInspect });
+
+                // if (distanceFromBottomPoint == 0 && distanceFromTopPoint == 0) return 0;
+
                 // diff * 2 + 1
                 var shortestDistance = distanceFromTopPoint < distanceFromBottomPoint
                     ? distanceFromTopPoint
                     : distanceFromBottomPoint;
 
-                return shortestDistance * 2 + 1;
+                var numberOfCoordinatesInRow = shortestDistance * 2 + 1;
+
+                for (var i = 0; i < numberOfCoordinatesInRow; i++)
+                {
+                    sensorCoverageInRowToInspect.Add(new Coordinate(_closestBeacon.X + i, rowToInspect));
+                }
             }
 
-            return 0;
+            return sensorCoverageInRowToInspect;
         }
     }
 }
