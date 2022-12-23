@@ -104,6 +104,16 @@ public static class CoordinateExtensions
         return Math.Abs(a.X - b.X) <= 1 && Math.Abs(a.Y - b.Y) <= 1;
     }
 
+    public static Coordinate IncrementY(this Coordinate a, int incrementBy = 1)
+    {
+        return a with { Y = a.Y + incrementBy };
+    }
+
+    public static Coordinate IncrementX(this Coordinate a, int incrementBy = 1)
+    {
+        return a with { X = a.X + incrementBy };
+    }
+
     public static Coordinate MoveTowards(this Coordinate a, Coordinate b)
     {
         var isInSameRow = a.X == b.X;

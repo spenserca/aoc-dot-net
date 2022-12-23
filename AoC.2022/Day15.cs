@@ -3,7 +3,7 @@ using AoC.Common;
 
 namespace AoC._2022;
 
-public class Day15: IDay
+public class Day15 : IDay
 {
     public string Title => "--- Day 15: Beacon Exclusion Zone ---";
 
@@ -19,11 +19,12 @@ public class Day15: IDay
             var rawCoordinates = sensorBeaconCoordinateRegex.Matches(sensorDetail);
             var sensorLocation = ParseCoordinate(rawCoordinates[0]);
             var beaconLocation = ParseCoordinate(rawCoordinates[1]);
-
+            
             sensors.Add(new Sensor(sensorLocation, beaconLocation, RowToInspect));
         }
 
-        return sensors.Select(s => s.NumberOfLocationsWhereABeaconIsNotPresent).Sum();
+        var partOne = sensors.Select(s => s.NumberOfPointsInRowToInspect).Sum();
+        return partOne;
     }
 
     private static Coordinate ParseCoordinate(Capture rawCoordinateMatch)
@@ -46,28 +47,45 @@ public class Day15: IDay
     {
         private readonly Coordinate _location;
         private readonly Coordinate _closestBeacon;
-        private readonly List<Coordinate> _coordinatesInRowToInspect;
 
-        private int manhattanDistanceToBeacon =>
-            Math.Abs(_location.X - _closestBeacon.X) + Math.Abs(_location.Y - _closestBeacon.Y);
+        public readonly int NumberOfPointsInRowToInspect;
+        // private readonly List<Coordinate> _coordinatesInRowToInspect;
+
+        private int ManhattanDistanceToBeacon => GetManhattanDistance(_location, _closestBeacon);
 
         public Sensor(Coordinate location, Coordinate closestBeacon, int rowToInspect)
         {
             _location = location;
             _closestBeacon = closestBeacon;
-            _coordinatesInRowToInspect = SetPointsThatExistInRowToInspect(rowToInspect);
+            NumberOfPointsInRowToInspect = SetPointsThatExistInRowToInspect(rowToInspect);
         }
 
-        private List<Coordinate> SetPointsThatExistInRowToInspect(int rowToInspect)
+        private static int GetManhattanDistance(Coordinate a, Coordinate b)
+        {
+            return Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y);
+        }
+
+        private int SetPointsThatExistInRowToInspect(int rowToInspect)
         {
             // use manhattan distance to determine the radius of the sensor
+            var topPoint = _location.IncrementY(ManhattanDistanceToBeacon);
+            var bottomPoint = _location.IncrementY(-ManhattanDistanceToBeacon);
 
-            // if any points of the radius are in the row to inspect, add them to the list
-            // otherwise skip them
+            // if row to inspect is between the top and bottom point
+            if (rowToInspect <= topPoint.Y && rowToInspect >= bottomPoint.Y)
+            {
+                // find diff between closest of top or bottom point and the row to inspect
+                var distanceFromTopPoint = GetManhattanDistance(topPoint, topPoint with { Y = rowToInspect });
+                var distanceFromBottomPoint = GetManhattanDistance(bottomPoint, bottomPoint with { Y = rowToInspect });
+                // diff * 2 + 1
+                var shortestDistance = distanceFromTopPoint < distanceFromBottomPoint
+                    ? distanceFromTopPoint
+                    : distanceFromBottomPoint;
 
-            return new List<Coordinate>();
+                return shortestDistance * 2 + 1;
+            }
+
+            return 0;
         }
-
-        public int NumberOfLocationsWhereABeaconIsNotPresent => _coordinatesInRowToInspect.Count;
     }
 }
