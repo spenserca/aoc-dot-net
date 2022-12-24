@@ -15,13 +15,13 @@ public class Day12 : IDay
 
         // find the slope from current point to the highest point
         var (deltaX, deltaY) = CalculateSlope(currentPosition, destination);
-        
+
         // find the surrounding points that are on that slope
         var surroundingPoints = GetSurroundingPoints(currentPosition, input)
             .Where(c => Math.Abs(heights.IndexOf(input[c.Y][c.X]) - currentPosition.Z) <= 1)
             .ToList();
-        
-        
+
+
         // for surrounding points on slope, find the one closest to highest point
         // move to closest location on slope
 
@@ -56,7 +56,7 @@ public class Day12 : IDay
         return steps;
     }
 
-    private static (int deltaX, int deltaY) CalculateSlope(Coordinate source, Coordinate destination)
+    private static (int deltaX, int deltaY) CalculateSlope(_3DCoordinate source, _3DCoordinate destination)
     {
         var deltaX = destination.X - source.X;
         var deltaY = destination.Y - source.Y;
@@ -64,10 +64,10 @@ public class Day12 : IDay
         return (deltaX, deltaY);
     }
 
-    private static Coordinate GetPointClosestToHighestPoint(IEnumerable<Coordinate> sourcePoints,
-        Coordinate destinationPoint)
+    private static _3DCoordinate GetPointClosestToHighestPoint(IEnumerable<_3DCoordinate> sourcePoints,
+        _3DCoordinate destinationPoint)
     {
-        var distanceCoordinateMap = new Dictionary<double, Coordinate>();
+        var distanceCoordinateMap = new Dictionary<double, _3DCoordinate>();
 
         foreach (var sourcePoint in sourcePoints)
         {
@@ -82,9 +82,9 @@ public class Day12 : IDay
         return distanceCoordinateMap[minDistance];
     }
 
-    private IEnumerable<Coordinate> GetSurroundingPoints(Coordinate point, string[] input)
+    private IEnumerable<_3DCoordinate> GetSurroundingPoints(_3DCoordinate point, string[] input)
     {
-        var surroundingPoints = new List<Coordinate>();
+        var surroundingPoints = new List<_3DCoordinate>();
         var isOnLeftBoundary = point.X == 0;
         var isOnRightBoundary = point.X == input[0].Length - 1;
         var isTopBoundary = point.Y == 0;
@@ -148,17 +148,18 @@ public class Day12 : IDay
         return (a.X - b.X, a.Y - b.Y);
     }
 
-    private static (Coordinate source, Coordinate destination) GetStartingAndEndingPoint(IReadOnlyList<string> input,
+    private static (_3DCoordinate source, _3DCoordinate destination) GetStartingAndEndingPoint(
+        IReadOnlyList<string> input,
         int maxHeight)
     {
-        Coordinate? destination = null;
-        Coordinate? source = null;
+        _3DCoordinate? destination = null;
+        _3DCoordinate? source = null;
         for (var y = input.Count - 1; y >= 0; y--)
         {
             for (var x = 0; x < input[0].Length; x++)
             {
-                if (input[y][x] == 'E') destination = new Coordinate(x, y, maxHeight);
-                if (input[y][x] == 'S') source = new Coordinate(x, y, 0);
+                if (input[y][x] == 'E') destination = new _3DCoordinate(x, y, maxHeight);
+                if (input[y][x] == 'S') source = new _3DCoordinate(x, y, 0);
             }
         }
 
@@ -172,19 +173,42 @@ public class Day12 : IDay
         throw new NotImplementedException();
     }
 
-    private record Coordinate(int X, int Y, int Z)
-    {
-        public Coordinate MoveUp() => this with { Y = Y + 1 };
-        public Coordinate MoveDown() => this with { Y = Y - 1 };
-        public Coordinate MoveLeft() => this with { X = X - 1 };
-        public Coordinate MoveRight() => this with { X = X + 1 };
-    }
-
     private class HeightMapNode
     {
         public Coordinate Location { get; set; }
-        
+
         public List<HeightMapNode> AdjacentNodes { get; set; }
+    }
+}
+
+public record _3DCoordinate(int X, int Y, int Z)
+{
+    public _3DCoordinate MoveUp() => this with { Y = Y + 1 };
+    public _3DCoordinate MoveDown() => this with { Y = Y - 1 };
+    public _3DCoordinate MoveLeft() => this with { X = X - 1 };
+    public _3DCoordinate MoveRight() => this with { X = X + 1 };
+}
+
+public static class Day12InputExtensions
+{
+    public static _3DCoordinate GetPositionOfValue(this string[] input, char value, int height)
+    {
+        for (var y = 0; y < input.Length; y++)
+        {
+            for (var x = 0; x < input[y].Length; x++)
+            {
+                if (input[y][x] == value) return new _3DCoordinate(x, y, height);
+            }
+        }
+
+        throw new PointNotFoundException($"Couldn't find a point with the value {value}");
+    }
+}
+
+internal class PointNotFoundException : Exception
+{
+    public PointNotFoundException(string message) : base(message)
+    {
     }
 }
 
