@@ -189,29 +189,6 @@ public record _3DCoordinate(int X, int Y, int Z)
     public _3DCoordinate MoveRight() => this with { X = X + 1 };
 }
 
-public static class Day12InputExtensions
-{
-    public static _3DCoordinate GetPositionOfValue(this string[] input, char value, int height)
-    {
-        for (var y = 0; y < input.Length; y++)
-        {
-            for (var x = 0; x < input[y].Length; x++)
-            {
-                if (input[y][x] == value) return new _3DCoordinate(x, y, height);
-            }
-        }
-
-        throw new PointNotFoundException($"Couldn't find a point with the value {value}");
-    }
-}
-
-internal class PointNotFoundException : Exception
-{
-    public PointNotFoundException(string message) : base(message)
-    {
-    }
-}
-
 internal class HighestPointNotFoundException : Exception
 {
     public HighestPointNotFoundException() : base("Could not find highest point!")
