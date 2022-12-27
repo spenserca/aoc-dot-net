@@ -11,8 +11,4 @@
       <ProjectReference Include="..\AoC.Common\AoC.Common.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Common" />
-    </ItemGroup>
-
 </Project>

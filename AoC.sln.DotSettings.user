@@ -1,13 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4d306cea_002D920a_002D455f_002D836c_002D7b3a06ad8bf0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="gets a count of all packet pairs that are in the right order with test input" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.Day12Tests.GetPositionOfValue_ReturnsCorrectPositionOfValueFromActualInput&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.Common.StringArrayExtensionsTests&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b549daa6_002D86a8_002D4dd9_002Db7ca_002D54cb4d87bcea/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.Day12Tests.DayTwelvePartOne_TestInput&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::21B6EEDD-15C1-489D-BA30-073C2AFCBC8D::net6.0::AoC.UnitTests.AoC._2022.Day12Tests.GetPositionOfValue_ReturnsCorrectPositionOfValueFromActualInput&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f33cd07b_002D6145_002D4c13_002Dbaf0_002Db5fcd2ed0539/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;And&gt;
+    &lt;Namespace&gt;AoC.UnitTests.AoC._2022&lt;/Namespace&gt;
+    &lt;Project Location="/Users/spenserca/repos/personal/aoc-dot-net/AoC.UnitTests" Presentation="&amp;lt;AoC.UnitTests&amp;gt;" /&gt;
+  &lt;/And&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

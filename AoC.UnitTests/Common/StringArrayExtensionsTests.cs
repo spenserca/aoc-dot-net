@@ -100,7 +100,7 @@ public class StringArrayExtensionsTests
             actual.Should().Contain(new Coordinate(6, 4));
         }
     }
-    
+
     [Fact(DisplayName = "when point is in the top row (not on a corner), has 3 surrounding values")]
     public void GetSurroundingCoordinates_TopRow_ReturnsThreeCoordinates()
     {
@@ -116,7 +116,7 @@ public class StringArrayExtensionsTests
             actual.Should().Contain(new Coordinate(4, 1));
         }
     }
-    
+
     [Fact(DisplayName = "when point is in the bottom row (not on a corner), has 3 surrounding values")]
     public void GetSurroundingCoordinates_BottomRow_ReturnsThreeCoordinates()
     {
@@ -132,7 +132,7 @@ public class StringArrayExtensionsTests
             actual.Should().Contain(new Coordinate(4, 3));
         }
     }
-    
+
     [Fact(DisplayName = "when point is on the left edge (not on a corner), has 3 surrounding values")]
     public void GetSurroundingCoordinates_LeftEdge_ReturnsThreeCoordinates()
     {
@@ -148,7 +148,7 @@ public class StringArrayExtensionsTests
             actual.Should().Contain(new Coordinate(1, 2));
         }
     }
-    
+
     [Fact(DisplayName = "when point is on the right edge (not on a corner), has 3 surrounding values")]
     public void GetSurroundingCoordinates_RightEdge_ReturnsThreeCoordinates()
     {
@@ -164,7 +164,7 @@ public class StringArrayExtensionsTests
             actual.Should().Contain(new Coordinate(6, 2));
         }
     }
-    
+
     [Fact(DisplayName = "when point is not on the edge, has 4 surrounding values")]
     public void GetSurroundingCoordinates_NotOnEdge_ReturnsThreeCoordinates()
     {
