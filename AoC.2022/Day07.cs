@@ -2,7 +2,7 @@ using AoC.Common;
 
 namespace AoC._2022;
 
-public class Day7 : IDay
+public class Day07 : IDay
 {
     public string Title => "--- Day 7: No Space Left On Device ---";
 

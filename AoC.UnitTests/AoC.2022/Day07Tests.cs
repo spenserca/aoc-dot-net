@@ -4,13 +4,13 @@ using Xunit;
 
 namespace AoC.UnitTests.AoC._2022;
 
-public class Day7Tests
+public class Day07Tests
 {
-    private readonly Day7 _underTest;
+    private readonly Day07 _underTest;
 
-    public Day7Tests()
+    public Day07Tests()
     {
-        _underTest = new Day7();
+        _underTest = new Day07();
     }
 
     [Fact(DisplayName = "gets sum of sizes of all directories with size less than 10000 with test input")]
