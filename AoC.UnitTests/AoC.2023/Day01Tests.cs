@@ -6,37 +6,61 @@ namespace AoC.UnitTests.AoC._2023;
 
 public class Day01Tests
 {
-    private readonly Day01 _underTest;
+    private readonly Day01 _underTest = new();
     private const string TestDataFile = @"AoC.2023/Data/Day01.txt";
 
-    public Day01Tests()
-    {
-        _underTest = new Day01();
-    }
-
-    [Fact(DisplayName = "calculates the most calories held by a single elf with test input")]
+    [Fact(DisplayName = "gets the sum of the calibration values for each line with test input")]
     public void DayOnePartOne_TestInput()
     {
         var input = new[]
         {
-            "1000",
-            "2000",
-            "3000",
-            "",
-            "4000",
-            "",
-            "5000",
-            "6000",
-            "",
-            "7000",
-            "8000",
-            "9000",
-            "",
-            "10000"
+            "1abc2",
+            "pqr3stu8vwx",
+            "a1b2c3d4e5f",
+            "treb7uchet",
         };
 
         var actual = _underTest.PartOne(input);
 
-        actual.Should().Be(24000);
+        actual.Should().Be(142);
+    }
+
+    [Fact(DisplayName = "gets the sum of the calibration values for each line with actual input")]
+    public void DayOnePartOne_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+
+        var actual = _underTest.PartOne(input);
+
+        actual.Should().Be(54916);
+    }
+
+    [Fact(DisplayName = "gets the sum of the calibration values for each line with test input")]
+    public void DayOnePartTwo_TestInput()
+    {
+        var input = new[]
+        {
+            "two1nine",
+            "eightwothree",
+            "abcone2threexyz",
+            "xtwone3four",
+            "4nineeightseven2",
+            "zoneight234",
+            "7pqrstsixteen",
+        };
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(281);
+    }
+
+    [Fact(DisplayName = "gets the sum of the calibration values for each line with actual input")]
+    public void DayOnePartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(54728);
     }
 }

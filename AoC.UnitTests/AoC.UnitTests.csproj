@@ -97,10 +97,10 @@
         <None Update="AoC.2022\Data\Day07.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="AoC.2023\Data\Day01.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="AoC.2023\Data\" />
-    </ItemGroup>
 
 </Project>
