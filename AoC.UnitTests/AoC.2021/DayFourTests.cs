@@ -6,11 +6,11 @@ namespace AoC.UnitTests.AoC._2021;
 
 public class DayFourTests
 {
-    private readonly DayFour _underTest;
+    private readonly Day04 _underTest;
 
     public DayFourTests()
     {
-        _underTest = new DayFour();
+        _underTest = new Day04();
     }
 
     [Fact(DisplayName = "day four part one multiplies the bingo score by the winning number")]

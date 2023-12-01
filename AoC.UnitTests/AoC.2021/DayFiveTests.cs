@@ -6,11 +6,11 @@ namespace AoC.UnitTests.AoC._2021;
 
 public class DayFiveTests
 {
-    private readonly DayFive _underTest;
+    private readonly Day05 _underTest;
 
     public DayFiveTests()
     {
-        _underTest = new DayFive();
+        _underTest = new Day05();
     }
 
     [Fact(DisplayName = "day five part one counts the number of points that are overlapped by 2+ lines")]

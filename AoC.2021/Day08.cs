@@ -2,7 +2,7 @@
 
 namespace AoC._2021;
 
-public class DayEight : IDay
+public class Day08 : IDayPartOne
 {
     public string Title => "--- Day 8: Seven Segment Search ---";
 
@@ -40,10 +40,5 @@ public class DayEight : IDay
             }).ToList()
             .SelectMany(o => o.Split(' '))
             .Count(v => new[] { 2, 3, 4, 7 }.Contains(v.Length));
-    }
-
-    public object PartTwo(string[] input)
-    {
-        throw new NotImplementedException();
     }
 }

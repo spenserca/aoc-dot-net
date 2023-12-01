@@ -6,11 +6,11 @@ namespace AoC.UnitTests.AoC._2021;
 
 public class DaySixTests
 {
-    private readonly DaySix _underTest;
+    private readonly Day06 _underTest;
 
     public DaySixTests()
     {
-        _underTest = new DaySix();
+        _underTest = new Day06();
     }
 
     [Fact(DisplayName = "day six part one calculates the number of lanternfish after 80 days")]

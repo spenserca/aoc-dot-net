@@ -3,7 +3,7 @@ using AoC.Common;
 
 namespace AoC._2022;
 
-public class Day03 : IDay
+public class Day03 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 3: Rucksack Reorganization ---";
 

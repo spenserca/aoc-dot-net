@@ -24,6 +24,7 @@
         <ProjectReference Include="..\AoC.2020\AoC.2020.csproj" />
         <ProjectReference Include="..\AoC.2021\AoC.2021.csproj" />
         <ProjectReference Include="..\AoC.2022\AoC.2022.csproj" />
+        <ProjectReference Include="..\AoC.2023\AoC.2023.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -96,6 +97,10 @@
         <None Update="AoC.2022\Data\Day07.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="AoC.2023\Data\Day01.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
+
 
 </Project>

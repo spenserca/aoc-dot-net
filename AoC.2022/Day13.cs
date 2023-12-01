@@ -2,7 +2,7 @@ using AoC.Common;
 
 namespace AoC._2022;
 
-public class Day13 : IDay
+public class Day13 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 13: Distress Signal ---";
 

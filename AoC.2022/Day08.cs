@@ -2,7 +2,7 @@
 
 namespace AoC._2022;
 
-public class Day08 : IDay
+public class Day08 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 8: Treetop Tree House ---";
 

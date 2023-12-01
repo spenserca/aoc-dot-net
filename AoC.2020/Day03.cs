@@ -3,7 +3,7 @@ using AoC.Common;
 
 namespace AoC._2020;
 
-public class DayThree : IDay
+public class Day03 : IDayPartOne
 {
     public string Title => "--- Day 3: Toboggan Trajectory ---";
 
@@ -28,11 +28,6 @@ public class DayThree : IDay
         }
 
         return treeCount;
-    }
-
-    public object PartTwo(string[] input)
-    {
-        throw new NotImplementedException();
     }
 
     private static int MoveHorizontally(int currentLocation, int wrapPoint)

@@ -6,11 +6,11 @@ namespace AoC.UnitTests.AoC._2021;
 
 public class DayThreeTests
 {
-    private readonly DayThree _underTest;
+    private readonly Day03 _underTest;
 
     public DayThreeTests()
     {
-        _underTest = new DayThree();
+        _underTest = new Day03();
     }
 
     [Fact(DisplayName = "day three part one calculates the power consumption of the submarine")]

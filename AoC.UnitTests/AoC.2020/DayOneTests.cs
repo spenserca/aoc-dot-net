@@ -6,11 +6,11 @@ namespace AoC.UnitTests.AoC._2020;
 
 public class DayOneTests
 {
-    private readonly DayOne _underTest;
+    private readonly Day01 _underTest;
 
     public DayOneTests()
     {
-        _underTest = new DayOne();
+        _underTest = new Day01();
     }
 
     [Fact(DisplayName = "day one part one gets the multiplied value of the two numbers that add up to 2020")]

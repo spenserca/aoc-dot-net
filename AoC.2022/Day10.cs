@@ -2,7 +2,7 @@
 
 namespace AoC._2022;
 
-public class Day10 : IDay
+public class Day10 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 10: Cathode-Ray Tube ---";
 

@@ -3,7 +3,7 @@ using AoC.Common;
 
 namespace AoC._2020;
 
-public class DayTwo : IDay
+public class Day02 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 2: Password Philosophy ---";
 
