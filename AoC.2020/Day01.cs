@@ -3,7 +3,7 @@ using AoC.Common;
 
 namespace AoC._2020;
 
-public class DayOne : IDay
+public class Day01 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 1: Report Repair ---";
 

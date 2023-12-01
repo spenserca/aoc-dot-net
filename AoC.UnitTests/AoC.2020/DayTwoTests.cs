@@ -6,11 +6,11 @@ namespace AoC.UnitTests.AoC._2020;
 
 public class DayTwoTests
 {
-    private readonly DayTwo _underTest;
+    private readonly Day02 _underTest;
 
     public DayTwoTests()
     {
-        _underTest = new DayTwo();
+        _underTest = new Day02();
     }
 
     [Fact(DisplayName = "day two part one gets the count of all valid passwords")]

@@ -7,11 +7,11 @@ namespace AoC.UnitTests.AoC._2021;
 
 public class DayEightTests
 {
-    private readonly DayEight _underTest;
+    private readonly Day08 _underTest;
 
     public DayEightTests()
     {
-        _underTest = new DayEight();
+        _underTest = new Day08();
     }
 
     [Fact(DisplayName = "day eight part one calculates the number of times 1, 4, 7 or 8 appear in the output")]

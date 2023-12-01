@@ -6,11 +6,11 @@ namespace AoC.UnitTests.AoC._2021;
 
 public class DaySevenTests
 {
-    private readonly DaySeven _underTest;
+    private readonly Day07 _underTest;
 
     public DaySevenTests()
     {
-        _underTest = new DaySeven();
+        _underTest = new Day07();
     }
 
     [Fact(DisplayName = "day seven part one calculates the amount of fuel spent aligning the crabs")]

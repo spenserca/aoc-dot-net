@@ -2,7 +2,7 @@ using AoC.Common;
 
 namespace AoC._2022;
 
-public class Day14 : IDay
+public class Day14 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 14: Regolith Reservoir ---";
 

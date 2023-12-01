@@ -2,7 +2,7 @@
 
 namespace AoC._2021;
 
-public class DaySeven : IDay
+public class Day07 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 7: The Treachery of Whales ---";
 

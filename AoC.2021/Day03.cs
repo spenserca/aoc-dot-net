@@ -2,7 +2,7 @@
 
 namespace AoC._2021;
 
-public class DayThree : IDay
+public class Day03 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 3: Binary Diagnostic ---";
 

@@ -2,7 +2,7 @@
 
 namespace AoC._2022;
 
-public class Day06 : IDay
+public class Day06 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 6: Tuning Trouble ---";
 
