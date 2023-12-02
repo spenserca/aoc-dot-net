@@ -3,7 +3,7 @@ using AoC.Common;
 
 namespace AoC._2023;
 
-public class Day02 : IDayPartOne
+public class Day02 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 2: Cube Conundrum ---";
 
@@ -14,6 +14,50 @@ public class Day02 : IDayPartOne
             .Sum(g => g.Id);
     }
 
+    public object PartTwo(string[] input)
+    {
+        var sumOfPowers = 0;
+        
+        foreach (var i in input)
+        {
+            var minRedCubes = 0;
+            var minGreenCubes = 0;
+            var minBlueCubes = 0;
+            
+            var regex = new Regex("([0-9]+\\s(blue|red|green))");
+            var matches = regex.Matches(i);
+            
+            foreach (Match match in matches)
+            {
+                switch (match.Value)
+                {
+                    case { } v when v.Contains("blue"):
+                    {
+                        var intValue = int.Parse(v.Split(' ')[0]);
+                        if (intValue > minBlueCubes) minBlueCubes = intValue;
+                        break;
+                    }
+                    case { } v when v.Contains("red"):
+                    {
+                        var intValue = int.Parse(v.Split(' ')[0]);
+                        if (intValue > minRedCubes) minRedCubes = intValue;
+                        break;
+                    }
+                    case { } v when v.Contains("green"):
+                    {
+                        var intValue = int.Parse(v.Split(' ')[0]);
+                        if (intValue > minGreenCubes) minGreenCubes = intValue;
+                        break;
+                    }
+                }
+            }
+
+            sumOfPowers += minRedCubes * minGreenCubes * minBlueCubes;
+        }
+
+        return sumOfPowers;
+    }
+    
     private sealed class CubeGame
     {
         public int Id { get; }
