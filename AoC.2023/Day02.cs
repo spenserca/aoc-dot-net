@@ -16,48 +16,44 @@ public class Day02 : IDayPartOne, IDayPartTwo
 
     public object PartTwo(string[] input)
     {
-        var sumOfPowers = 0;
-        
-        foreach (var i in input)
+        return input.Select(i =>
         {
             var minRedCubes = 0;
             var minGreenCubes = 0;
             var minBlueCubes = 0;
-            
+
             var regex = new Regex("([0-9]+\\s(blue|red|green))");
             var matches = regex.Matches(i);
-            
+
             foreach (Match match in matches)
             {
-                switch (match.Value)
+                var handfulDetails = match.Value.Split(' ');
+                var intValue = int.Parse(handfulDetails[0]);
+
+                switch (handfulDetails[1])
                 {
-                    case { } v when v.Contains("blue"):
+                    case "blue" when intValue > minBlueCubes:
                     {
-                        var intValue = int.Parse(v.Split(' ')[0]);
-                        if (intValue > minBlueCubes) minBlueCubes = intValue;
+                        minBlueCubes = intValue;
                         break;
                     }
-                    case { } v when v.Contains("red"):
+                    case "red" when intValue > minRedCubes:
                     {
-                        var intValue = int.Parse(v.Split(' ')[0]);
-                        if (intValue > minRedCubes) minRedCubes = intValue;
+                        minRedCubes = intValue;
                         break;
                     }
-                    case { } v when v.Contains("green"):
+                    case "green" when intValue > minGreenCubes:
                     {
-                        var intValue = int.Parse(v.Split(' ')[0]);
-                        if (intValue > minGreenCubes) minGreenCubes = intValue;
+                        minGreenCubes = intValue;
                         break;
                     }
                 }
             }
 
-            sumOfPowers += minRedCubes * minGreenCubes * minBlueCubes;
-        }
-
-        return sumOfPowers;
+            return minRedCubes * minGreenCubes * minBlueCubes;
+        }).Sum();
     }
-    
+
     private sealed class CubeGame
     {
         public int Id { get; }
@@ -70,32 +66,30 @@ public class Day02 : IDayPartOne, IDayPartTwo
             IsPossible = !ParseContainsImpossibleHandfuls(gameDetails, maxRedCubes, maxGreenCubes, maxBlueCubes);
         }
 
-        private static bool ParseContainsImpossibleHandfuls(string gameDetails, int maxRedCubes, int maxGreenCubes, int maxBlueCubes)
+        private static bool ParseContainsImpossibleHandfuls(string gameDetails, int maxRedCubes, int maxGreenCubes,
+            int maxBlueCubes)
         {
             var regex = new Regex("([0-9]+\\s(blue|red|green))");
             var matches = regex.Matches(gameDetails);
 
             foreach (Match match in matches)
             {
-                switch (match.Value)
+                var handfulDetails = match.Value.Split(' ');
+                var intValue = int.Parse(handfulDetails[0]);
+
+                switch (handfulDetails[1])
                 {
-                    case { } v when v.Contains("blue"):
+                    case "blue" when intValue > maxBlueCubes:
                     {
-                        var intValue = int.Parse(v.Split(' ')[0]);
-                        if (intValue > maxBlueCubes) return true;
-                        break;
+                        return true;
                     }
-                    case { } v when v.Contains("red"):
+                    case "red" when intValue > maxRedCubes:
                     {
-                        var intValue = int.Parse(v.Split(' ')[0]);
-                        if (intValue > maxRedCubes) return true;
-                        break;
+                        return true;
                     }
-                    case { } v when v.Contains("green"):
+                    case "green" when intValue > maxGreenCubes:
                     {
-                        var intValue = int.Parse(v.Split(' ')[0]);
-                        if (intValue > maxGreenCubes) return true;
-                        break;
+                        return true;
                     }
                 }
             }
