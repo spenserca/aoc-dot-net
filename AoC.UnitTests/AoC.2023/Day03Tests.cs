@@ -38,6 +38,6 @@ public class Day03Tests
     
         var actual = _underTest.PartOne(input);
     
-        actual.Should().Be(2449); // 424752 too low
+        actual.Should().Be(551094);
     }
 }

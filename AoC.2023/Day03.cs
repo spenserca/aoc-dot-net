@@ -7,7 +7,7 @@ public class Day03 : IDayPartOne
 {
     public string Title => "--- Day 3: Gear Ratios ---";
 
-    private static readonly string[] Symbols = { "*", "#", "+", "$" };
+    private static readonly string[] Symbols = { "*", "#", "+", "$", "/", "=", "%", "&", "@" };
 
     public object PartOne(string[] input)
     {
@@ -24,8 +24,10 @@ public class Day03 : IDayPartOne
                 var adjacentCoordinates = coordinateGrid.GetSurroundingCoordinates(coordinate);
                 if (!isSymbolAdjacent)
                 {
-                    isSymbolAdjacent = adjacentCoordinates.Any(c => Symbols.Contains(c.Value));
+                    isSymbolAdjacent =
+                        adjacentCoordinates.Any(c => !int.TryParse(c.Value, out _) && !c.Value.Equals("."));
                 }
+
                 enginePart += coordinate.Value;
             }
             else
