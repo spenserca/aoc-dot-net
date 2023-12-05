@@ -7,8 +7,6 @@ public class Day03 : IDayPartOne
 {
     public string Title => "--- Day 3: Gear Ratios ---";
 
-    private static readonly string[] Symbols = { "*", "#", "+", "$", "/", "=", "%", "&", "@" };
-
     public object PartOne(string[] input)
     {
         var enginePart = string.Empty;
