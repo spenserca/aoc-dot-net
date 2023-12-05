@@ -40,4 +40,36 @@ public class Day03Tests
     
         actual.Should().Be(551094);
     }
+    
+    [Fact(DisplayName = "gets the sum of the gear ratios with test input")]
+    public void DayOnePartTwo_TestInput()
+    {
+        var input = new[]
+        {
+            "467..114..",
+            "...*......",
+            "..35..633.",
+            "......#...",
+            "617*......",
+            ".....+.58.",
+            "..592.....",
+            "......755.",
+            "...$.*....",
+            ".664.598..",
+        };
+    
+        var actual = _underTest.PartTwo(input);
+    
+        actual.Should().Be(467835);
+    }
+    
+    // [Fact(DisplayName = "gets the sum of the gear ratios with actual input")]
+    // public void DayOnePartTwo_ActualInput()
+    // {
+    //     var input = FileReader.ReadAllLines(TestDataFile);
+    //
+    //     var actual = _underTest.PartTwo(input);
+    //
+    //     actual.Should().Be(63981);
+    // }
 }

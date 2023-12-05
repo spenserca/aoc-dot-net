@@ -3,7 +3,7 @@ using AoC.Common.Coordinates;
 
 namespace AoC._2023;
 
-public class Day03 : IDayPartOne
+public class Day03 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 3: Gear Ratios ---";
 
@@ -12,14 +12,14 @@ public class Day03 : IDayPartOne
         var enginePart = string.Empty;
         var sum = 0;
 
-        var coordinateGrid = new CoordinateGrid(input);
+        var grid = new CoordinateGrid(input);
         var isSymbolAdjacent = false;
 
-        foreach (var coordinate in coordinateGrid.Coordinates)
+        foreach (var coordinate in grid.Coordinates)
         {
             if (int.TryParse(coordinate.Value, out _))
             {
-                var adjacentCoordinates = coordinateGrid.GetSurroundingCoordinates(coordinate);
+                var adjacentCoordinates = grid.GetSurroundingCoordinates(coordinate);
                 if (!isSymbolAdjacent)
                 {
                     isSymbolAdjacent =
@@ -34,6 +34,25 @@ public class Day03 : IDayPartOne
                 enginePart = string.Empty;
                 isSymbolAdjacent = false;
             }
+        }
+
+        return sum;
+    }
+
+    public object PartTwo(string[] input)
+    {
+        var grid = new CoordinateGrid(input);
+        var gearLikeCoordinates = grid.Coordinates.Where(c => c.Value.Equals("*"))
+            .ToList();
+        var sum = 0;
+
+        foreach (var coordinate in gearLikeCoordinates)
+        {
+            var adjacentNumericCoordinates = grid.GetSurroundingCoordinates(coordinate)
+                .Where(c => int.TryParse(c.Value, out _))
+                .ToList();
+            if (adjacentNumericCoordinates.Count == 2)
+                sum += int.Parse(adjacentNumericCoordinates[0].Value) * int.Parse(adjacentNumericCoordinates[1].Value);
         }
 
         return sum;
