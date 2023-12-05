@@ -31,13 +31,13 @@ public class Day03Tests
         actual.Should().Be(4361);
     }
 
-    // [Fact(DisplayName = "gets the sum of the ids of games which are possible with actual input")]
-    // public void DayOnePartOne_ActualInput()
-    // {
-    //     var input = FileReader.ReadAllLines(TestDataFile);
-    //
-    //     var actual = _underTest.PartOne(input);
-    //
-    //     actual.Should().Be(2449);
-    // }
+    [Fact(DisplayName = "gets the sum of part numbers that are adjacent to a symbol with actual input")]
+    public void DayOnePartOne_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+    
+        var actual = _underTest.PartOne(input);
+    
+        actual.Should().Be(2449); // 424752 too low
+    }
 }
