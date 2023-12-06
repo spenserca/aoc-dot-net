@@ -63,13 +63,13 @@ public class Day03Tests
         actual.Should().Be(467835);
     }
     
-    // [Fact(DisplayName = "gets the sum of the gear ratios with actual input")]
-    // public void DayOnePartTwo_ActualInput()
-    // {
-    //     var input = FileReader.ReadAllLines(TestDataFile);
-    //
-    //     var actual = _underTest.PartTwo(input);
-    //
-    //     actual.Should().Be(63981);
-    // }
+    [Fact(DisplayName = "gets the sum of the gear ratios with actual input")]
+    public void DayOnePartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+    
+        var actual = _underTest.PartTwo(input);
+    
+        actual.Should().Be(63981);
+    }
 }

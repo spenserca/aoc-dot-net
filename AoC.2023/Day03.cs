@@ -41,20 +41,47 @@ public class Day03 : IDayPartOne, IDayPartTwo
 
     public object PartTwo(string[] input)
     {
-        var grid = new CoordinateGrid(input);
-        var gearLikeCoordinates = grid.Coordinates.Where(c => c.Value.Equals("*"))
-            .ToList();
-        var sum = 0;
+        var enginePart = string.Empty;
+        var adjacentGears = new List<Coordinate>();
+        var gearsWithAdjacentEngineParts = new Dictionary<Coordinate, List<string>>();
 
-        foreach (var coordinate in gearLikeCoordinates)
+        var grid = new CoordinateGrid(input);
+        var isSymbolAdjacent = false;
+
+        foreach (var coordinate in grid.Coordinates)
         {
-            var adjacentNumericCoordinates = grid.GetSurroundingCoordinates(coordinate)
-                .Where(c => int.TryParse(c.Value, out _))
-                .ToList();
-            if (adjacentNumericCoordinates.Count == 2)
-                sum += int.Parse(adjacentNumericCoordinates[0].Value) * int.Parse(adjacentNumericCoordinates[1].Value);
+            if (int.TryParse(coordinate.Value, out _))
+            {
+                var adjacentCoordinates = grid.GetSurroundingCoordinates(coordinate);
+                if (!isSymbolAdjacent)
+                {
+                    var adjacentSymbols =
+                        adjacentCoordinates.Where(c => !int.TryParse(c.Value, out _) && !c.Value.Equals(".")).ToList();
+                    isSymbolAdjacent = adjacentSymbols.Any();
+                    adjacentGears.AddRange(adjacentSymbols.Where(s => s.Value.Equals("*")));
+                }
+
+                enginePart += coordinate.Value;
+            }
+            else
+            {
+                if (isSymbolAdjacent)
+                {
+                    foreach (var gear in adjacentGears)
+                    {
+                        if (!gearsWithAdjacentEngineParts.ContainsKey(gear))
+                            gearsWithAdjacentEngineParts.Add(gear, new List<string>() { enginePart });
+                        else gearsWithAdjacentEngineParts[gear].Add(enginePart);
+                    }
+                }
+
+                enginePart = string.Empty;
+                adjacentGears.Clear();
+                isSymbolAdjacent = false;
+            }
         }
 
-        return sum;
+        return gearsWithAdjacentEngineParts.Values.Where(v => v.Count == 2)
+            .Sum(v => int.Parse(v[0]) * int.Parse(v[1]));
     }
 }
