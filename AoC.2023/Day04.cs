@@ -26,12 +26,9 @@ public class Day04 : IDayPartOne
 
                 if (overlap == 0) return 0;
                 if (overlap == 1) return 1;
-             
                 
-
-                return 2 * overlap;
+                return (int)Math.Pow(2, overlap - 1);
             })
-            .ToList()
             .Sum();
     }
 }

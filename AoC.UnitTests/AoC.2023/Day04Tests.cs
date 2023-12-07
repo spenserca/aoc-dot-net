@@ -7,7 +7,7 @@ namespace AoC.UnitTests.AoC._2023;
 public class Day04Tests
 {
     private readonly Day04 _underTest = new();
-    private const string TestDataFile = @"AoC.2023/Data/Day03.txt";
+    private const string TestDataFile = @"AoC.2023/Data/Day04.txt";
 
     [Fact(DisplayName = "gets the total points of all the scratch cards with test input")]
     public void DayFourPartOne_TestInput()
@@ -27,13 +27,13 @@ public class Day04Tests
         actual.Should().Be(13);
     }
 
-    [Fact(DisplayName = "gets the total points of all the scratch cards  with actual input", Skip = "wip")]
+    [Fact(DisplayName = "gets the total points of all the scratch cards  with actual input")]
     public void DayFourPartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
     
         var actual = _underTest.PartOne(input);
     
-        actual.Should().Be(551094);
+        actual.Should().Be(18519);
     } 
 }
