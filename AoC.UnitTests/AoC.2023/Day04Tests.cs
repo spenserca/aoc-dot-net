@@ -10,7 +10,7 @@ public class Day04Tests
     private const string TestDataFile = @"AoC.2023/Data/Day03.txt";
 
     [Fact(DisplayName = "gets the total points of all the scratch cards with test input")]
-    public void DayOnePartOne_TestInput()
+    public void DayFourPartOne_TestInput()
     {
         var input = new[]
         {
@@ -28,7 +28,7 @@ public class Day04Tests
     }
 
     [Fact(DisplayName = "gets the total points of all the scratch cards  with actual input", Skip = "wip")]
-    public void DayOnePartOne_ActualInput()
+    public void DayFourPartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
     
