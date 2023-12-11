@@ -12,15 +12,15 @@ public class Day05: IDayPartOne
             .Where(v => int.TryParse(v, out var value))
             .Select(int.Parse)
             .ToList();
-        var maps = new Dictionary<string, SourceDestinationRange>()
+        var maps = new Dictionary<string, SourceDestinationRange>();
 
         return 0;
     }
 
     private class SourceDestinationRange
     {
-        public (int, int) SourceRange { get; set; }
+        public Range SourceRange { get; set; }
 
-        public (int, int) DestinationRange { get; set; }
+        public Range DestinationRange { get; set; }
     }
 }
