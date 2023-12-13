@@ -54,15 +54,13 @@ public class Day05Tests
         actual.Should().Be(35);
     }
 
-    [Fact(
-        DisplayName = "finds the lowest location number that corresponds to any of the initial seeds with actual input",
-        Skip = "wip")]
+    [Fact(DisplayName = "finds the lowest location number that corresponds to any of the initial seeds with actual input")]
     public void PartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
 
         var actual = _underTest.PartOne(input);
 
-        actual.Should().Be(18519);
+        actual.Should().Be(309796150L);
     }
 }
