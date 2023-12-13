@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AoC.UnitTests.AoC._2023;
 
-public class Day05Tests
+public class Day05Tests: IDayPartOneTest, IDayPartTwoTest
 {
     private readonly Day05 _underTest = new();
     private const string TestDataFile = "AoC.2023/Data/Day05.txt";
@@ -62,5 +62,25 @@ public class Day05Tests
         var actual = _underTest.PartOne(input);
 
         actual.Should().Be(309796150L);
+    }
+
+    [Fact(DisplayName =
+        "finds the lowest location number that corresponds to any of the initial seed ranges with test input")]
+    public void PartTwo_TestInput()
+    {
+        var actual = _underTest.PartTwo(_testInput);
+
+        actual.Should().Be(46);
+    }
+
+    [Fact(DisplayName =
+        "finds the lowest location number that corresponds to any of the initial seed ranges with actual input")]
+    public void PartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(35);
     }
 }

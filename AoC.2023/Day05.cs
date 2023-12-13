@@ -2,7 +2,7 @@
 
 namespace AoC._2023;
 
-public class Day05 : IDayPartOne
+public class Day05 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 5: If You Give A Seed A Fertilizer ---";
 
@@ -12,6 +12,40 @@ public class Day05 : IDayPartOne
             .Where(v => long.TryParse(v, out _))
             .Select(long.Parse)
             .ToList();
+        var almanac = BuildAlmanac(input);
+
+        var lowestLocation = GetLowestLocation(seedsToPlant, almanac);
+
+        return lowestLocation;
+    }
+
+    private static long GetLowestLocation(List<long> seedsToPlant, Dictionary<string, List<SourceDestinationMapping>> almanac)
+    {
+        var lowestLocation = long.MaxValue;
+        foreach (var seed in seedsToPlant)
+        {
+            var soil = GetDestinationValue(almanac["seed-to-soil map:"], seed);
+
+            var fertilizer = GetDestinationValue(almanac["soil-to-fertilizer map:"], soil);
+
+            var water = GetDestinationValue(almanac["fertilizer-to-water map:"], fertilizer);
+
+            var light = GetDestinationValue(almanac["water-to-light map:"], water);
+
+            var temp = GetDestinationValue(almanac["light-to-temperature map:"], light);
+
+            var humidity = GetDestinationValue(almanac["temperature-to-humidity map:"], temp);
+
+            var location = GetDestinationValue(almanac["humidity-to-location map:"], humidity);
+
+            if (location < lowestLocation) lowestLocation = location;
+        }
+
+        return lowestLocation;
+    }
+
+    private static Dictionary<string, List<SourceDestinationMapping>> BuildAlmanac(string[] input)
+    {
         var maps = new Dictionary<string, List<SourceDestinationMapping>>();
 
         var mapKey = string.Empty;
@@ -48,27 +82,7 @@ public class Day05 : IDayPartOne
             }
         }
 
-        var lowestLocation = long.MaxValue;
-        foreach (var seed in seedsToPlant)
-        {
-            var soil = GetDestinationValue(maps["seed-to-soil map:"], seed);
-
-            var fertilizer = GetDestinationValue(maps["soil-to-fertilizer map:"], soil);
-
-            var water = GetDestinationValue(maps["fertilizer-to-water map:"], fertilizer);
-
-            var light = GetDestinationValue(maps["water-to-light map:"], water);
-
-            var temp = GetDestinationValue(maps["light-to-temperature map:"], light);
-
-            var humidity = GetDestinationValue(maps["temperature-to-humidity map:"], temp);
-
-            var location = GetDestinationValue(maps["humidity-to-location map:"], humidity);
-
-            if (location < lowestLocation) lowestLocation = location;
-        }
-
-        return lowestLocation;
+        return maps;
     }
 
     private static long GetDestinationValue(List<SourceDestinationMapping> maps, long lookupValue)
@@ -92,5 +106,36 @@ public class Day05 : IDayPartOne
 
         public long DestinationStart { get; set; }
         public long DestinationEnd { get; set; }
+    }
+
+    public object PartTwo(string[] input)
+    {
+        var seedRangeValues = input[0].Split(' ')
+            .Where(v => long.TryParse(v, out _))
+            .Select(long.Parse)
+            .ToList();
+
+        var almanac = BuildAlmanac(input);
+
+        var lowestLocation = long.MaxValue;
+        for (int i = 0; i < seedRangeValues.Count; i++)
+        {
+            if (i % 2 != 0)
+            {
+                var seedRange = new List<long>();
+                var start = seedRangeValues[i - 1];
+                var length = seedRangeValues[i];
+                for (int j = 0; j < length; j++)
+                {
+                    seedRange.Add(start + j);
+                }
+
+                var currentLowestLocation = GetLowestLocation(seedRange, almanac);
+                if (currentLowestLocation < lowestLocation) lowestLocation = currentLowestLocation;
+
+            }
+        }
+
+        return lowestLocation;
     }
 }
