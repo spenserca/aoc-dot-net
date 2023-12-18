@@ -16,7 +16,7 @@ public class Day06 : IDayPartOne, IDayPartTwo
             .Where(v => int.TryParse(v, out _))
             .Select(int.Parse)
             .ToArray();
-        var races = raceDurations.Select((r, index) => new Race(r, recordDistances[index]));
+        var races = raceDurations.Select((r, index) => new BoatRace(r, recordDistances[index]));
 
         return races.Select(r => r.NumberOfWaysToWin())
             .Aggregate(1, (a, b) => a * b);
@@ -33,21 +33,21 @@ public class Day06 : IDayPartOne, IDayPartTwo
             .Select(int.Parse)
             .ToArray());
 
-        return new Race(long.Parse(raceDuration), long.Parse(recordDistance)).NumberOfWaysToWin();
+        return new BoatRace(long.Parse(raceDuration), long.Parse(recordDistance)).NumberOfWaysToWin();
     }
 
-    private sealed class Race
+    private sealed class BoatRace
     {
         private readonly long _duration;
         private readonly long _recordDistance;
 
-        public Race(int duration, int recordDistance)
+        public BoatRace(int duration, int recordDistance)
         {
             _duration = duration;
             _recordDistance = recordDistance;
         }
 
-        public Race(long duration, long recordDistance)
+        public BoatRace(long duration, long recordDistance)
         {
             _duration = duration;
             _recordDistance = recordDistance;
