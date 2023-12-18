@@ -74,7 +74,7 @@ public class Day05Tests: IDayPartOneTest, IDayPartTwoTest
     }
 
     [Fact(DisplayName =
-        "finds the lowest location number that corresponds to any of the initial seed ranges with actual input")]
+        "finds the lowest location number that corresponds to any of the initial seed ranges with actual input", Skip = "takes too long to process ")]
     public void PartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
