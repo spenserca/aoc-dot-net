@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AoC.UnitTests.AoC._2023;
 
-public class Day07Tests : IDayPartOneTest
+public class Day07Tests : IDayPartOneTest, IDayPartTwoTest
 {
     private readonly Day07 _underTest = new();
     private const string TestDataFile = "AoC.2023/Data/Day07.txt";
@@ -33,6 +33,24 @@ public class Day07Tests : IDayPartOneTest
 
         var actual = _underTest.PartOne(input);
 
-        actual.Should().Be(6440);
+        actual.Should().Be(241455695);
+    }
+
+    [Fact(DisplayName = "gets the total winnings for a list of hands (including jokers) with test input")]
+    public void PartTwo_TestInput()
+    {
+        var actual = _underTest.PartTwo(_testInput);
+
+        actual.Should().Be(5905);
+    }
+
+    [Fact(DisplayName = "gets the total winnings for a list of hands (including jokers) with actual input")]
+    public void PartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(243101568);
     }
 }
