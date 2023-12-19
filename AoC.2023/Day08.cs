@@ -2,7 +2,7 @@ using AoC.Common;
 
 namespace AoC._2023;
 
-public class Day08 : IDayPartOne
+public class Day08 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 8: Haunted Wasteland ---";
 
@@ -56,5 +56,47 @@ public class Day08 : IDayPartOne
         {
             return instruction.Equals("L") ? _leftNode : _rightNode;
         }
+    }
+
+    public object PartTwo(string[] input)
+    {
+        var instructions = input[0];
+        var networkMap = new Dictionary<string, NetworkNode>();
+
+        for (int i = 2; i < input.Length; i++)
+        {
+            var nodeDetails = input[i];
+            var leftNode = nodeDetails.Substring(7, 3);
+            var rightNode = nodeDetails.Substring(12, 3);
+            var key = nodeDetails.Substring(0, 3);
+            var node = new NetworkNode(key, leftNode, rightNode);
+            networkMap[key] = node;
+        }
+        
+        var currentNodes = networkMap.Keys.Where(k => k.EndsWith('A'))
+            .Select(k => networkMap[k])
+            .ToList();
+
+        var stepCount = 0;
+
+        while (!currentNodes.TrueForAll(n => n.Key.EndsWith('Z')))
+        {
+            foreach (var instruction in instructions)
+            {
+                stepCount++;
+                var tempCurrentNodes = currentNodes.Select(node =>
+                {
+                    var nextNodeKey = node.GetNextNodeKey(instruction.ToString());
+                    return networkMap[nextNodeKey];
+                }).ToList();
+
+                currentNodes.Clear();
+                currentNodes = tempCurrentNodes;
+
+                if (currentNodes.TrueForAll(n => n.Key.EndsWith('Z'))) break;
+            }
+        }
+
+        return stepCount;
     }
 }
