@@ -119,18 +119,13 @@ public class Day11 : IDayPartOne, IDayPartTwo
 
     private class Monkey
     {
-        public readonly List<long> ItemWorryLevels;
-        private string _operationType;
-        private string _operationValue;
+        public readonly List<long> ItemWorryLevels = new();
+        private string _operationType = null!;
+        private string _operationValue = null!;
         public int TestValue { get; private set; } = 0;
         private int _throwToIfTrueId;
         private int _throwToIfFalseId;
         public long Inspections { get; private set; } = 0;
-
-        public Monkey()
-        {
-            ItemWorryLevels = new List<long>();
-        }
 
         public long InspectItem(bool shouldUseDefaultReliefCalculation, int mod)
         {
