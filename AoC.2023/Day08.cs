@@ -33,7 +33,8 @@ public class Day08 : IDayPartOne, IDayPartTwo
                 var nextNodeKey = currentNode.GetNextNodeKey(instruction.ToString());
                 currentNode = networkMap[nextNodeKey];
 
-                if (nextNodeKey.Equals("ZZZ")) break;
+                if (nextNodeKey.Equals("ZZZ"))
+                    break;
             }
         }
 
@@ -55,7 +56,8 @@ public class Day08 : IDayPartOne, IDayPartTwo
             networkMap[key] = node;
         }
 
-        var startingNodes = networkMap.Keys.Where(k => k.EndsWith('A'))
+        var startingNodes = networkMap
+            .Keys.Where(k => k.EndsWith('A'))
             .Select(k => networkMap[k])
             .ToList();
 

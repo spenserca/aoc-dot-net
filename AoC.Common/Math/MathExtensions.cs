@@ -2,8 +2,8 @@ namespace AoC.Common.Math;
 
 public static class MathExtensions
 {
-    public static long LeastCommonMultiple(this IEnumerable<long> values)
-        => values.Aggregate(LeastCommonMultiple);
+    public static long LeastCommonMultiple(this IEnumerable<long> values) =>
+        values.Aggregate(LeastCommonMultiple);
 
     private static long GreatestCommonFactor(long a, long b)
     {
