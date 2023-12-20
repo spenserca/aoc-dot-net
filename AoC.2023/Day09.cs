@@ -25,14 +25,24 @@ public class Day09 : IDayPartOne
 
     private int GetNextValueInHistory(string history)
     {
+        var sequences = new List<IEnumerable<int>>();
         var sequence = history.Split(' ')
             .Select(int.Parse)
-            .Aggregate(0, (x, y) => x - y);
+            .ToList();
+        
+        sequences.Add(sequence);
+        
+        while (!sequence.TrueForAll(v => v == 0))
+        {
+            sequence.Clear();
+            sequence = GetNextSequence(sequence);
+            sequences.Add(sequence);
+        }
 
         return 0;
     }
 
-    private List<string> GetNextSequence(List<string> sequence)
+    private List<int> GetNextSequence(IEnumerable<int> sequence)
     {
         throw new NotImplementedException();
     }
