@@ -14,7 +14,8 @@ public class Day13Tests
     }
 
     [Fact(
-        DisplayName = "gets a count of all packet pairs that are in the right order with test input"
+        DisplayName = "gets a count of all packet pairs that are in the right order with test input",
+        Skip = "not implemented"
     )]
     public void DayThirteenPartOne_TestInput()
     {

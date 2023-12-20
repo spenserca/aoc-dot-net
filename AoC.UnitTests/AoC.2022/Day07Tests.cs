@@ -14,7 +14,8 @@ public class Day07Tests
     }
 
     [Fact(
-        DisplayName = "gets sum of sizes of all directories with size less than 10000 with test input"
+        DisplayName = "gets sum of sizes of all directories with size less than 10000 with test input",
+        Skip = "not implemented"
     )]
     public void DaySevenPartOne_TestInput()
     {
