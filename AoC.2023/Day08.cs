@@ -1,4 +1,5 @@
 using AoC.Common;
+using AoC.Common.Math;
 
 namespace AoC._2023;
 
@@ -39,6 +40,50 @@ public class Day08 : IDayPartOne, IDayPartTwo
         return stepCount;
     }
 
+    public object PartTwo(string[] input)
+    {
+        var instructions = input[0];
+        var networkMap = new Dictionary<string, NetworkNode>();
+
+        for (int i = 2; i < input.Length; i++)
+        {
+            var nodeDetails = input[i];
+            var leftNode = nodeDetails.Substring(7, 3);
+            var rightNode = nodeDetails.Substring(12, 3);
+            var key = nodeDetails.Substring(0, 3);
+            var node = new NetworkNode(key, leftNode, rightNode);
+            networkMap[key] = node;
+        }
+
+        var startingNodes = networkMap.Keys.Where(k => k.EndsWith('A'))
+            .Select(k => networkMap[k])
+            .ToList();
+
+        var stepCountMap = new Dictionary<string, long>();
+        foreach (var node in startingNodes)
+        {
+            var currentNode = node;
+            var stepCount = 0;
+            while (!currentNode.Key.EndsWith('Z'))
+            {
+                foreach (var instruction in instructions)
+                {
+                    stepCount++;
+                    var nextNodeKey = currentNode.GetNextNodeKey(instruction.ToString());
+                    currentNode = networkMap[nextNodeKey];
+
+                    if (currentNode.Key.EndsWith('Z'))
+                    {
+                        stepCountMap.Add(node.Key, stepCount);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return stepCountMap.Values.LeastCommonMultiple();
+    }
+
     private sealed class NetworkNode
     {
         private readonly string _leftNode;
@@ -56,47 +101,5 @@ public class Day08 : IDayPartOne, IDayPartTwo
         {
             return instruction.Equals("L") ? _leftNode : _rightNode;
         }
-    }
-
-    public object PartTwo(string[] input)
-    {
-        var instructions = input[0];
-        var networkMap = new Dictionary<string, NetworkNode>();
-
-        for (int i = 2; i < input.Length; i++)
-        {
-            var nodeDetails = input[i];
-            var leftNode = nodeDetails.Substring(7, 3);
-            var rightNode = nodeDetails.Substring(12, 3);
-            var key = nodeDetails.Substring(0, 3);
-            var node = new NetworkNode(key, leftNode, rightNode);
-            networkMap[key] = node;
-        }
-        
-        var currentNodes = networkMap.Keys.Where(k => k.EndsWith('A'))
-            .Select(k => networkMap[k])
-            .ToList();
-
-        var stepCount = 0;
-
-        while (!currentNodes.TrueForAll(n => n.Key.EndsWith('Z')))
-        {
-            foreach (var instruction in instructions)
-            {
-                stepCount++;
-                var tempCurrentNodes = currentNodes.Select(node =>
-                {
-                    var nextNodeKey = node.GetNextNodeKey(instruction.ToString());
-                    return networkMap[nextNodeKey];
-                }).ToList();
-
-                currentNodes.Clear();
-                currentNodes = tempCurrentNodes;
-
-                if (currentNodes.TrueForAll(n => n.Key.EndsWith('Z'))) break;
-            }
-        }
-
-        return stepCount;
     }
 }

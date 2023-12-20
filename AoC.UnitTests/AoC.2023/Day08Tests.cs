@@ -62,7 +62,7 @@ public class Day08Tests : IDayPartOneTest, IDayPartTwoTest
         actual.Should().Be(6);
     }
 
-    [Fact(DisplayName = "gets the number of steps needed to get to all nodes ending in Z with actual input", Skip = "takes too long to process")]
+    [Fact(DisplayName = "gets the number of steps needed to get to all nodes ending in Z with actual input")]
     public void PartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
