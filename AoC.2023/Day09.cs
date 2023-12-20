@@ -29,9 +29,9 @@ public class Day09 : IDayPartOne
         var sequence = history.Split(' ')
             .Select(int.Parse)
             .ToList();
-        
+
         sequences.Add(sequence);
-        
+
         while (!sequence.TrueForAll(v => v == 0))
         {
             sequence.Clear();
@@ -42,8 +42,18 @@ public class Day09 : IDayPartOne
         return 0;
     }
 
-    private List<int> GetNextSequence(IEnumerable<int> sequence)
+    private static List<int> GetNextSequence(IReadOnlyList<int> sequence)
     {
-        throw new NotImplementedException();
+        var nextSequence = new List<int>();
+        for (var i = 0; i < sequence.Count - 1; i++)
+        {
+            var a = sequence[i];
+            var b = sequence[i + 1];
+            nextSequence.Add(a - b);
+        }
+
+        if (nextSequence.TrueForAll(v => v == 0)) nextSequence.Add(0);
+
+        return nextSequence;
     }
 }
