@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AoC.UnitTests.AoC._2023;
 
-public class Day09Tests : IDayPartOneTest
+public class Day09Tests : IDayPartOneTest, IDayPartTwoTest
 {
     private readonly Day09 _underTest = new();
     private const string TestDataFile = "AoC.2023/Data/Day09.txt";
@@ -32,5 +32,25 @@ public class Day09Tests : IDayPartOneTest
         var actual = _underTest.PartOne(input);
 
         actual.Should().Be(1972648895);
+    }
+
+    [Fact(DisplayName = "calculates the sum of all backwards extrapolated values with test input")]
+    public void PartTwo_TestInput()
+    {
+        var actual = _underTest.PartTwo(_testInput);
+
+        actual.Should().Be(2);
+    }
+
+    [Fact(
+        DisplayName = "calculates the sum of all backwards extrapolated values with actual input"
+    )]
+    public void PartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+
+        var actual = _underTest.PartTwo(input);
+
+        actual.Should().Be(919);
     }
 }

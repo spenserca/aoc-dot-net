@@ -2,7 +2,7 @@
 
 namespace AoC._2023;
 
-public class Day09 : IDayPartOne
+public class Day09 : IDayPartOne, IDayPartTwo
 {
     public string Title => "--- Day 9: Mirage Maintenance ---";
 
@@ -11,12 +11,40 @@ public class Day09 : IDayPartOne
         return input.Select(GetNextValueInHistory).Sum();
     }
 
+    public object PartTwo(string[] input)
+    {
+        return input.Select(GetEarlierValueInHistory).ToList().Sum();
+    }
+
+    private static int GetEarlierValueInHistory(string history)
+    {
+        var sequences = new List<List<int>>();
+        var sequence = history.Split(' ').Select(int.Parse).ToList();
+
+        sequences.Add(sequence);
+
+        while (!sequence.TrueForAll(v => v == 0))
+        {
+            sequence = GetNextSequence(sequence);
+            sequences.Add(sequence);
+        }
+
+        for (var i = sequences.Count - 1; i > 0; i--)
+        {
+            var sequenceBelowFirstValue = sequences[i].First();
+            var sequenceAboveFirstValue = sequences[i - 1].First();
+
+            var aboveSequenceEarlierValue = sequenceAboveFirstValue - sequenceBelowFirstValue;
+            sequences[i - 1].Insert(0, aboveSequenceEarlierValue);
+        }
+
+        return sequences[0].First();
+    }
+
     private static int GetNextValueInHistory(string history)
     {
         var sequences = new List<List<int>>();
-        var sequence = history.Split(' ')
-            .Select(int.Parse)
-            .ToList();
+        var sequence = history.Split(' ').Select(int.Parse).ToList();
 
         sequences.Add(sequence);
 
@@ -48,7 +76,8 @@ public class Day09 : IDayPartOne
             nextSequence.Add(b - a);
         }
 
-        if (nextSequence.TrueForAll(v => v == 0)) nextSequence.Add(0);
+        if (nextSequence.TrueForAll(v => v == 0))
+            nextSequence.Add(0);
 
         return nextSequence;
     }
