@@ -17,7 +17,7 @@ public class CoordinateGrid
         }
     }
 
-    public IEnumerable<Coordinate> GetSurroundingCoordinates(Coordinate coordinate)
+    public IEnumerable<Coordinate> GetAllAdjacentCoords(Coordinate coordinate)
     {
         return Coordinates.Where(
             c =>
@@ -30,5 +30,31 @@ public class CoordinateGrid
                 || c.IsToTheBottomLeftOf(coordinate)
                 || c.IsToTheBottomRightOf(coordinate)
         );
+    }
+
+    public CoordinateGrid RemoveByValue(string value)
+    {
+        Coordinates.RemoveAll(c => c.Value.Equals(value));
+        return this;
+    }
+
+    public IEnumerable<Coordinate> GetLinearlyAdjacentCoords(Coordinate coordinate)
+    {
+        return Coordinates.Where(c =>
+            c.IsToTheLeftOf(coordinate) || c.IsToTheRightOf(coordinate) || c.IsAbove(coordinate) ||
+            c.IsBelow(coordinate));
+    }
+
+    public Coordinate GetCoordinateByValue(string value)
+    {
+        return Coordinates.FirstOrDefault(c => c.Value.Equals(value)) ??
+               throw new CoordinateNotFoundException($"Could not find a coordinate with value {value}");
+    }
+}
+
+public class CoordinateNotFoundException : Exception
+{
+    public CoordinateNotFoundException(string message) : base(message)
+    {
     }
 }

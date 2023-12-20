@@ -19,7 +19,7 @@ public class Day03 : IDayPartOne, IDayPartTwo
         {
             if (int.TryParse(coordinate.Value, out _))
             {
-                var adjacentCoordinates = grid.GetSurroundingCoordinates(coordinate);
+                var adjacentCoordinates = grid.GetAllAdjacentCoords(coordinate);
                 if (!isSymbolAdjacent)
                 {
                     isSymbolAdjacent = adjacentCoordinates.Any(
@@ -54,7 +54,7 @@ public class Day03 : IDayPartOne, IDayPartTwo
         {
             if (int.TryParse(coordinate.Value, out _))
             {
-                var adjacentCoordinates = grid.GetSurroundingCoordinates(coordinate);
+                var adjacentCoordinates = grid.GetAllAdjacentCoords(coordinate);
                 if (!isSymbolAdjacent)
                 {
                     var adjacentSymbols = adjacentCoordinates
