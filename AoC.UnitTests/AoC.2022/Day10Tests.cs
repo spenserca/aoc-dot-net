@@ -198,7 +198,7 @@ public class Day10Tests
 
         actual.Should().BeEquivalentTo(expected);
     }
-    
+
     [Fact(DisplayName = "draws the correct image with actual input")]
     public void DayTenPartTwo_ActualInput()
     {

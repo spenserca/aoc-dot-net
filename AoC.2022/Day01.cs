@@ -16,12 +16,15 @@ public class Day01 : IDayPartOne, IDayPartTwo
             var elvesCalories = input[i];
             if (elvesCalories == string.Empty)
             {
-                if (currentElfCalories > mostCalories) mostCalories = currentElfCalories;
+                if (currentElfCalories > mostCalories)
+                    mostCalories = currentElfCalories;
                 currentElfCalories = 0;
-            } else if (i == input.Length - 1)
+            }
+            else if (i == input.Length - 1)
             {
                 currentElfCalories += int.Parse(elvesCalories);
-                if (currentElfCalories > mostCalories) mostCalories = currentElfCalories;
+                if (currentElfCalories > mostCalories)
+                    mostCalories = currentElfCalories;
             }
             else
             {
@@ -44,7 +47,8 @@ public class Day01 : IDayPartOne, IDayPartTwo
             {
                 summedElvesCalories.Add(currentElfCalories);
                 currentElfCalories = 0;
-            } else if (i == input.Length - 1)
+            }
+            else if (i == input.Length - 1)
             {
                 currentElfCalories += int.Parse(elvesCalories);
                 summedElvesCalories.Add(currentElfCalories);

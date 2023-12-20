@@ -9,16 +9,12 @@ public class Day02 : IDayPartOne, IDayPartTwo
 
     public object PartOne(string[] input)
     {
-        return input
-            .Select(i => new DayOneParsedPasswordRecord(i))
-            .Count(r => r.IsValid());
+        return input.Select(i => new DayOneParsedPasswordRecord(i)).Count(r => r.IsValid());
     }
 
     public object PartTwo(string[] input)
     {
-        return input
-            .Select(i => new DayTwoParsedPasswordRecord(i))
-            .Count(r => r.IsValid());
+        return input.Select(i => new DayTwoParsedPasswordRecord(i)).Count(r => r.IsValid());
     }
 
     private abstract class ParsedPasswordRecord
@@ -44,9 +40,8 @@ public class Day02 : IDayPartOne, IDayPartTwo
 
     private class DayOneParsedPasswordRecord : ParsedPasswordRecord
     {
-        public DayOneParsedPasswordRecord(string passwordRecord) : base(passwordRecord)
-        {
-        }
+        public DayOneParsedPasswordRecord(string passwordRecord)
+            : base(passwordRecord) { }
 
         public override bool IsValid()
         {
@@ -57,9 +52,8 @@ public class Day02 : IDayPartOne, IDayPartTwo
 
     private class DayTwoParsedPasswordRecord : ParsedPasswordRecord
     {
-        public DayTwoParsedPasswordRecord(string passwordRecord) : base(passwordRecord)
-        {
-        }
+        public DayTwoParsedPasswordRecord(string passwordRecord)
+            : base(passwordRecord) { }
 
         public override bool IsValid()
         {
@@ -71,8 +65,7 @@ public class Day02 : IDayPartOne, IDayPartTwo
                 return false;
             }
 
-            return isValueAtFirstPosition ||
-                   isValueAtSecondPosition;
+            return isValueAtFirstPosition || isValueAtSecondPosition;
         }
     }
 }

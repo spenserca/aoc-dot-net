@@ -9,7 +9,8 @@ public class Day05 : IDayPartOne, IDayPartTwo
 
     public object PartOne(string[] input)
     {
-        return input.Select(ToLine)
+        return input
+            .Select(ToLine)
             .Where(IsStraightLine)
             .Select(ToCoordinates)
             .SelectMany(c => c)
@@ -20,7 +21,8 @@ public class Day05 : IDayPartOne, IDayPartTwo
 
     public object PartTwo(string[] input)
     {
-        return input.Select(ToLine)
+        return input
+            .Select(ToLine)
             .Select(ToCoordinates)
             .SelectMany(c => c)
             .GroupBy(c => c.ToString())
@@ -145,8 +147,7 @@ public class Day05 : IDayPartOne, IDayPartTwo
 
     private static Coordinate GetCoordinate(string coordinateMatches)
     {
-        var values = coordinateMatches.Split(',')
-            .Select(v => Convert.ToInt32(v)).ToArray();
+        var values = coordinateMatches.Split(',').Select(v => Convert.ToInt32(v)).ToArray();
 
         return new Coordinate(values[0], values[1]);
     }

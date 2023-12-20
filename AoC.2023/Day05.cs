@@ -8,7 +8,8 @@ public class Day05 : IDayPartOne, IDayPartTwo
 
     public object PartOne(string[] input)
     {
-        var seedsToPlant = input[0].Split(' ')
+        var seedsToPlant = input[0]
+            .Split(' ')
             .Where(v => long.TryParse(v, out _))
             .Select(long.Parse)
             .ToList();
@@ -19,7 +20,10 @@ public class Day05 : IDayPartOne, IDayPartTwo
         return lowestLocation;
     }
 
-    private static long GetLowestLocation(List<long> seedsToPlant, Dictionary<string, List<SourceDestinationMapping>> almanac)
+    private static long GetLowestLocation(
+        List<long> seedsToPlant,
+        Dictionary<string, List<SourceDestinationMapping>> almanac
+    )
     {
         var lowestLocation = long.MaxValue;
         foreach (var seed in seedsToPlant)
@@ -38,7 +42,8 @@ public class Day05 : IDayPartOne, IDayPartTwo
 
             var location = GetDestinationValue(almanac["humidity-to-location map:"], humidity);
 
-            if (location < lowestLocation) lowestLocation = location;
+            if (location < lowestLocation)
+                lowestLocation = location;
         }
 
         return lowestLocation;
@@ -65,20 +70,20 @@ public class Day05 : IDayPartOne, IDayPartTwo
             }
             else
             {
-                var rangeStartsAndLength = value.Split(' ')
-                    .Select(long.Parse)
-                    .ToArray();
+                var rangeStartsAndLength = value.Split(' ').Select(long.Parse).ToArray();
 
                 var sourceStart = rangeStartsAndLength[1];
                 var destinationStart = rangeStartsAndLength[0];
                 var rangeLength = rangeStartsAndLength[2];
-                sourceDestinationMappings.Add(new SourceDestinationMapping()
-                {
-                    SourceStart = sourceStart,
-                    SourceEnd = sourceStart + rangeLength - 1,
-                    DestinationStart = destinationStart,
-                    DestinationEnd = destinationStart + rangeLength - 1
-                });
+                sourceDestinationMappings.Add(
+                    new SourceDestinationMapping()
+                    {
+                        SourceStart = sourceStart,
+                        SourceEnd = sourceStart + rangeLength - 1,
+                        DestinationStart = destinationStart,
+                        DestinationEnd = destinationStart + rangeLength - 1
+                    }
+                );
             }
         }
 
@@ -87,7 +92,9 @@ public class Day05 : IDayPartOne, IDayPartTwo
 
     private static long GetDestinationValue(List<SourceDestinationMapping> maps, long lookupValue)
     {
-        var sourceDestinationMapping = maps.FirstOrDefault(v => v.SourceStart <= lookupValue && v.SourceEnd >= lookupValue);
+        var sourceDestinationMapping = maps.FirstOrDefault(
+            v => v.SourceStart <= lookupValue && v.SourceEnd >= lookupValue
+        );
         return sourceDestinationMapping is not null
             ? GetDestinationValue(sourceDestinationMapping, lookupValue)
             : lookupValue;
@@ -110,7 +117,8 @@ public class Day05 : IDayPartOne, IDayPartTwo
 
     public object PartTwo(string[] input)
     {
-        var seedRangeValues = input[0].Split(' ')
+        var seedRangeValues = input[0]
+            .Split(' ')
             .Where(v => long.TryParse(v, out _))
             .Select(long.Parse)
             .ToList();
@@ -131,8 +139,8 @@ public class Day05 : IDayPartOne, IDayPartTwo
                 }
 
                 var currentLowestLocation = GetLowestLocation(seedRange, almanac);
-                if (currentLowestLocation < lowestLocation) lowestLocation = currentLowestLocation;
-
+                if (currentLowestLocation < lowestLocation)
+                    lowestLocation = currentLowestLocation;
             }
         }
 

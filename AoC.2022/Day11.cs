@@ -8,11 +8,10 @@ public class Day11 : IDayPartOne, IDayPartTwo
 
     public object PartOne(string[] input)
     {
-        var game = new MonkeyInTheMiddle(input, new GameOptions()
-        {
-            NumberOfRounds = 20,
-            ShouldUseDefaultReliefCalculation = true
-        });
+        var game = new MonkeyInTheMiddle(
+            input,
+            new GameOptions() { NumberOfRounds = 20, ShouldUseDefaultReliefCalculation = true }
+        );
 
         game.Play();
 
@@ -21,11 +20,10 @@ public class Day11 : IDayPartOne, IDayPartTwo
 
     public object PartTwo(string[] input)
     {
-        var game = new MonkeyInTheMiddle(input, new GameOptions()
-        {
-            NumberOfRounds = 10000,
-            ShouldUseDefaultReliefCalculation = false
-        });
+        var game = new MonkeyInTheMiddle(
+            input,
+            new GameOptions() { NumberOfRounds = 10000, ShouldUseDefaultReliefCalculation = false }
+        );
 
         game.Play();
 
@@ -57,17 +55,25 @@ public class Day11 : IDayPartOne, IDayPartTwo
                     monkey = new Monkey();
                 }
 
-                if (trimmedNoted.StartsWith("Starting items")) monkey.ParseStartingItems(trimmedNoted);
+                if (trimmedNoted.StartsWith("Starting items"))
+                    monkey.ParseStartingItems(trimmedNoted);
 
-                if (trimmedNoted.StartsWith("Operation")) monkey.ParseOperation(trimmedNoted);
+                if (trimmedNoted.StartsWith("Operation"))
+                    monkey.ParseOperation(trimmedNoted);
 
-                if (trimmedNoted.StartsWith("Test")) monkey.ParseTest(trimmedNoted);
+                if (trimmedNoted.StartsWith("Test"))
+                    monkey.ParseTest(trimmedNoted);
 
-                if (trimmedNoted.StartsWith("If true")) monkey.ParseTrueAction(trimmedNoted);
+                if (trimmedNoted.StartsWith("If true"))
+                    monkey.ParseTrueAction(trimmedNoted);
 
-                if (trimmedNoted.StartsWith("If false")) monkey.ParseFalseAction(trimmedNoted);
+                if (trimmedNoted.StartsWith("If false"))
+                    monkey.ParseFalseAction(trimmedNoted);
 
-                if (trimmedNoted == string.Empty || Array.IndexOf(input, note, 0) == input.Length - 1)
+                if (
+                    trimmedNoted == string.Empty
+                    || Array.IndexOf(input, note, 0) == input.Length - 1
+                )
                 {
                     monkeys.Add(monkey);
                 }
@@ -81,8 +87,7 @@ public class Day11 : IDayPartOne, IDayPartTwo
             var mod = 1;
             if (!_gameOptions.ShouldUseDefaultReliefCalculation)
             {
-                mod = _monkeys.Select(m => m.TestValue)
-                    .Aggregate((a, b) => a * b);
+                mod = _monkeys.Select(m => m.TestValue).Aggregate((a, b) => a * b);
             }
 
             for (var i = 0; i < _gameOptions.NumberOfRounds; i++)
@@ -91,7 +96,10 @@ public class Day11 : IDayPartOne, IDayPartTwo
                 {
                     while (monkey.ItemWorryLevels.Any())
                     {
-                        var itemWorryLevel = monkey.InspectItem(_gameOptions.ShouldUseDefaultReliefCalculation, mod);
+                        var itemWorryLevel = monkey.InspectItem(
+                            _gameOptions.ShouldUseDefaultReliefCalculation,
+                            mod
+                        );
 
                         var monkeyToThrowTo = monkey.GetMonkeyIdToThrowTo(itemWorryLevel);
 
@@ -102,7 +110,8 @@ public class Day11 : IDayPartOne, IDayPartTwo
         }
 
         public long GetMonkeyBusinessLevel() =>
-            _monkeys.Select(m => m.Inspections)
+            _monkeys
+                .Select(m => m.Inspections)
                 .OrderByDescending(i => i)
                 .Take(2)
                 .Aggregate((a, b) => a * b);
@@ -110,18 +119,13 @@ public class Day11 : IDayPartOne, IDayPartTwo
 
     private class Monkey
     {
-        public readonly List<long> ItemWorryLevels;
-        private string _operationType;
-        private string _operationValue;
+        public readonly List<long> ItemWorryLevels = new();
+        private string _operationType = null!;
+        private string _operationValue = null!;
         public int TestValue { get; private set; } = 0;
         private int _throwToIfTrueId;
         private int _throwToIfFalseId;
         public long Inspections { get; private set; } = 0;
-
-        public Monkey()
-        {
-            ItemWorryLevels = new List<long>();
-        }
 
         public long InspectItem(bool shouldUseDefaultReliefCalculation, int mod)
         {
@@ -130,7 +134,11 @@ public class Day11 : IDayPartOne, IDayPartTwo
             var itemWorryLevel = ItemWorryLevels.First();
             ItemWorryLevels.RemoveAt(0);
 
-            var updatedItemWorryLevel = CalculateItemWorryLevel(_operationType, _operationValue, itemWorryLevel);
+            var updatedItemWorryLevel = CalculateItemWorryLevel(
+                _operationType,
+                _operationValue,
+                itemWorryLevel
+            );
 
             return shouldUseDefaultReliefCalculation
                 ? CalculateReliefWorryLevel(updatedItemWorryLevel)
@@ -147,9 +155,14 @@ public class Day11 : IDayPartOne, IDayPartTwo
             return (long)Math.Floor(itemWorryLevel / 3.0);
         }
 
-        private static long CalculateItemWorryLevel(string operationType, string operationValue, long itemWorryLevel)
+        private static long CalculateItemWorryLevel(
+            string operationType,
+            string operationValue,
+            long itemWorryLevel
+        )
         {
-            if (operationValue == "old") operationValue = itemWorryLevel.ToString();
+            if (operationValue == "old")
+                operationValue = itemWorryLevel.ToString();
 
             return operationType switch
             {
@@ -164,8 +177,7 @@ public class Day11 : IDayPartOne, IDayPartTwo
         public void ParseStartingItems(string startingItemNote)
         {
             var notePieces = startingItemNote.Split(":");
-            var startingItems = notePieces[1].Trim().Split(",")
-                .Select(long.Parse);
+            var startingItems = notePieces[1].Trim().Split(",").Select(long.Parse);
 
             ItemWorryLevels.AddRange(startingItems);
         }

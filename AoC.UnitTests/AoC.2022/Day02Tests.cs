@@ -14,15 +14,12 @@ public class Day02Tests
         _underTest = new Day02();
     }
 
-    [Fact(DisplayName = "calculates total score by following the action in the strategy guide with test input")]
+    [Fact(
+        DisplayName = "calculates total score by following the action in the strategy guide with test input"
+    )]
     public void DayTwoPartOne_TestInput()
     {
-        var input = new[]
-        {
-            "A Y",
-            "B X",
-            "C Z"
-        };
+        var input = new[] { "A Y", "B X", "C Z" };
 
         var actual = _underTest.PartOne(input);
 
@@ -39,22 +36,21 @@ public class Day02Tests
         actual.Should().Be(12458);
     }
 
-    [Fact(DisplayName = "calculates total score by following the outcome in the strategy guide with test input")]
+    [Fact(
+        DisplayName = "calculates total score by following the outcome in the strategy guide with test input"
+    )]
     public void DayTwoPartTwo_TestInput()
     {
-        var input = new[]
-        {
-            "A Y",
-            "B X",
-            "C Z"
-        };
+        var input = new[] { "A Y", "B X", "C Z" };
 
         var actual = _underTest.PartTwo(input);
 
         actual.Should().Be(12);
     }
 
-    [Fact(DisplayName = "calculates total score by following the outcome in the strategy guide with actual input")]
+    [Fact(
+        DisplayName = "calculates total score by following the outcome in the strategy guide with actual input"
+    )]
     public void DayTwoPartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);

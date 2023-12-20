@@ -13,7 +13,9 @@ public class DayFiveTests
         _underTest = new Day05();
     }
 
-    [Fact(DisplayName = "day five part one counts the number of points that are overlapped by 2+ lines")]
+    [Fact(
+        DisplayName = "day five part one counts the number of points that are overlapped by 2+ lines"
+    )]
     public void DayFivePartOneTest_One()
     {
         var input = new[]
@@ -45,8 +47,9 @@ public class DayFiveTests
         actual.Should().Be(6548);
     }
 
-    [Fact(DisplayName =
-        "day five part two counts the number of points that are overlapped by 2+ lines including diagonals")]
+    [Fact(
+        DisplayName = "day five part two counts the number of points that are overlapped by 2+ lines including diagonals"
+    )]
     public void DayFivePartTwoTest_One()
     {
         var input = new[]

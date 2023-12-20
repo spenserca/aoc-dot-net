@@ -4,12 +4,13 @@ using Xunit;
 
 namespace AoC.UnitTests.AoC._2023;
 
-public class Day05Tests: IDayPartOneTest, IDayPartTwoTest
+public class Day05Tests : IDayPartOneTest, IDayPartTwoTest
 {
     private readonly Day05 _underTest = new();
     private const string TestDataFile = "AoC.2023/Data/Day05.txt";
 
-    private readonly string[] _testInput = {
+    private readonly string[] _testInput =
+    {
         "seeds: 79 14 55 13",
         "",
         "seed-to-soil map:",
@@ -45,8 +46,9 @@ public class Day05Tests: IDayPartOneTest, IDayPartTwoTest
         "56 93 4",
     };
 
-    [Fact(DisplayName =
-        "finds the lowest location number that corresponds to any of the initial seeds with test input")]
+    [Fact(
+        DisplayName = "finds the lowest location number that corresponds to any of the initial seeds with test input"
+    )]
     public void PartOne_TestInput()
     {
         var actual = _underTest.PartOne(_testInput);
@@ -54,7 +56,9 @@ public class Day05Tests: IDayPartOneTest, IDayPartTwoTest
         actual.Should().Be(35);
     }
 
-    [Fact(DisplayName = "finds the lowest location number that corresponds to any of the initial seeds with actual input")]
+    [Fact(
+        DisplayName = "finds the lowest location number that corresponds to any of the initial seeds with actual input"
+    )]
     public void PartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
@@ -64,8 +68,9 @@ public class Day05Tests: IDayPartOneTest, IDayPartTwoTest
         actual.Should().Be(309796150L);
     }
 
-    [Fact(DisplayName =
-        "finds the lowest location number that corresponds to any of the initial seed ranges with test input")]
+    [Fact(
+        DisplayName = "finds the lowest location number that corresponds to any of the initial seed ranges with test input"
+    )]
     public void PartTwo_TestInput()
     {
         var actual = _underTest.PartTwo(_testInput);
@@ -73,8 +78,10 @@ public class Day05Tests: IDayPartOneTest, IDayPartTwoTest
         actual.Should().Be(46);
     }
 
-    [Fact(DisplayName =
-        "finds the lowest location number that corresponds to any of the initial seed ranges with actual input", Skip = "takes too long to process ")]
+    [Fact(
+        DisplayName = "finds the lowest location number that corresponds to any of the initial seed ranges with actual input",
+        Skip = "takes too long to process "
+    )]
     public void PartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);

@@ -26,11 +26,13 @@ internal class CamelCardHand : IComparable
 
     private HandType GetHandTypeWithJokersWild()
     {
-        if (!HasJokers) return GetHandTypeWithoutJokersWild();
+        if (!HasJokers)
+            return GetHandTypeWithoutJokersWild();
         var handCards = new Dictionary<char, int>();
         foreach (var card in _cards)
         {
-            if (!handCards.TryAdd(card, 1)) handCards[card]++;
+            if (!handCards.TryAdd(card, 1))
+                handCards[card]++;
         }
 
         return handCards switch
@@ -43,8 +45,10 @@ internal class CamelCardHand : IComparable
             { Keys.Count: 3 } when handCards['J'] == 2 => HandType.FourOfAKind,
             { Keys.Count: 4 } when handCards['J'] == 2 => HandType.ThreeOfAKind,
             // 1 Joker
-            { Keys.Count: 3 } when handCards['J'] == 1 && handCards.ContainsValue(3) => HandType.FourOfAKind,
-            { Keys.Count: 3 } when handCards['J'] == 1 && handCards.ContainsValue(2) => HandType.FullHouse,
+            { Keys.Count: 3 } when handCards['J'] == 1 && handCards.ContainsValue(3)
+                => HandType.FourOfAKind,
+            { Keys.Count: 3 } when handCards['J'] == 1 && handCards.ContainsValue(2)
+                => HandType.FullHouse,
             { Keys.Count: 4 } when handCards['J'] == 1 => HandType.ThreeOfAKind,
             { Keys.Count: 5 } when handCards['J'] == 1 => HandType.OnePair,
             _ => throw new ArgumentException("Invalid configuration for cards in the hand!")
@@ -56,18 +60,18 @@ internal class CamelCardHand : IComparable
         var handCards = new Dictionary<char, int>();
         foreach (var card in _cards)
         {
-            if (!handCards.TryAdd(card, 1)) handCards[card]++;
+            if (!handCards.TryAdd(card, 1))
+                handCards[card]++;
         }
 
         return handCards switch
         {
             { Keys.Count: 5 } => HandType.HighCard,
             { Keys.Count: 4 } => HandType.OnePair,
-            { Keys.Count: 3, Values: var values } => values.Any(v => v == 3)
-                ? HandType.ThreeOfAKind
-                : HandType.TwoPair,
-            { Keys.Count: 2, Values: var values } =>
-                values.Any(v => v == 4) ? HandType.FourOfAKind : HandType.FullHouse,
+            { Keys.Count: 3, Values: var values }
+                => values.Any(v => v == 3) ? HandType.ThreeOfAKind : HandType.TwoPair,
+            { Keys.Count: 2, Values: var values }
+                => values.Any(v => v == 4) ? HandType.FourOfAKind : HandType.FullHouse,
             { Keys.Count: 1 } => HandType.FiveOfAKind,
             _ => throw new ArgumentException("Invalid configuration for cards in the hand!")
         };
@@ -75,18 +79,21 @@ internal class CamelCardHand : IComparable
 
     public int CompareTo(object? obj)
     {
-        if (obj is null) return 1;
+        if (obj is null)
+            return 1;
         var objValue = (CamelCardHand)obj;
         var typeDiff = Type - objValue.Type;
 
-        if (typeDiff != 0) return typeDiff;
+        if (typeDiff != 0)
+            return typeDiff;
 
         for (var i = 0; i < _cards.Length; i++)
         {
             var thisCard = _cards[i];
             var thatCard = objValue._cards[i];
 
-            if (thisCard.Equals(thatCard)) continue;
+            if (thisCard.Equals(thatCard))
+                continue;
 
             var thisCardStrength = CardsInOrderOfStrength.IndexOf(thisCard);
             var thatCardStrength = CardsInOrderOfStrength.IndexOf(thatCard);

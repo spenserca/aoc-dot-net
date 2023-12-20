@@ -1,0 +1,30 @@
+name: dotnet package
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup dotnet 6.0.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: lint and test
+        run: |
+          dotnet --version
+          
+          dotnet tool restore
+          
+          dotnet csharpier --check $GITHUB_WORKSPACE
+          
+          dotnet test AoC.UnitTests/AoC.UnitTests.csproj

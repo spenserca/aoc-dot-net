@@ -54,7 +54,9 @@ public class DayFourTests
         actual.Should().Be(55770);
     }
 
-    [Fact(DisplayName = "day four part two multiplies the bingo score by the winning number of the last winning card")]
+    [Fact(
+        DisplayName = "day four part two multiplies the bingo score by the winning number of the last winning card"
+    )]
     public void DayFourPartTwoTest_One()
     {
         var input = new[]

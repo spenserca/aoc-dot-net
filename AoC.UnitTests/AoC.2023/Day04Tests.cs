@@ -30,9 +30,9 @@ public class Day04Tests
     public void DayFourPartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
-    
+
         var actual = _underTest.PartOne(input);
-    
+
         actual.Should().Be(18519);
     }
 
@@ -44,7 +44,10 @@ public class Day04Tests
         actual.Should().Be(30);
     }
 
-    [Fact(DisplayName = "gets the total number of scratch cards with actual input", Skip = "takes 2 minutes to run")]
+    [Fact(
+        DisplayName = "gets the total number of scratch cards with actual input",
+        Skip = "takes 2 minutes to run"
+    )]
     public void DayOnePartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);

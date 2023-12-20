@@ -9,49 +9,52 @@ public class Day02 : IDayPartOne, IDayPartTwo
 
     public object PartOne(string[] input)
     {
-        return input.Select(i => new CubeGame(i, 12, 13, 14))
+        return input
+            .Select(i => new CubeGame(i, 12, 13, 14))
             .Where(g => g.IsPossible)
             .Sum(g => g.Id);
     }
 
     public object PartTwo(string[] input)
     {
-        return input.Select(i =>
-        {
-            var minRedCubes = 0;
-            var minGreenCubes = 0;
-            var minBlueCubes = 0;
-
-            var regex = new Regex("([0-9]+\\s(blue|red|green))");
-            var matches = regex.Matches(i);
-
-            foreach (Match match in matches)
+        return input
+            .Select(i =>
             {
-                var handfulDetails = match.Value.Split(' ');
-                var intValue = int.Parse(handfulDetails[0]);
+                var minRedCubes = 0;
+                var minGreenCubes = 0;
+                var minBlueCubes = 0;
 
-                switch (handfulDetails[1])
+                var regex = new Regex("([0-9]+\\s(blue|red|green))");
+                var matches = regex.Matches(i);
+
+                foreach (Match match in matches)
                 {
-                    case "blue" when intValue > minBlueCubes:
+                    var handfulDetails = match.Value.Split(' ');
+                    var intValue = int.Parse(handfulDetails[0]);
+
+                    switch (handfulDetails[1])
                     {
-                        minBlueCubes = intValue;
-                        break;
-                    }
-                    case "red" when intValue > minRedCubes:
-                    {
-                        minRedCubes = intValue;
-                        break;
-                    }
-                    case "green" when intValue > minGreenCubes:
-                    {
-                        minGreenCubes = intValue;
-                        break;
+                        case "blue" when intValue > minBlueCubes:
+                        {
+                            minBlueCubes = intValue;
+                            break;
+                        }
+                        case "red" when intValue > minRedCubes:
+                        {
+                            minRedCubes = intValue;
+                            break;
+                        }
+                        case "green" when intValue > minGreenCubes:
+                        {
+                            minGreenCubes = intValue;
+                            break;
+                        }
                     }
                 }
-            }
 
-            return minRedCubes * minGreenCubes * minBlueCubes;
-        }).Sum();
+                return minRedCubes * minGreenCubes * minBlueCubes;
+            })
+            .Sum();
     }
 
     private sealed class CubeGame
@@ -63,11 +66,20 @@ public class Day02 : IDayPartOne, IDayPartTwo
         public CubeGame(string gameDetails, int maxRedCubes, int maxGreenCubes, int maxBlueCubes)
         {
             Id = ParseGameId(gameDetails);
-            IsPossible = !ParseContainsImpossibleHandfuls(gameDetails, maxRedCubes, maxGreenCubes, maxBlueCubes);
+            IsPossible = !ParseContainsImpossibleHandfuls(
+                gameDetails,
+                maxRedCubes,
+                maxGreenCubes,
+                maxBlueCubes
+            );
         }
 
-        private static bool ParseContainsImpossibleHandfuls(string gameDetails, int maxRedCubes, int maxGreenCubes,
-            int maxBlueCubes)
+        private static bool ParseContainsImpossibleHandfuls(
+            string gameDetails,
+            int maxRedCubes,
+            int maxGreenCubes,
+            int maxBlueCubes
+        )
         {
             var regex = new Regex("([0-9]+\\s(blue|red|green))");
             var matches = regex.Matches(gameDetails);

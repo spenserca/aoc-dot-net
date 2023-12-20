@@ -11,8 +11,9 @@ public class Day06 : IDayPartOne, IDayPartTwo
         const int numberOfCharsToCheck = 4;
         var value = input[0];
 
-        return new UniqueSequenceFinder(numberOfCharsToCheck)
-            .GetNumberOfCharsProcessedBeforeUniqueSequenceIsFound(value);
+        return new UniqueSequenceFinder(
+            numberOfCharsToCheck
+        ).GetNumberOfCharsProcessedBeforeUniqueSequenceIsFound(value);
     }
 
     public object PartTwo(string[] input)
@@ -20,8 +21,9 @@ public class Day06 : IDayPartOne, IDayPartTwo
         const int numberOfCharsToCheck = 14;
         var value = input[0];
 
-        return new UniqueSequenceFinder(numberOfCharsToCheck)
-            .GetNumberOfCharsProcessedBeforeUniqueSequenceIsFound(value);
+        return new UniqueSequenceFinder(
+            numberOfCharsToCheck
+        ).GetNumberOfCharsProcessedBeforeUniqueSequenceIsFound(value);
     }
 
     private class UniqueSequenceFinder

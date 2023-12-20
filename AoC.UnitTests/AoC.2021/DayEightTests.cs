@@ -14,7 +14,9 @@ public class DayEightTests
         _underTest = new Day08();
     }
 
-    [Fact(DisplayName = "day eight part one calculates the number of times 1, 4, 7 or 8 appear in the output")]
+    [Fact(
+        DisplayName = "day eight part one calculates the number of times 1, 4, 7 or 8 appear in the output"
+    )]
     public void DayEightPartOneTest_One()
     {
         var input = new[]

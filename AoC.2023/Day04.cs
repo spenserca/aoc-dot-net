@@ -8,25 +8,28 @@ public class Day04 : IDayPartOne, IDayPartTwo
 
     public object PartOne(string[] input)
     {
-        return input.Select(i => i.Substring(i.IndexOf(':') + 2))
+        return input
+            .Select(i => i.Substring(i.IndexOf(':') + 2))
             .Select(g =>
             {
-                var card = g.Split('|')
-                    .Select(c => c.Trim())
-                    .ToList();
+                var card = g.Split('|').Select(c => c.Trim()).ToList();
 
-                var winningNumbers = card[0].Split(' ')
+                var winningNumbers = card[0]
+                    .Split(' ')
                     .Where(v => int.TryParse(v, out _))
                     .Select(int.Parse);
-                var myNumbers = card[1].Split(' ')
+                var myNumbers = card[1]
+                    .Split(' ')
                     .Where(v => int.TryParse(v, out _))
                     .Select(int.Parse);
 
                 var overlap = myNumbers.Count(n => winningNumbers.Contains(n));
 
-                if (overlap == 0) return 0;
-                if (overlap == 1) return 1;
-                
+                if (overlap == 0)
+                    return 0;
+                if (overlap == 1)
+                    return 1;
+
                 return (int)Math.Pow(2, overlap - 1);
             })
             .Sum();
@@ -34,8 +37,10 @@ public class Day04 : IDayPartOne, IDayPartTwo
 
     public object PartTwo(string[] input)
     {
-        return input.Select((i, index) => i.Substring(i.IndexOf(':') + 2))
-            .Select((g, index) => new ScratchCard(input[index], index)).ToList()
+        return input
+            .Select((i, index) => i.Substring(i.IndexOf(':') + 2))
+            .Select((g, index) => new ScratchCard(input[index], index))
+            .ToList()
             .Sum(c => c.GetCountOfAllCardsWon(input));
     }
 
@@ -53,15 +58,15 @@ public class Day04 : IDayPartOne, IDayPartTwo
         {
             Index = index;
 
-            var cardSplit = card.Split('|')
-                .Select(c => c.Trim())
-                .ToList();
+            var cardSplit = card.Split('|').Select(c => c.Trim()).ToList();
 
-            WinningNumbers = cardSplit[0].Split(' ')
+            WinningNumbers = cardSplit[0]
+                .Split(' ')
                 .Where(v => int.TryParse(v, out _))
                 .Select(int.Parse);
 
-            CardNumbers = cardSplit[1].Split(' ')
+            CardNumbers = cardSplit[1]
+                .Split(' ')
                 .Where(v => int.TryParse(v, out _))
                 .Select(int.Parse);
 
@@ -75,7 +80,10 @@ public class Day04 : IDayPartOne, IDayPartTwo
             for (var i = 0; i < CountOfMatchedNumbers; i++)
             {
                 var indexOfNextWonCard = Index + 1 + i;
-                var cardsWonFromBonusCard = new ScratchCard(input[indexOfNextWonCard], indexOfNextWonCard);
+                var cardsWonFromBonusCard = new ScratchCard(
+                    input[indexOfNextWonCard],
+                    indexOfNextWonCard
+                );
                 countOfCardsWonFromBonusCards += cardsWonFromBonusCard.GetCountOfAllCardsWon(input);
             }
 

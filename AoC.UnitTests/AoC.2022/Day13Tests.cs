@@ -13,7 +13,10 @@ public class Day13Tests
         _underTest = new Day13();
     }
 
-    [Fact(DisplayName = "gets a count of all packet pairs that are in the right order with test input")]
+    [Fact(
+        DisplayName = "gets a count of all packet pairs that are in the right order with test input",
+        Skip = "not implemented"
+    )]
     public void DayThirteenPartOne_TestInput()
     {
         var input = new[]

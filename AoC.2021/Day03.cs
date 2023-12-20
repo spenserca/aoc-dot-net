@@ -42,7 +42,10 @@ public class Day03 : IDayPartOne, IDayPartTwo
         {
             if (diagnosticsForOxygenRating.Count() > 1)
             {
-                diagnosticsForOxygenRating = FilterDiagnosticsForOxygenRating(diagnosticsForOxygenRating, i);
+                diagnosticsForOxygenRating = FilterDiagnosticsForOxygenRating(
+                    diagnosticsForOxygenRating,
+                    i
+                );
             }
 
             if (diagnosticsForC02Rating.Count() > 1)
@@ -80,23 +83,33 @@ public class Day03 : IDayPartOne, IDayPartTwo
         return bitCounters;
     }
 
-    private List<string> FilterDiagnosticsForC02Rating(List<string> diagnosticsForC02Rating, int index)
+    private List<string> FilterDiagnosticsForC02Rating(
+        List<string> diagnosticsForC02Rating,
+        int index
+    )
     {
         var bitCounters = GetBitCounts(diagnosticsForC02Rating.ToArray());
         var sumOfZeroes = bitCounters[index].Count(i => i == 0);
         var sumOfOnes = bitCounters[index].Count(i => i == 1);
         var valueToFind = sumOfZeroes <= sumOfOnes ? 0 : 1;
 
-        return diagnosticsForC02Rating.Where(pc => pc[index].ToString() == valueToFind.ToString()).ToList();
+        return diagnosticsForC02Rating
+            .Where(pc => pc[index].ToString() == valueToFind.ToString())
+            .ToList();
     }
 
-    private List<string> FilterDiagnosticsForOxygenRating(List<string> diagnosticsForOxygenRating, int index)
+    private List<string> FilterDiagnosticsForOxygenRating(
+        List<string> diagnosticsForOxygenRating,
+        int index
+    )
     {
         var bitCounters = GetBitCounts(diagnosticsForOxygenRating.ToArray());
         var sumOfZeroes = bitCounters[index].Count(i => i == 0);
         var sumOfOnes = bitCounters[index].Count(i => i == 1);
         var valueToFind = sumOfOnes >= sumOfZeroes ? 1 : 0;
 
-        return diagnosticsForOxygenRating.Where(pc => pc[index].ToString() == valueToFind.ToString()).ToList();
+        return diagnosticsForOxygenRating
+            .Where(pc => pc[index].ToString() == valueToFind.ToString())
+            .ToList();
     }
 }
