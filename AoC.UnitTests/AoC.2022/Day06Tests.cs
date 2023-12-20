@@ -23,17 +23,16 @@ public class Day06Tests
     [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11)]
     public void DaySixPartOne_TestInput(string value, int expected)
     {
-        var input = new[]
-        {
-            value
-        };
+        var input = new[] { value };
 
         var actual = _underTest.PartOne(input);
 
         actual.Should().Be(expected);
     }
 
-    [Fact(DisplayName = "calculates the number of chars processed until 4 unique chars are found in a row with actual input")]
+    [Fact(
+        DisplayName = "calculates the number of chars processed until 4 unique chars are found in a row with actual input"
+    )]
     public void DaySixPartOne_ActualInput()
     {
         var input = File.ReadAllLines(TestFilePath);
@@ -51,17 +50,16 @@ public class Day06Tests
     [InlineData("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26)]
     public void DaySixPartTwo_TestInput(string value, int expected)
     {
-        var input = new[]
-        {
-            value
-        };
+        var input = new[] { value };
 
         var actual = _underTest.PartTwo(input);
 
         actual.Should().Be(expected);
     }
 
-    [Fact(DisplayName = "calculates the number of chars processed until 14 unique chars are found in a row with actual input")]
+    [Fact(
+        DisplayName = "calculates the number of chars processed until 14 unique chars are found in a row with actual input"
+    )]
     public void DaySixPartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestFilePath);

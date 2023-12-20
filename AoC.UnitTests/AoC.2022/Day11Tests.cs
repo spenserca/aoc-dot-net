@@ -62,7 +62,9 @@ public class Day11Tests
         actual.Should().Be(316888);
     }
 
-    [Fact(DisplayName = "calculates the total monkey business with manually reduced worry levels with test input")]
+    [Fact(
+        DisplayName = "calculates the total monkey business with manually reduced worry levels with test input"
+    )]
     public void DayElevenPartTwo_TestInput()
     {
         var actual = _underTest.PartTwo(_input);
@@ -70,7 +72,9 @@ public class Day11Tests
         actual.Should().Be(2713310158);
     }
 
-    [Fact(DisplayName = "calculates the total monkey business with manually reduced worry levels with actual input")]
+    [Fact(
+        DisplayName = "calculates the total monkey business with manually reduced worry levels with actual input"
+    )]
     public void DayElevenPartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(@"AoC.2022/Data/Day11.txt");

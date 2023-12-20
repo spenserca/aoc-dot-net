@@ -13,7 +13,9 @@ public class Day07Tests
         _underTest = new Day07();
     }
 
-    [Fact(DisplayName = "gets sum of sizes of all directories with size less than 10000 with test input")]
+    [Fact(
+        DisplayName = "gets sum of sizes of all directories with size less than 10000 with test input"
+    )]
     public void DaySevenPartOne_TestInput()
     {
         var input = new[]

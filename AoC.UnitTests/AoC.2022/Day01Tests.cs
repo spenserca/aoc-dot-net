@@ -50,7 +50,9 @@ public class Day01Tests
         actual.Should().Be(69206);
     }
 
-    [Fact(DisplayName = "calculates the total calories held by the elves with the top 3 most calories with test input")]
+    [Fact(
+        DisplayName = "calculates the total calories held by the elves with the top 3 most calories with test input"
+    )]
     public void DayOnePartTwo_TestInput()
     {
         var input = new[]
@@ -76,7 +78,9 @@ public class Day01Tests
         actual.Should().Be(45000);
     }
 
-    [Fact(DisplayName = "calculates the total calories held by the elves with the top 3 most calories with actual input")]
+    [Fact(
+        DisplayName = "calculates the total calories held by the elves with the top 3 most calories with actual input"
+    )]
     public void DayOnePartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);

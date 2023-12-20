@@ -23,7 +23,7 @@ public class Day05 : IDayPartOne, IDayPartTwo
             for (int j = 0; j < numberOfContainersToMove; j++)
             {
                 var container = stacks[sourceContainer - 1].Pop();
-                stacks[destinationContainer -1].Push(container);
+                stacks[destinationContainer - 1].Push(container);
             }
         }
 
@@ -59,7 +59,7 @@ public class Day05 : IDayPartOne, IDayPartTwo
 
             foreach (var crate in cratesToMove)
             {
-                stacks[destinationContainer -1].Push(crate);
+                stacks[destinationContainer - 1].Push(crate);
             }
         }
 

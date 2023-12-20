@@ -22,15 +22,17 @@ public class Day03 : IDayPartOne, IDayPartTwo
                 var adjacentCoordinates = grid.GetSurroundingCoordinates(coordinate);
                 if (!isSymbolAdjacent)
                 {
-                    isSymbolAdjacent =
-                        adjacentCoordinates.Any(c => !int.TryParse(c.Value, out _) && !c.Value.Equals("."));
+                    isSymbolAdjacent = adjacentCoordinates.Any(
+                        c => !int.TryParse(c.Value, out _) && !c.Value.Equals(".")
+                    );
                 }
 
                 enginePart += coordinate.Value;
             }
             else
             {
-                if (isSymbolAdjacent) sum += int.Parse(enginePart);
+                if (isSymbolAdjacent)
+                    sum += int.Parse(enginePart);
                 enginePart = string.Empty;
                 isSymbolAdjacent = false;
             }
@@ -55,8 +57,9 @@ public class Day03 : IDayPartOne, IDayPartTwo
                 var adjacentCoordinates = grid.GetSurroundingCoordinates(coordinate);
                 if (!isSymbolAdjacent)
                 {
-                    var adjacentSymbols =
-                        adjacentCoordinates.Where(c => !int.TryParse(c.Value, out _) && !c.Value.Equals(".")).ToList();
+                    var adjacentSymbols = adjacentCoordinates
+                        .Where(c => !int.TryParse(c.Value, out _) && !c.Value.Equals("."))
+                        .ToList();
                     isSymbolAdjacent = adjacentSymbols.Any();
                     adjacentGears.AddRange(adjacentSymbols.Where(s => s.Value.Equals("*")));
                 }
@@ -70,8 +73,12 @@ public class Day03 : IDayPartOne, IDayPartTwo
                     foreach (var gear in adjacentGears)
                     {
                         if (!gearsWithAdjacentEngineParts.ContainsKey(gear))
-                            gearsWithAdjacentEngineParts.Add(gear, new List<string>() { enginePart });
-                        else gearsWithAdjacentEngineParts[gear].Add(enginePart);
+                            gearsWithAdjacentEngineParts.Add(
+                                gear,
+                                new List<string>() { enginePart }
+                            );
+                        else
+                            gearsWithAdjacentEngineParts[gear].Add(enginePart);
                     }
                 }
 
@@ -81,7 +88,8 @@ public class Day03 : IDayPartOne, IDayPartTwo
             }
         }
 
-        return gearsWithAdjacentEngineParts.Values.Where(v => v.Count == 2)
+        return gearsWithAdjacentEngineParts
+            .Values.Where(v => v.Count == 2)
             .Sum(v => int.Parse(v[0]) * int.Parse(v[1]));
     }
 }

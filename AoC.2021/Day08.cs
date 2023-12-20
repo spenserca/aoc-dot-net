@@ -6,21 +6,25 @@ public class Day08 : IDayPartOne
 {
     public string Title => "--- Day 8: Seven Segment Search ---";
 
-    private Dictionary<int, string[]> _signalPatternCountToPotentialSegments = new()
-    {
-        { 0, new[] { "a", "b", "c", "e", "f", "g" } },
-        { 1, new[] { "c", "f" } },
-        { 2, new[] { "a", "c", "d", "e", "g" } },
-        { 3, new[] { "a", "c", "d", "f", "g" } },
-        { 4, new[] { "b", "c", "d", "f" } },
-        { 5, new[] { "a", "b", "d", "f", "g" } },
-        { 6, new[] { "a", "b", "d", "e", "f", "g" } },
-        { 7, new[] { "a", "c", "f" } },
-        { 8, new[] { "a", "b", "c", "d", "e", "f", "g" } },
-        { 9, new[] { "a", "b", "c", "d", "f", "g" } }
-    };
+    private Dictionary<int, string[]> _signalPatternCountToPotentialSegments =
+        new()
+        {
+            { 0, new[] { "a", "b", "c", "e", "f", "g" } },
+            { 1, new[] { "c", "f" } },
+            { 2, new[] { "a", "c", "d", "e", "g" } },
+            { 3, new[] { "a", "c", "d", "f", "g" } },
+            { 4, new[] { "b", "c", "d", "f" } },
+            { 5, new[] { "a", "b", "d", "f", "g" } },
+            { 6, new[] { "a", "b", "d", "e", "f", "g" } },
+            { 7, new[] { "a", "c", "f" } },
+            { 8, new[] { "a", "b", "c", "d", "e", "f", "g" } },
+            { 9, new[] { "a", "b", "c", "d", "f", "g" } }
+        };
 
-    private Dictionary<int, int[]> _signalPatternLengthToDisplayNumbers = new Dictionary<int, int[]>()
+    private Dictionary<int, int[]> _signalPatternLengthToDisplayNumbers = new Dictionary<
+        int,
+        int[]
+    >()
     {
         { 2, new[] { 1 } },
         { 3, new[] { 7 } },
@@ -32,12 +36,14 @@ public class Day08 : IDayPartOne
 
     public object PartOne(string[] input)
     {
-        return input.Select(i =>
+        return input
+            .Select(i =>
             {
                 var inputsAndOutputs = i.Split('|');
 
                 return inputsAndOutputs[1];
-            }).ToList()
+            })
+            .ToList()
             .SelectMany(o => o.Split(' '))
             .Count(v => new[] { 2, 3, 4, 7 }.Contains(v.Length));
     }

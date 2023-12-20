@@ -12,17 +12,18 @@ public class Day07 : IDayPartOne, IDayPartTwo
 
         var positions = input.Select(i => Convert.ToInt32(i)).ToList();
 
-        positions
-            .ForEach(p =>
-            {
-                var positionToMoveTo = p;
-                var totalFuel = positions.Select(currentPosition => Math.Abs(currentPosition - positionToMoveTo)).Sum();
+        positions.ForEach(p =>
+        {
+            var positionToMoveTo = p;
+            var totalFuel = positions
+                .Select(currentPosition => Math.Abs(currentPosition - positionToMoveTo))
+                .Sum();
 
-                if (totalFuel < fuelAmount)
-                {
-                    fuelAmount = totalFuel;
-                }
-            });
+            if (totalFuel < fuelAmount)
+            {
+                fuelAmount = totalFuel;
+            }
+        });
 
         return fuelAmount;
     }
@@ -55,7 +56,8 @@ public class Day07 : IDayPartOne, IDayPartTwo
                     var distance = Math.Abs(currentPosition - positionToMoveTo);
                     var factorial = GetFactorial(distance);
                     return factorial;
-                }).Sum();
+                })
+                .Sum();
 
             if (totalFuel < fuelAmount)
             {

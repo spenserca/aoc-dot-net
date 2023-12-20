@@ -30,12 +30,12 @@ public class Day02Tests
     public void DayOnePartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
-    
+
         var actual = _underTest.PartOne(input);
-    
+
         actual.Should().Be(2449);
     }
-    
+
     [Fact(DisplayName = "gets the sum of the power of the minimum sets with test input")]
     public void DayOnePartTwo_TestInput()
     {
@@ -47,19 +47,19 @@ public class Day02Tests
             "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red",
             "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green",
         };
-    
+
         var actual = _underTest.PartTwo(input);
-    
+
         actual.Should().Be(2286);
     }
-    
+
     [Fact(DisplayName = "gets the sum of the power of the minimum sets with actual input")]
     public void DayOnePartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
-    
+
         var actual = _underTest.PartTwo(input);
-    
+
         actual.Should().Be(63981);
     }
 }

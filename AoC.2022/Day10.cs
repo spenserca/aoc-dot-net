@@ -11,15 +11,7 @@ public class Day10 : IDayPartOne, IDayPartTwo
         var totalSignalStrength = 0;
         var registerValue = 1;
         var valueToAdd = 0;
-        var interestingCycles = new[]
-        {
-            20,
-            60,
-            100,
-            140,
-            180,
-            220
-        };
+        var interestingCycles = new[] { 20, 60, 100, 140, 180, 220 };
         var cycles = BuildCycles(input);
 
         for (var i = 1; i <= cycles.Count; i++)
@@ -30,7 +22,8 @@ public class Day10 : IDayPartOne, IDayPartTwo
             }
 
             var cycleInstruction = cycles[i - 1];
-            if (cycleInstruction == "noop") continue;
+            if (cycleInstruction == "noop")
+                continue;
 
             if (cycleInstruction == "X")
             {
@@ -52,7 +45,8 @@ public class Day10 : IDayPartOne, IDayPartTwo
 
         foreach (var instruction in input)
         {
-            if (instruction == "noop") cycles.Add(instruction);
+            if (instruction == "noop")
+                cycles.Add(instruction);
             else
             {
                 cycles.Add(instruction);
@@ -85,7 +79,8 @@ public class Day10 : IDayPartOne, IDayPartTwo
             }
 
             var cycleInstruction = cycles[i - 1];
-            if (cycleInstruction == "noop") continue;
+            if (cycleInstruction == "noop")
+                continue;
 
             if (cycleInstruction == "X")
             {

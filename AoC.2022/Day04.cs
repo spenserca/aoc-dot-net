@@ -57,7 +57,7 @@ public static class RangeExtensions
 
     public static bool ContainsPartOf(this Range a, Range b)
     {
-        return (b.Start.Value >= a.Start.Value && b.Start.Value <= a.End.Value) ||
-               (b.End.Value <= a.End.Value && b.End.Value >= a.Start.Value);
+        return (b.Start.Value >= a.Start.Value && b.Start.Value <= a.End.Value)
+            || (b.End.Value <= a.End.Value && b.End.Value >= a.Start.Value);
     }
 }

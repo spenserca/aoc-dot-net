@@ -11,12 +11,14 @@ public class Day14 : IDayPartOne, IDayPartTwo
         var flowPoint = new Coordinate(500, 0);
         var occupiedPoints = new HashSet<Coordinate>();
         var rockPaths = new List<RockPath>();
-        
+
         foreach (var path in input)
         {
             var rockPath = new RockPath(path);
             rockPaths.Add(rockPath);
-            rockPaths.ForEach(rp => rp.PathCoordinates.ToList().ForEach(pc => occupiedPoints.Add(pc)));
+            rockPaths.ForEach(
+                rp => rp.PathCoordinates.ToList().ForEach(pc => occupiedPoints.Add(pc))
+            );
         }
 
         var isSandFallingIntoTheAbyss = false;
@@ -44,8 +46,9 @@ public class Day14 : IDayPartOne, IDayPartTwo
                 sandPosition = flowPoint;
             }
 
-            var hasOccupiedPointsBelow = occupiedPoints
-                .Any(c => c.X == sandPosition.X && c.Y > sandPosition.Y);
+            var hasOccupiedPointsBelow = occupiedPoints.Any(
+                c => c.X == sandPosition.X && c.Y > sandPosition.Y
+            );
 
             isSandFallingIntoTheAbyss = !hasOccupiedPointsBelow;
         }
@@ -63,12 +66,14 @@ public class Day14 : IDayPartOne, IDayPartTwo
         {
             var rockPath = new RockPath(path);
             rockPaths.Add(rockPath);
-            rockPaths.ForEach(rp => rp.PathCoordinates.ToList().ForEach(pc => occupiedPoints.Add(pc)));
+            rockPaths.ForEach(
+                rp => rp.PathCoordinates.ToList().ForEach(pc => occupiedPoints.Add(pc))
+            );
         }
 
         // add floor as rock path @ max Y + 2
-        var floorLevel = rockPaths.SelectMany(rp => rp.PathCoordinates.Select(pc => pc.Y))
-            .Max() + 2;
+        var floorLevel =
+            rockPaths.SelectMany(rp => rp.PathCoordinates.Select(pc => pc.Y)).Max() + 2;
 
         var isFlowPointBlocked = false;
         var sandCount = 0;
@@ -76,15 +81,24 @@ public class Day14 : IDayPartOne, IDayPartTwo
 
         while (!isFlowPointBlocked)
         {
-            if (!occupiedPoints.Contains(sandPosition.MoveUp()) && sandPosition.MoveUp().Y < floorLevel)
+            if (
+                !occupiedPoints.Contains(sandPosition.MoveUp())
+                && sandPosition.MoveUp().Y < floorLevel
+            )
             {
                 sandPosition = sandPosition.MoveUp();
             }
-            else if (!occupiedPoints.Contains(sandPosition.MoveUp().MoveLeft()) && sandPosition.MoveUp().Y < floorLevel)
+            else if (
+                !occupiedPoints.Contains(sandPosition.MoveUp().MoveLeft())
+                && sandPosition.MoveUp().Y < floorLevel
+            )
             {
                 sandPosition = sandPosition.MoveUp().MoveLeft();
             }
-            else if (!occupiedPoints.Contains(sandPosition.MoveUp().MoveRight()) && sandPosition.MoveUp().Y < floorLevel)
+            else if (
+                !occupiedPoints.Contains(sandPosition.MoveUp().MoveRight())
+                && sandPosition.MoveUp().Y < floorLevel
+            )
             {
                 sandPosition = sandPosition.MoveUp().MoveRight();
             }
@@ -110,14 +124,14 @@ public class RockPath
         var pathCoordinates = path.Split(" -> ")
             .Select(p =>
             {
-                var coords = p.Split(',')
-                    .Select(int.Parse).ToArray();
+                var coords = p.Split(',').Select(int.Parse).ToArray();
 
                 var coord = new Coordinate(coords[0], coords[1]);
                 PathCoordinates.Add(coord);
 
                 return coord;
-            }).ToArray();
+            })
+            .ToArray();
 
         for (var i = 0; i < pathCoordinates.Length - 1; i++)
         {
@@ -126,13 +140,11 @@ public class RockPath
 
             if (start.Y == end.Y)
             {
-                MoveAlongXAxis(start, end)
-                    .ToList().ForEach(c => PathCoordinates.Add(c));
+                MoveAlongXAxis(start, end).ToList().ForEach(c => PathCoordinates.Add(c));
             }
             else if (start.X == end.X)
             {
-                MoveAlongYAxis(start, end).ToList()
-                    .ForEach(c => PathCoordinates.Add(c));
+                MoveAlongYAxis(start, end).ToList().ForEach(c => PathCoordinates.Add(c));
             }
         }
     }

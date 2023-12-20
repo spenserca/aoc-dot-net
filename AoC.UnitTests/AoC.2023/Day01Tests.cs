@@ -12,13 +12,7 @@ public class Day01Tests
     [Fact(DisplayName = "gets the sum of the calibration values for each line with test input")]
     public void DayOnePartOne_TestInput()
     {
-        var input = new[]
-        {
-            "1abc2",
-            "pqr3stu8vwx",
-            "a1b2c3d4e5f",
-            "treb7uchet",
-        };
+        var input = new[] { "1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet", };
 
         var actual = _underTest.PartOne(input);
 

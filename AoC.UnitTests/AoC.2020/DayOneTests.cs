@@ -13,7 +13,9 @@ public class DayOneTests
         _underTest = new Day01();
     }
 
-    [Fact(DisplayName = "day one part one gets the multiplied value of the two numbers that add up to 2020")]
+    [Fact(
+        DisplayName = "day one part one gets the multiplied value of the two numbers that add up to 2020"
+    )]
     public void DayOnePartOneTest_One()
     {
         var input = new[] { "1721", "979", "366", "299", "675", "1456" };
@@ -33,7 +35,9 @@ public class DayOneTests
         actual.Should().Be(926464);
     }
 
-    [Fact(DisplayName = "day one part two gets the multiplied value of the three numbers that add up to 2020")]
+    [Fact(
+        DisplayName = "day one part two gets the multiplied value of the three numbers that add up to 2020"
+    )]
     public void DayOnePartTwoTest_One()
     {
         var input = new[] { "1721", "979", "366", "299", "675", "1456" };

@@ -79,7 +79,10 @@ public class Day04 : IDayPartOne, IDayPartTwo
 
         public BingoCard(List<string> rows)
         {
-            rows.ForEach(row => { _board.Add(row.Split(' ').Where(v => v != string.Empty).ToList()); });
+            rows.ForEach(row =>
+            {
+                _board.Add(row.Split(' ').Where(v => v != string.Empty).ToList());
+            });
         }
 
         public void MarkCardForBingoNumber(string bingoNumber, int turn)
@@ -99,9 +102,9 @@ public class Day04 : IDayPartOne, IDayPartTwo
         public int GetScore()
         {
             return _board
-                .SelectMany(r => r.Where(v => v != Marker))
-                .Select(n => Convert.ToInt32(n))
-                .Sum() * _lastMarkedNumber;
+                    .SelectMany(r => r.Where(v => v != Marker))
+                    .Select(n => Convert.ToInt32(n))
+                    .Sum() * _lastMarkedNumber;
         }
 
         public bool HasBingo()

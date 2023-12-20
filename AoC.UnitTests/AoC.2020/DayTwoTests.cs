@@ -16,12 +16,7 @@ public class DayTwoTests
     [Fact(DisplayName = "day two part one gets the count of all valid passwords")]
     public void DayTwoPartOne_TestOne()
     {
-        var input = new[]
-        {
-            "1-3 a: abcde",
-            "1-3 b: cdefg",
-            "2-9 c: ccccccccc"
-        };
+        var input = new[] { "1-3 a: abcde", "1-3 b: cdefg", "2-9 c: ccccccccc" };
 
         var actual = _underTest.PartOne(input);
 
@@ -41,12 +36,7 @@ public class DayTwoTests
     [Fact(DisplayName = "day two part twi gets the count of all valid passwords")]
     public void DayTwoPartTwo_TestOne()
     {
-        var input = new[]
-        {
-            "1-3 a: abcde",
-            "1-3 b: cdefg",
-            "2-9 c: ccccccccc"
-        };
+        var input = new[] { "1-3 a: abcde", "1-3 b: cdefg", "2-9 c: ccccccccc" };
 
         var actual = _underTest.PartTwo(input);
 

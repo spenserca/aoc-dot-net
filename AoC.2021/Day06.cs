@@ -49,8 +49,13 @@ public class Day06 : IDayPartOne, IDayPartTwo
                 0L
             };
 
-            lanternFish.Select(i => Convert.ToInt32(i)).ToList()
-                .ForEach(lf => { _fishWithGivenDaysToReproduction[lf] += 1; });
+            lanternFish
+                .Select(i => Convert.ToInt32(i))
+                .ToList()
+                .ForEach(lf =>
+                {
+                    _fishWithGivenDaysToReproduction[lf] += 1;
+                });
         }
 
         public void SimulateDay()

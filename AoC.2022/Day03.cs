@@ -15,7 +15,7 @@ public class Day03 : IDayPartOne, IDayPartTwo
         {
             var distinctItemsByCompartment = GetRuckSackItemsDistinctByCompartment(items);
             var sharedItem = GetSharedItem(distinctItemsByCompartment);
-            
+
             totalPriority += CalculatePriority(sharedItem);
         }
 
@@ -34,10 +34,14 @@ public class Day03 : IDayPartOne, IDayPartTwo
     {
         foreach (var item in items)
         {
-            if (items.Count(i => i == item) == 2) return item.ToString();
+            if (items.Count(i => i == item) == 2)
+                return item.ToString();
         }
-        
-        throw new ArgumentException("No item found that matches criteria for shared items!", nameof(items));
+
+        throw new ArgumentException(
+            "No item found that matches criteria for shared items!",
+            nameof(items)
+        );
     }
 
     public object PartTwo(string[] input)
@@ -58,7 +62,7 @@ public class Day03 : IDayPartOne, IDayPartTwo
                 currentElfGroupItems.Clear();
             }
         }
-        
+
         return badgePriority;
     }
 
@@ -72,10 +76,14 @@ public class Day03 : IDayPartOne, IDayPartTwo
     {
         foreach (var item in items)
         {
-            if (items.Count(i => i == item) == 3) return item.ToString();
+            if (items.Count(i => i == item) == 3)
+                return item.ToString();
         }
 
-        throw new ArgumentException("No item found that matches criteria for badge items!", nameof(items));
+        throw new ArgumentException(
+            "No item found that matches criteria for badge items!",
+            nameof(items)
+        );
     }
 
     private static bool IsLastElfInGroup(int i)

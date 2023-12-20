@@ -16,19 +16,7 @@ public class DayOneTests
     [Fact(DisplayName = "day one part one counts the number of depth increases")]
     public void DayOnePartOneTest_One()
     {
-        var input = new[]
-        {
-            "199",
-            "200",
-            "208",
-            "210",
-            "200",
-            "207",
-            "240",
-            "269",
-            "260",
-            "263"
-        };
+        var input = new[] { "199", "200", "208", "210", "200", "207", "240", "269", "260", "263" };
 
         var actual = _underTest.PartOne(input);
 
@@ -45,22 +33,12 @@ public class DayOneTests
         actual.Should().Be(1713);
     }
 
-    [Fact(DisplayName = "day one part two counts the number of depth increases in a sliding window")]
+    [Fact(
+        DisplayName = "day one part two counts the number of depth increases in a sliding window"
+    )]
     public void DayOnePartTwoTest_One()
     {
-        var input = new[]
-        {
-            "199",
-            "200",
-            "208",
-            "210",
-            "200",
-            "207",
-            "240",
-            "269",
-            "260",
-            "263"
-        };
+        var input = new[] { "199", "200", "208", "210", "200", "207", "240", "269", "260", "263" };
 
         var actual = _underTest.PartTwo(input);
 

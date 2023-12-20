@@ -24,15 +24,16 @@ public class Day02 : IDayPartOne, IDayPartTwo
     public object PartOne(string[] input)
     {
         var totalScore = 0;
-        Dictionary<string, GameActionsWithScores> inputActionToGameActionMap = new()
-        {
-            ["A"] = GameActionsWithScores.Rock,
-            ["B"] = GameActionsWithScores.Paper,
-            ["C"] = GameActionsWithScores.Scissors,
-            ["X"] = GameActionsWithScores.Rock,
-            ["Y"] = GameActionsWithScores.Paper,
-            ["Z"] = GameActionsWithScores.Scissors
-        };
+        Dictionary<string, GameActionsWithScores> inputActionToGameActionMap =
+            new()
+            {
+                ["A"] = GameActionsWithScores.Rock,
+                ["B"] = GameActionsWithScores.Paper,
+                ["C"] = GameActionsWithScores.Scissors,
+                ["X"] = GameActionsWithScores.Rock,
+                ["Y"] = GameActionsWithScores.Paper,
+                ["Z"] = GameActionsWithScores.Scissors
+            };
 
         foreach (var round in input)
         {
@@ -47,10 +48,13 @@ public class Day02 : IDayPartOne, IDayPartTwo
         return totalScore;
     }
 
-    private static int GetMyRockPaperScissorsScore(GameActionsWithScores opponentAction,
-        GameActionsWithScores myAction)
+    private static int GetMyRockPaperScissorsScore(
+        GameActionsWithScores opponentAction,
+        GameActionsWithScores myAction
+    )
     {
-        if (opponentAction == myAction) return (int)GameOutcomesWithScores.Draw;
+        if (opponentAction == myAction)
+            return (int)GameOutcomesWithScores.Draw;
 
         switch (opponentAction)
         {
@@ -66,18 +70,20 @@ public class Day02 : IDayPartOne, IDayPartTwo
     public object PartTwo(string[] input)
     {
         var totalScore = 0;
-        Dictionary<string, GameActionsWithScores> inputActionToGameActionMap = new()
-        {
-            ["A"] = GameActionsWithScores.Rock,
-            ["B"] = GameActionsWithScores.Paper,
-            ["C"] = GameActionsWithScores.Scissors
-        };
-        Dictionary<string, GameOutcomesWithScores> inputActionToGameOutcomeMap = new()
-        {
-            ["X"] = GameOutcomesWithScores.Lose,
-            ["Y"] = GameOutcomesWithScores.Draw,
-            ["Z"] = GameOutcomesWithScores.Win
-        };
+        Dictionary<string, GameActionsWithScores> inputActionToGameActionMap =
+            new()
+            {
+                ["A"] = GameActionsWithScores.Rock,
+                ["B"] = GameActionsWithScores.Paper,
+                ["C"] = GameActionsWithScores.Scissors
+            };
+        Dictionary<string, GameOutcomesWithScores> inputActionToGameOutcomeMap =
+            new()
+            {
+                ["X"] = GameOutcomesWithScores.Lose,
+                ["Y"] = GameOutcomesWithScores.Draw,
+                ["Z"] = GameOutcomesWithScores.Win
+            };
 
         foreach (var round in input)
         {
@@ -93,10 +99,13 @@ public class Day02 : IDayPartOne, IDayPartTwo
         return totalScore;
     }
 
-    private GameActionsWithScores GetMyActionFromOpponentsAndGameOutcome(GameActionsWithScores opponentAction,
-        GameOutcomesWithScores gameOutcomeWithScores)
+    private GameActionsWithScores GetMyActionFromOpponentsAndGameOutcome(
+        GameActionsWithScores opponentAction,
+        GameOutcomesWithScores gameOutcomeWithScores
+    )
     {
-        if (gameOutcomeWithScores is GameOutcomesWithScores.Draw) return opponentAction;
+        if (gameOutcomeWithScores is GameOutcomesWithScores.Draw)
+            return opponentAction;
 
         return gameOutcomeWithScores is GameOutcomesWithScores.Win
             ? GetWinningAction(opponentAction)
@@ -110,8 +119,12 @@ public class Day02 : IDayPartOne, IDayPartTwo
             GameActionsWithScores.Rock => GameActionsWithScores.Scissors,
             GameActionsWithScores.Paper => GameActionsWithScores.Rock,
             GameActionsWithScores.Scissors => GameActionsWithScores.Paper,
-            _ => throw new InvalidEnumArgumentException(nameof(opponentAction), (int)opponentAction,
-                typeof(GameActionsWithScores))
+            _
+                => throw new InvalidEnumArgumentException(
+                    nameof(opponentAction),
+                    (int)opponentAction,
+                    typeof(GameActionsWithScores)
+                )
         };
     }
 
@@ -122,8 +135,12 @@ public class Day02 : IDayPartOne, IDayPartTwo
             GameActionsWithScores.Rock => GameActionsWithScores.Paper,
             GameActionsWithScores.Paper => GameActionsWithScores.Scissors,
             GameActionsWithScores.Scissors => GameActionsWithScores.Rock,
-            _ => throw new InvalidEnumArgumentException(nameof(opponentAction), (int)opponentAction,
-                typeof(GameActionsWithScores))
+            _
+                => throw new InvalidEnumArgumentException(
+                    nameof(opponentAction),
+                    (int)opponentAction,
+                    typeof(GameActionsWithScores)
+                )
         };
     }
 }

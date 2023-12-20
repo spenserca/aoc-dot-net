@@ -94,6 +94,7 @@ public record Coordinate(int X, int Y)
     public Coordinate MoveDown() => this with { Y = Y - 1 };
 
     public Coordinate MoveLeft() => this with { X = X - 1 };
+
     public Coordinate MoveRight() => this with { X = X + 1 };
 };
 

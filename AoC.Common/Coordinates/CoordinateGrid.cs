@@ -19,10 +19,16 @@ public class CoordinateGrid
 
     public IEnumerable<Coordinate> GetSurroundingCoordinates(Coordinate coordinate)
     {
-        return Coordinates.Where(c => c.IsToTheLeftOf(coordinate) || c.IsToTheRightOf(coordinate) ||
-                                      c.IsAbove(coordinate) ||
-                                      c.IsBelow(coordinate) || c.IsToTheUpperLeftOf(coordinate) ||
-                                      c.IsToTheUpperRightOf(coordinate) ||
-                                      c.IsToTheBottomLeftOf(coordinate) || c.IsToTheBottomRightOf(coordinate));
+        return Coordinates.Where(
+            c =>
+                c.IsToTheLeftOf(coordinate)
+                || c.IsToTheRightOf(coordinate)
+                || c.IsAbove(coordinate)
+                || c.IsBelow(coordinate)
+                || c.IsToTheUpperLeftOf(coordinate)
+                || c.IsToTheUpperRightOf(coordinate)
+                || c.IsToTheBottomLeftOf(coordinate)
+                || c.IsToTheBottomRightOf(coordinate)
+        );
     }
 }

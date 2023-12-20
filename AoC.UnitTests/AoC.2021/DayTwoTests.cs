@@ -16,15 +16,7 @@ public class DayTwoTests
     [Fact(DisplayName = "day two part one multiplies the final depth and horizontal position")]
     public void DayTwoPartOneTest_One()
     {
-        var input = new[]
-        {
-            "forward 5",
-            "down 5",
-            "forward 8",
-            "up 3",
-            "down 8",
-            "forward 2"
-        };
+        var input = new[] { "forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2" };
 
         var actual = _underTest.PartOne(input);
 
@@ -41,19 +33,12 @@ public class DayTwoTests
         actual.Should().Be(1989014);
     }
 
-    [Fact(DisplayName =
-        "day two part two multiplies the final depth and horizontal position taking into account the aim of the submarine")]
+    [Fact(
+        DisplayName = "day two part two multiplies the final depth and horizontal position taking into account the aim of the submarine"
+    )]
     public void DayTwoPartTwoTest_One()
     {
-        var input = new[]
-        {
-            "forward 5",
-            "down 5",
-            "forward 8",
-            "up 3",
-            "down 8",
-            "forward 2"
-        };
+        var input = new[] { "forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2" };
 
         var actual = _underTest.PartTwo(input);
 
