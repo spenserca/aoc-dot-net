@@ -88,8 +88,8 @@ public class Day03 : IDayPartOne, IDayPartTwo
             }
         }
 
-        return gearsWithAdjacentEngineParts.Values
-            .Where(v => v.Count == 2)
+        return gearsWithAdjacentEngineParts
+            .Values.Where(v => v.Count == 2)
             .Sum(v => int.Parse(v[0]) * int.Parse(v[1]));
     }
 }
