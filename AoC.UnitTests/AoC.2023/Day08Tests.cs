@@ -73,6 +73,6 @@ public class Day08Tests : IDayPartOneTest, IDayPartTwoTest
 
         var actual = _underTest.PartTwo(input);
 
-        actual.Should().Be(19667);
+        actual.Should().Be(19185263738117L);
     }
 }
