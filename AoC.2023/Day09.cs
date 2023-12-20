@@ -9,23 +9,11 @@ public class Day09 : IDayPartOne
     public object PartOne(string[] input)
     {
         return input.Select(GetNextValueInHistory).Sum();
-
-        foreach (var i in input)
-        {
-            var sequence = i.Split(' ').ToList();
-
-            while (!sequence.TrueForAll(v => v.Equals("0")))
-            {
-                sequence = GetNextSequence(sequence);
-            }
-        }
-
-        return 0;
     }
 
-    private int GetNextValueInHistory(string history)
+    private static int GetNextValueInHistory(string history)
     {
-        var sequences = new List<IEnumerable<int>>();
+        var sequences = new List<List<int>>();
         var sequence = history.Split(' ')
             .Select(int.Parse)
             .ToList();
@@ -34,12 +22,20 @@ public class Day09 : IDayPartOne
 
         while (!sequence.TrueForAll(v => v == 0))
         {
-            sequence.Clear();
             sequence = GetNextSequence(sequence);
             sequences.Add(sequence);
         }
 
-        return 0;
+        for (var i = sequences.Count - 1; i > 0; i--)
+        {
+            var sequenceBelowLastValue = sequences[i].Last();
+            var sequenceAboveLastValue = sequences[i - 1].Last();
+
+            var aboveSequenceNextValue = sequenceBelowLastValue + sequenceAboveLastValue;
+            sequences[i - 1].Add(aboveSequenceNextValue);
+        }
+
+        return sequences[0].Last();
     }
 
     private static List<int> GetNextSequence(IReadOnlyList<int> sequence)
@@ -49,7 +45,7 @@ public class Day09 : IDayPartOne
         {
             var a = sequence[i];
             var b = sequence[i + 1];
-            nextSequence.Add(a - b);
+            nextSequence.Add(b - a);
         }
 
         if (nextSequence.TrueForAll(v => v == 0)) nextSequence.Add(0);

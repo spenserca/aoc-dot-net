@@ -24,8 +24,13 @@ public class Day09Tests : IDayPartOneTest
         actual.Should().Be(114);
     }
 
+    [Fact(DisplayName = "calculates the sum of all extrapolated values with actual input")]
     public void PartOne_ActualInput()
     {
-        throw new System.NotImplementedException();
+        var input = FileReader.ReadAllLines(TestDataFile);
+
+        var actual = _underTest.PartOne(input);
+
+        actual.Should().Be(1972648895);
     }
 }
