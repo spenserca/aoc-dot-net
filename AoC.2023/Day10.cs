@@ -7,25 +7,24 @@ public class Day10 : IDayPartOne
 {
     public string Title => "--- Day 10: Pipe Maze ---";
 
+    private const string NorthSouth = "|";
+    private const string EastWest = "-";
+    private const string NorthEast = "L";
+    private const string NorthWest = "J";
+    private const string SouthWest = "7";
+    private const string SouthEast = "F";
+    private const string Ground = ".";
+    private const string Start = "S";
+
     public object PartOne(string[] input)
     {
-        var grid = new CoordinateGrid(input).RemoveByValue(".");
-        var start = grid.GetCoordinateByValue("S");
-        var adjacentCoords = grid.GetLinearlyAdjacentCoords(start)
-            .ToList();
+        var grid = new CoordinateGrid(input).RemoveByValue(Ground);
+        var start = grid.GetCoordinateByValue(Start);
 
-        var paths = new Dictionary<Coordinate, List<Coordinate>> { { start, adjacentCoords } };
-        var steps = 0;
 
-        foreach (var coord in adjacentCoords)
-        {
-        }
 
         return 0;
     }
-
-    private static IEnumerable<Coordinate> FollowPath(Coordinate coord)
-    {
-        throw new NotImplementedException();
-    }
+    
+    
 }
