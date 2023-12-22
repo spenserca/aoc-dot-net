@@ -20,11 +20,23 @@ public class Day10 : IDayPartOne
     {
         var grid = new CoordinateGrid(input).RemoveByValue(Ground);
         var start = grid.GetCoordinateByValue(Start);
+        var steps = 0;
 
+        foreach (var coord in grid.GetLinearlyAdjacentCoords(start))
+        {
+            if (IsContinuousLoop(coord, out var loop))
+            {
+                steps = loop.Count() / 2;
+            }
+        }
 
-
-        return 0;
+        return steps;
     }
-    
-    
+
+    private static bool IsContinuousLoop(Coordinate coord, out IEnumerable<Coordinate> Loop)
+    {
+        Loop = Enumerable.Empty<Coordinate>();
+
+        return false;
+    }
 }
