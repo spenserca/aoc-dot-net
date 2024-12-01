@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
 
         <IsPackable>false</IsPackable>
+
+        <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,6 +26,7 @@
         <ProjectReference Include="..\AoC.2021\AoC.2021.csproj" />
         <ProjectReference Include="..\AoC.2022\AoC.2022.csproj" />
         <ProjectReference Include="..\AoC.2023\AoC.2023.csproj" />
+        <ProjectReference Include="..\AoC.2024\AoC.2024.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -122,6 +124,9 @@
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="AoC.2023\Data\Day09.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="AoC.2024\Data\Day01.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>
