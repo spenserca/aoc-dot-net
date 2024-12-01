@@ -28,4 +28,24 @@ public class Day01Tests
 
         actual.Should().Be(1666427);
     }
+
+    [Fact(DisplayName = "gets the similarity scores for test input")]
+    public void DayOnePartTwo_TestInput()
+    {
+        var input = new[] { "3   4", "4   3", "2   5", "1   3", "3   9", "3   3" };
+
+        var actual = _sut.PartTwo(input);
+
+        actual.Should().Be(31);
+    }
+
+    [Fact(DisplayName = "gets the similarity scores for test input")]
+    public void DayOnePartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+
+        var actual = _sut.PartTwo(input);
+
+        actual.Should().Be(24316233);
+    }
 }
