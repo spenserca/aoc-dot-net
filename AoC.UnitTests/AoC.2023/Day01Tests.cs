@@ -19,7 +19,10 @@ public class Day01Tests
         actual.Should().Be(142);
     }
 
-    [Fact(DisplayName = "gets the sum of the calibration values for each line with actual input")]
+    [Fact(
+        DisplayName = "gets the sum of the calibration values for each line with actual input",
+        Skip = "input file not included"
+    )]
     public void DayOnePartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
@@ -48,7 +51,10 @@ public class Day01Tests
         actual.Should().Be(281);
     }
 
-    [Fact(DisplayName = "gets the sum of the calibration values for each line with actual input")]
+    [Fact(
+        DisplayName = "gets the sum of the calibration values for each line with actual input",
+        Skip = "input file not included"
+    )]
     public void DayOnePartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);

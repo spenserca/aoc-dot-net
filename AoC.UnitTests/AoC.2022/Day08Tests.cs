@@ -27,7 +27,8 @@ public class Day08Tests
     }
 
     [Fact(
-        DisplayName = "finds how many trees are visible from the outside the grid with actual input"
+        DisplayName = "finds how many trees are visible from the outside the grid with actual input",
+        Skip = "input file not included"
     )]
     public void DayEightPartOne_ActualInput()
     {
@@ -48,7 +49,10 @@ public class Day08Tests
         actual.Should().Be(8);
     }
 
-    [Fact(DisplayName = "finds the highest scenic score with actual input")]
+    [Fact(
+        DisplayName = "finds the highest scenic score with actual input",
+        Skip = "input file not included"
+    )]
     public void DayEightPartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestFilePath);

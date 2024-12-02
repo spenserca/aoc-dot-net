@@ -38,7 +38,10 @@ public class DayEightTests
         actual.Should().Be(26);
     }
 
-    [Fact(DisplayName = "day eight part one with puzzle input gets the correct answer")]
+    [Fact(
+        DisplayName = "day eight part one with puzzle input gets the correct answer",
+        Skip = "input file not included"
+    )]
     public void DayEightPartOneTest_Two()
     {
         var input = FileReader.ReadAllLines(@"AoC.2021/Data/DayEight.txt");

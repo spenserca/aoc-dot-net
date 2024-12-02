@@ -31,7 +31,8 @@ public class Day06Tests
     }
 
     [Fact(
-        DisplayName = "calculates the number of chars processed until 4 unique chars are found in a row with actual input"
+        DisplayName = "calculates the number of chars processed until 4 unique chars are found in a row with actual input",
+        Skip = "input file not included"
     )]
     public void DaySixPartOne_ActualInput()
     {
@@ -58,7 +59,8 @@ public class Day06Tests
     }
 
     [Fact(
-        DisplayName = "calculates the number of chars processed until 14 unique chars are found in a row with actual input"
+        DisplayName = "calculates the number of chars processed until 14 unique chars are found in a row with actual input",
+        Skip = "input file not included"
     )]
     public void DaySixPartTwo_ActualInput()
     {

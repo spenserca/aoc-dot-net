@@ -36,7 +36,10 @@ public class DayThreeTests
         actual.Should().Be(7);
     }
 
-    [Fact(DisplayName = "day three part one with puzzle input gets the correct answer")]
+    [Fact(
+        DisplayName = "day three part one with puzzle input gets the correct answer",
+        Skip = "input file not included"
+    )]
     public void DayThreePartOne_TestTwo()
     {
         var input = FileReader.ReadAllLines(@"AoC.2020/Data/DayThree.txt");

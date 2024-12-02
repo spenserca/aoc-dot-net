@@ -22,7 +22,8 @@ public class Day06Tests : IDayPartOneTest, IDayPartTwoTest
     }
 
     [Fact(
-        DisplayName = "gets the multiplied value of all ways to win for all races with actual input"
+        DisplayName = "gets the multiplied value of all ways to win for all races with actual input",
+        Skip = "input file not included"
     )]
     public void PartOne_ActualInput()
     {
@@ -41,7 +42,10 @@ public class Day06Tests : IDayPartOneTest, IDayPartTwoTest
         actual.Should().Be(71503);
     }
 
-    [Fact(DisplayName = "gets the number of ways to win for the race with actual input")]
+    [Fact(
+        DisplayName = "gets the number of ways to win for the race with actual input",
+        Skip = "input file not included"
+    )]
     public void PartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);

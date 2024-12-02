@@ -27,7 +27,8 @@ public class Day14Tests
     }
 
     [Fact(
-        DisplayName = "determines how many units of sand will fall before endlessly falling into the abyss with actual input"
+        DisplayName = "determines how many units of sand will fall before endlessly falling into the abyss with actual input",
+        Skip = "input file not included"
     )]
     public void DayFourteenPartOne_ActualInput()
     {
@@ -49,7 +50,8 @@ public class Day14Tests
     }
 
     [Fact(
-        DisplayName = "determines how many units of sand will fall before the flow point is blocked with actual input"
+        DisplayName = "determines how many units of sand will fall before the flow point is blocked with actual input",
+        Skip = "input file not included"
     )]
     public void DayFourteenPartTwo_ActualInput()
     {

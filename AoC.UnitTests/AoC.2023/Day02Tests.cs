@@ -26,7 +26,10 @@ public class Day02Tests
         actual.Should().Be(8);
     }
 
-    [Fact(DisplayName = "gets the sum of the ids of games which are possible with actual input")]
+    [Fact(
+        DisplayName = "gets the sum of the ids of games which are possible with actual input",
+        Skip = "input file not included"
+    )]
     public void DayOnePartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
@@ -53,7 +56,10 @@ public class Day02Tests
         actual.Should().Be(2286);
     }
 
-    [Fact(DisplayName = "gets the sum of the power of the minimum sets with actual input")]
+    [Fact(
+        DisplayName = "gets the sum of the power of the minimum sets with actual input",
+        Skip = "input file not included"
+    )]
     public void DayOnePartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);

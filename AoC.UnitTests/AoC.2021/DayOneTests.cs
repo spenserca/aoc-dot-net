@@ -23,7 +23,10 @@ public class DayOneTests
         actual.Should().Be(7);
     }
 
-    [Fact(DisplayName = "day one part one with puzzle input gets the correct answer")]
+    [Fact(
+        DisplayName = "day one part one with puzzle input gets the correct answer",
+        Skip = "input file not included"
+    )]
     public void DayOnePartOneTest_Two()
     {
         var input = FileReader.ReadAllLines(@"AoC.2021/Data/DayOne.txt");
@@ -45,7 +48,10 @@ public class DayOneTests
         actual.Should().Be(5);
     }
 
-    [Fact(DisplayName = "day one part two with puzzle input gets the correct answer")]
+    [Fact(
+        DisplayName = "day one part two with puzzle input gets the correct answer",
+        Skip = "input file not included"
+    )]
     public void DayOnePartTwoTest_Two()
     {
         var input = FileReader.ReadAllLines(@"AoC.2021/Data/DayOne.txt");

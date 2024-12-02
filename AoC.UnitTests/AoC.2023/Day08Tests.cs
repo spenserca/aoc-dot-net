@@ -30,7 +30,10 @@ public class Day08Tests : IDayPartOneTest, IDayPartTwoTest
         actual.Should().Be(2);
     }
 
-    [Fact(DisplayName = "gets the number of steps needed to get to ZZZ with actual input")]
+    [Fact(
+        DisplayName = "gets the number of steps needed to get to ZZZ with actual input",
+        Skip = "input file not included"
+    )]
     public void PartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
@@ -65,7 +68,8 @@ public class Day08Tests : IDayPartOneTest, IDayPartTwoTest
     }
 
     [Fact(
-        DisplayName = "gets the number of steps needed to get to all nodes ending in Z with actual input"
+        DisplayName = "gets the number of steps needed to get to all nodes ending in Z with actual input",
+        Skip = "input file not included"
     )]
     public void PartTwo_ActualInput()
     {

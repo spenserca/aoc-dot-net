@@ -24,7 +24,10 @@ public class Day09Tests : IDayPartOneTest, IDayPartTwoTest
         actual.Should().Be(114);
     }
 
-    [Fact(DisplayName = "calculates the sum of all extrapolated values with actual input")]
+    [Fact(
+        DisplayName = "calculates the sum of all extrapolated values with actual input",
+        Skip = "input file not included"
+    )]
     public void PartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
@@ -43,7 +46,8 @@ public class Day09Tests : IDayPartOneTest, IDayPartTwoTest
     }
 
     [Fact(
-        DisplayName = "calculates the sum of all backwards extrapolated values with actual input"
+        DisplayName = "calculates the sum of all backwards extrapolated values with actual input",
+        Skip = "input file not included"
     )]
     public void PartTwo_ActualInput()
     {

@@ -35,7 +35,8 @@ public class Day03Tests
     }
 
     [Fact(
-        DisplayName = "calculates the sum of priorities of items included in both compartments with actual input"
+        DisplayName = "calculates the sum of priorities of items included in both compartments with actual input",
+        Skip = "input file not included"
     )]
     public void DayThreePartOne_ActualInput()
     {
@@ -67,7 +68,8 @@ public class Day03Tests
     }
 
     [Fact(
-        DisplayName = "calculates the sum of priorities of badges for the elf group with actual input"
+        DisplayName = "calculates the sum of priorities of badges for the elf group with actual input",
+        Skip = "input file not included"
     )]
     public void DayThreePartTwo_ActualInput()
     {

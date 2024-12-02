@@ -26,7 +26,10 @@ public class Day07Tests : IDayPartOneTest, IDayPartTwoTest
         actual.Should().Be(6440);
     }
 
-    [Fact(DisplayName = "gets the total winnings for a list of hands with actual input")]
+    [Fact(
+        DisplayName = "gets the total winnings for a list of hands with actual input",
+        Skip = "input file not included"
+    )]
     public void PartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
@@ -47,7 +50,8 @@ public class Day07Tests : IDayPartOneTest, IDayPartTwoTest
     }
 
     [Fact(
-        DisplayName = "gets the total winnings for a list of hands (including jokers) with actual input"
+        DisplayName = "gets the total winnings for a list of hands (including jokers) with actual input",
+        Skip = "input file not included"
     )]
     public void PartTwo_ActualInput()
     {

@@ -35,7 +35,10 @@ public class Day05Tests
         actual.Should().Be("CMZ");
     }
 
-    [Fact(DisplayName = "determines which crates are on top after rearrangement with actual input")]
+    [Fact(
+        DisplayName = "determines which crates are on top after rearrangement with actual input",
+        Skip = "input file not included"
+    )]
     public void DayFivePartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestFilePath);
@@ -69,7 +72,8 @@ public class Day05Tests
     }
 
     [Fact(
-        DisplayName = "determines which crates are on top after rearrangement using the CrateMover 9001 with actual input"
+        DisplayName = "determines which crates are on top after rearrangement using the CrateMover 9001 with actual input",
+        Skip = "input file not included"
     )]
     public void DayFivePartTwo_ActualInput()
     {

@@ -23,7 +23,10 @@ public class DaySixTests
         actual.Should().Be(5934);
     }
 
-    [Fact(DisplayName = "day six part one with puzzle input gets the correct answer")]
+    [Fact(
+        DisplayName = "day six part one with puzzle input gets the correct answer",
+        Skip = "input file not included"
+    )]
     public void DaySixPartOneTest_Two()
     {
         var input = FileReader.ReadAllLines(@"AoC.2021/Data/DaySix.txt");
@@ -43,7 +46,10 @@ public class DaySixTests
         actual.Should().Be(26984457539);
     }
 
-    [Fact(DisplayName = "day six part two with puzzle input gets the correct answer")]
+    [Fact(
+        DisplayName = "day six part two with puzzle input gets the correct answer",
+        Skip = "input file not included"
+    )]
     public void DaySixPartTwoTest_Two()
     {
         var input = FileReader.ReadAllLines(@"AoC.2021/Data/DaySix.txt");

@@ -26,7 +26,8 @@ public class Day09Tests
     }
 
     [Fact(
-        DisplayName = "gets the number of locations the tail visited at least once with actual input"
+        DisplayName = "gets the number of locations the tail visited at least once with actual input",
+        Skip = "input file not included"
     )]
     public void DayNinePartOne_ActualInput()
     {
@@ -50,7 +51,8 @@ public class Day09Tests
     }
 
     [Fact(
-        DisplayName = "gets the number of locations the tail visited at least once (with 10 knots) with actual input"
+        DisplayName = "gets the number of locations the tail visited at least once (with 10 knots) with actual input",
+        Skip = "input file not included"
     )]
     public void DayNinePartTwo_ActualInput()
     {

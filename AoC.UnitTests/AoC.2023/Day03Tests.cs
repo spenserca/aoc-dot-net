@@ -34,7 +34,8 @@ public class Day03Tests
     }
 
     [Fact(
-        DisplayName = "gets the sum of part numbers that are adjacent to a symbol with actual input"
+        DisplayName = "gets the sum of part numbers that are adjacent to a symbol with actual input",
+        Skip = "input file not included"
     )]
     public void DayOnePartOne_ActualInput()
     {
@@ -67,7 +68,10 @@ public class Day03Tests
         actual.Should().Be(467835);
     }
 
-    [Fact(DisplayName = "gets the sum of the gear ratios with actual input")]
+    [Fact(
+        DisplayName = "gets the sum of the gear ratios with actual input",
+        Skip = "input file not included"
+    )]
     public void DayOnePartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);

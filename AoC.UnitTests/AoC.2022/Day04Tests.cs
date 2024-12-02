@@ -28,7 +28,8 @@ public class Day04Tests
     }
 
     [Fact(
-        DisplayName = "calculates the number of pairs where one range contains the other with actual input"
+        DisplayName = "calculates the number of pairs where one range contains the other with actual input",
+        Skip = "input file not included"
     )]
     public void DayFourPartOne_ActualInput()
     {
@@ -52,7 +53,8 @@ public class Day04Tests
     }
 
     [Fact(
-        DisplayName = "calculates the number of pairs where one range contains any part of the other with actual input"
+        DisplayName = "calculates the number of pairs where one range contains any part of the other with actual input",
+        Skip = "input file not included"
     )]
     public void DayFourPartTwo_ActualInput()
     {

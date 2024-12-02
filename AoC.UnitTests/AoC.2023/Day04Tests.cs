@@ -26,7 +26,10 @@ public class Day04Tests
         actual.Should().Be(13);
     }
 
-    [Fact(DisplayName = "gets the total points of all the scratch cards  with actual input")]
+    [Fact(
+        DisplayName = "gets the total points of all the scratch cards with actual input",
+        Skip = "input file not included"
+    )]
     public void DayFourPartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
@@ -46,7 +49,7 @@ public class Day04Tests
 
     [Fact(
         DisplayName = "gets the total number of scratch cards with actual input",
-        Skip = "takes 2 minutes to run"
+        Skip = "input file not included"
     )]
     public void DayOnePartTwo_ActualInput()
     {

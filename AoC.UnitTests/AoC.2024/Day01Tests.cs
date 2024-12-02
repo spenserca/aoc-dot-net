@@ -19,7 +19,7 @@ public class Day01Tests
         actual.Should().Be(11);
     }
 
-    [Fact(DisplayName = "gets the total distance for test input")]
+    [Fact(DisplayName = "gets the total distance for test input", Skip = "input file not included")]
     public void DayOnePartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
@@ -39,7 +39,10 @@ public class Day01Tests
         actual.Should().Be(31);
     }
 
-    [Fact(DisplayName = "gets the similarity scores for test input")]
+    [Fact(
+        DisplayName = "gets the similarity scores for test input",
+        Skip = "input file not included"
+    )]
     public void DayOnePartTwo_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);

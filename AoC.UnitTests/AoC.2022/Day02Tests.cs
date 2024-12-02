@@ -26,7 +26,10 @@ public class Day02Tests
         actual.Should().Be(15);
     }
 
-    [Fact(DisplayName = "calculates total score by following the strategy guide with actual input")]
+    [Fact(
+        DisplayName = "calculates total score by following the strategy guide with actual input",
+        Skip = "input file not included"
+    )]
     public void DayTwoPartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(TestDataFile);
@@ -49,7 +52,8 @@ public class Day02Tests
     }
 
     [Fact(
-        DisplayName = "calculates total score by following the outcome in the strategy guide with actual input"
+        DisplayName = "calculates total score by following the outcome in the strategy guide with actual input",
+        Skip = "input file not included"
     )]
     public void DayTwoPartTwo_ActualInput()
     {

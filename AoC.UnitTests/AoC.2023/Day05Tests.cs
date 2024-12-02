@@ -57,7 +57,8 @@ public class Day05Tests : IDayPartOneTest, IDayPartTwoTest
     }
 
     [Fact(
-        DisplayName = "finds the lowest location number that corresponds to any of the initial seeds with actual input"
+        DisplayName = "finds the lowest location number that corresponds to any of the initial seeds with actual input",
+        Skip = "input file not included"
     )]
     public void PartOne_ActualInput()
     {
@@ -80,7 +81,7 @@ public class Day05Tests : IDayPartOneTest, IDayPartTwoTest
 
     [Fact(
         DisplayName = "finds the lowest location number that corresponds to any of the initial seed ranges with actual input",
-        Skip = "takes too long to process "
+        Skip = "input file not included"
     )]
     public void PartTwo_ActualInput()
     {

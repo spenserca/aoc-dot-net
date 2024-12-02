@@ -171,7 +171,10 @@ public class Day10Tests
         actual.Should().Be(13140);
     }
 
-    [Fact(DisplayName = "calculates total signal strength with actual input")]
+    [Fact(
+        DisplayName = "calculates total signal strength with actual input",
+        Skip = "input file not included"
+    )]
     public void DayTenPartOne_ActualInput()
     {
         var input = FileReader.ReadAllLines(@"AoC.2022/Data/Day10.txt");
@@ -199,7 +202,10 @@ public class Day10Tests
         actual.Should().BeEquivalentTo(expected);
     }
 
-    [Fact(DisplayName = "draws the correct image with actual input")]
+    [Fact(
+        DisplayName = "draws the correct image with actual input",
+        Skip = "input file not included"
+    )]
     public void DayTenPartTwo_ActualInput()
     {
         var expected = new[]
