@@ -25,10 +25,7 @@ public class Report(string value)
         .Select(v => new Level(v))
         .ToList();
 
-    public bool IsSafe()
-    {
-        return IsSafe(_levels);
-    }
+    public bool IsSafe() => IsSafe(_levels);
 
     private static bool IsSafe(List<Level> levels)
     {
