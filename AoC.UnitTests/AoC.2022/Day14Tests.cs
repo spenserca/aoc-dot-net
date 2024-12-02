@@ -1,13 +1,10 @@
 using AoC._2022;
-using FluentAssertions;
-using Xunit;
 
 namespace AoC.UnitTests.AoC._2022;
 
 public class Day14Tests
 {
     private readonly Day14 _underTest;
-    private readonly string[] _actualInput = FileReader.ReadAllLines(@"AoC.2022/Data/Day14.txt");
 
     public Day14Tests()
     {
@@ -32,7 +29,7 @@ public class Day14Tests
     )]
     public void DayFourteenPartOne_ActualInput()
     {
-        var actual = _underTest.PartOne(_actualInput);
+        var actual = _underTest.PartOne(FileReader.ReadAllLines(@"AoC.2022/Data/Day14.txt"));
 
         actual.Should().Be(795);
     }
@@ -55,7 +52,7 @@ public class Day14Tests
     )]
     public void DayFourteenPartTwo_ActualInput()
     {
-        var actual = _underTest.PartTwo(_actualInput);
+        var actual = _underTest.PartTwo(FileReader.ReadAllLines(@"AoC.2022/Data/Day14.txt"));
 
         actual.Should().Be(30214);
     }
