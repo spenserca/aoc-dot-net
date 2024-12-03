@@ -29,4 +29,27 @@ public class Day03Tests
 
         actual.Should().Be(183380722);
     }
+
+    [Fact(DisplayName = "2024 day 03 part 02 with test input")]
+    public void PartTwo_TestInput()
+    {
+        var input = new[]
+        {
+            "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+        };
+
+        var actual = _sut.PartTwo(input);
+
+        actual.Should().Be(48);
+    }
+
+    [Fact(DisplayName = "2024 day 03 part 02 with actual input", Skip = "input file not included")]
+    public void PartTwo_ActualInput()
+    {
+        var input = FileReader.ReadAllLines(TestDataFile);
+
+        var actual = _sut.PartTwo(input);
+
+        actual.Should().Be(82733683);
+    }
 }

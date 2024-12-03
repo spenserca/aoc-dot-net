@@ -1,5 +1,4 @@
 ﻿using AoC._2021;
-using Xunit.Sdk;
 
 namespace AoC.UnitTests.AoC._2021;
 
