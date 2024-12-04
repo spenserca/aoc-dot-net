@@ -68,8 +68,7 @@ public class GridBuilder
         for (var rowIndex = 0; rowIndex < rowCount; rowIndex++)
         {
             var diagonalBuilder = new StringBuilder();
-            var currentRow = _input[rowIndex];
-            var startingValue = currentRow[0];
+            var startingValue = _input[rowIndex][0].ToString();
             diagonalBuilder.Append(startingValue);
             
             var upperRowIndex = rowIndex - 1;
@@ -89,6 +88,55 @@ public class GridBuilder
             diagonals.Add(diagonalBuilder.ToString());
             diagonalBuilder.Clear();
         }
+        
+        var lastRow = _input[rowCount - 1];
+        for (var columnIndex = 0; columnIndex < columnCount; columnIndex++)
+        {
+            var diagonalBuilder = new StringBuilder();
+            var startingValue = lastRow[columnIndex].ToString();
+            diagonalBuilder.Append(startingValue);
+            
+            var nextColumnIndex = columnIndex + 1;
+            var upperRowIndex = rowCount - 1;
+            while (nextColumnIndex < columnCount)
+            {
+                if (upperRowIndex >= 0)
+                {
+                    upperRowIndex--;
+                    var nextValue = _input[upperRowIndex][nextColumnIndex];
+                    diagonalBuilder.Append(nextValue);
+                }
+                nextColumnIndex++;
+            }
+            
+            diagonals.Add(diagonalBuilder.ToString());
+            diagonalBuilder.Clear();
+        }
+        
+        // for (var columnIndex = 0; columnIndex < columnCount - 1; columnIndex++)
+        // {  
+        //     var diagonalBuilder = new StringBuilder();
+        //     var rowIndex = rowCount - 1;
+        //     var startingValue = _input[rowIndex][columnIndex];
+        //     diagonalBuilder.Append(startingValue);
+        //     
+        //     var upperRowIndex = rowIndex - 1;
+        //     var nextColumnIndex = columnIndex;
+        //     while (upperRowIndex >= 0)
+        //     {
+        //         if (nextColumnIndex < columnCount)
+        //         {
+        //             var nextValue = _input[upperRowIndex][nextColumnIndex + 1];
+        //             diagonalBuilder.Append(nextValue);
+        //             nextColumnIndex++;
+        //         }
+        //
+        //         upperRowIndex--;
+        //     }
+        //     
+        //     diagonals.Add(diagonalBuilder.ToString());
+        //     diagonalBuilder.Clear();
+        // }
 
         // do the same thing as above starting in the bottom right corner
         // this is the logic for the downward diagonals
