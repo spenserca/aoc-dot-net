@@ -20,35 +20,56 @@ public class Day03 : IDayPartOne, IDayPartTwo
     {
         var joined = string.Join(string.Empty, input);
 
-        return ParseMultiplierInstructions(joined).Sum(i => i.Value);
+        return new Program(joined).Execute();
+    }
+}
+
+public class Program(string instructions)
+{
+    private const string MultiplierPattern = @"mul\([0-9]{1,3},[0-9]{1,3}\)";
+    private bool IsEnabled { get; set; } = true;
+
+    private List<MultiplyInstruction> Instructions { get; set; } = new();
+
+    public int Execute()
+    {
+        var parsedInstructions = Regex.Matches(
+            instructions,
+            @"(do\(\))|(don't\(\))|(mul\([0-9]{1,3},[0-9]{1,3}\))"
+        );
+
+        foreach (Match pi in parsedInstructions)
+        {
+            ExecuteDontInstruction(pi.Value);
+            ExecuteDoInstruction(pi.Value);
+            ExecuteMulInstruction(pi.Value);
+        }
+
+        return Instructions.Sum(i => i.Value);
     }
 
-    private static List<MultiplyInstruction> ParseMultiplierInstructions(string instruction)
+    private void ExecuteDoInstruction(string instruction)
     {
-        var isEnabled = true;
+        if (instruction.Equals("do()"))
+        {
+            IsEnabled = true;
+        }
+    }
 
-        return Regex
-            .Matches(instruction, @"(do\(\))|(don't\(\))|(mul\([0-9]{1,3},[0-9]{1,3}\))")
-            .Select(
-                (m) =>
-                {
-                    if (m.Value.Equals("don't()"))
-                    {
-                        isEnabled = false;
-                    }
-                    else if (m.Value.Equals("do()"))
-                    {
-                        isEnabled = true;
-                    }
-                    else if (Regex.IsMatch(m.Value, MultiplierPattern) && isEnabled)
-                    {
-                        return new MultiplyInstruction(m.Value);
-                    }
+    private void ExecuteDontInstruction(string instruction)
+    {
+        if (instruction.Equals("don't()"))
+        {
+            IsEnabled = false;
+        }
+    }
 
-                    return MultiplyInstruction.Empty();
-                }
-            )
-            .ToList();
+    private void ExecuteMulInstruction(string instruction)
+    {
+        if (Regex.IsMatch(instruction, MultiplierPattern) && IsEnabled)
+        {
+            Instructions.Add(new MultiplyInstruction(instruction));
+        }
     }
 }
 
