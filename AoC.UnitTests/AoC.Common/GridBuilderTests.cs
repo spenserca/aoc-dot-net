@@ -103,4 +103,42 @@ public class GridBuilderTests
             grid.Columns.Should().BeEmpty();
         }
     }
+    
+    [Fact(DisplayName = "when diagonals should be included, then downward diagonals are returned in the grid")]
+    public void IncludeDiagonalsInGridDownwardDiagonals()
+    {
+        var input = new[]
+        {
+            "12345",
+            "ABCDE",
+            "23456",
+            "FGHIJ",
+            "34567",
+        };
+        
+        var expected = new[]
+        {
+            "3",
+            "F4",
+            "2G5",
+            "A3H6",
+            "1B4I7",
+            "2C5J",
+            "3D6",
+            "4E",
+            "5",
+        };
+
+        var grid = GridBuilder.FromInput(input)
+            .IncludeDiagonals()
+            .Build();
+
+        using (new AssertionScope())
+        {
+            grid.DownwardDiagonals.Should().HaveCount(expected.Length);
+            grid.DownwardDiagonals.Should().BeEquivalentTo(expected);
+            grid.Rows.Should().BeEmpty();
+            grid.Columns.Should().BeEmpty();
+        }
+    }
 }

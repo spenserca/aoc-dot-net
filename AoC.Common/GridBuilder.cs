@@ -39,11 +39,10 @@ public class GridBuilder
 
     public Grid Build()
     {
-        var buildUpwardDiagonals = BuildUpwardDiagonals();
         return new Grid(
             BuildRows(),
             BuildColumns(),
-            buildUpwardDiagonals,
+            BuildUpwardDiagonals(),
             BuildDownwardDiagonals()
         );
     }
@@ -52,7 +51,10 @@ public class GridBuilder
     {
         if (!_includeDiagonals) return null;
         
-        // for each value in each row -- get the value down and to the right of it and add to the current "row"
+        var rowCount = _input.Length;
+        var columnCount = _input[0].Length;
+
+        var diagonals = new HashSet<string>();
 
         return [];
     }
@@ -167,17 +169,6 @@ public class GridBuilder
         
         return diagonals;
     }
-
-    // private string BuildUpwardDiagonal(string diagonalStart)
-    // {
-    //     var diagonalBuilder = new StringBuilder(diagonalStart);
-    //
-    //     // get up and to the right value, if any
-    //     var nextValue = _input[x - 1][y + 1]
-    //     diagonalBuilder.Append()
-    //     
-    //     return diagonalBuilder.ToString();
-    // }
 
     private IEnumerable<string>? BuildColumns()
     {
