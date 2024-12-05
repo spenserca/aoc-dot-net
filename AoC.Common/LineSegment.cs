@@ -4,11 +4,13 @@ public record Coordinate(int X, int Y);
 
 public record LineSegment(Coordinate Start, Coordinate End)
 {
-    public int Run => End.X - Start.X;
+    private int Run => End.X - Start.X;
     public bool IsHorizontal => Rise == 0;
-    
-    public int Rise => End.Y - Start.Y;
+
+    private int Rise => End.Y - Start.Y;
     public bool IsVertical => Run == 0;
+
+    private double Slope => (double)Rise / Run;
     
     public bool IsStraightLine => IsHorizontal || IsVertical;
 
@@ -22,11 +24,28 @@ public record LineSegment(Coordinate Start, Coordinate End)
         // horizontal lines
         if (IsHorizontal) return GetHorizontalLinePoints();
         
-        // diagonally negative incline \
+        // slopes
+        return GetSlopedLinePoints();
+    }
+
+    private List<Coordinate> GetSlopedLinePoints()
+    {
+        var coordinates = new List<Coordinate>() { Start };
+
+        var x = Run > 0 ? Start.X + 1 : Start.X - 1;
+        var y = Rise > 0 ? Start.Y + 1 : Start.Y - 1;
+        while (x != End.X && y != End.Y)
+        {
+            coordinates.Add(new Coordinate(x, y));
+            if (Run > 0) x++;
+            else x--;
+            if (Rise > 0) y++;
+            else y--;
+        }
         
-        // diagonally positive incline /
+        coordinates.Add(End);
         
-        return new List<Coordinate>();
+        return coordinates;
     }
 
     private List<Coordinate> GetHorizontalLinePoints()
