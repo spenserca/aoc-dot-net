@@ -26,8 +26,8 @@ public class GridBuilderTests
             grid.Rows.Should().HaveCount(5);
             grid.Rows.Should().BeEquivalentTo(input);
             grid.Columns.Should().BeEmpty();
-            grid.UpwardDiagonals.Should().BeEmpty();
-            grid.DownwardDiagonals.Should().BeEmpty();
+            grid.Slopes.Should().BeEmpty();
+            grid.Slopes.Should().BeEmpty();
         }
     }
 
@@ -61,8 +61,8 @@ public class GridBuilderTests
             grid.Columns.Should().HaveCount(5);
             grid.Columns.Should().BeEquivalentTo(expected);
             grid.Rows.Should().BeEmpty();
-            grid.UpwardDiagonals.Should().BeEmpty();
-            grid.DownwardDiagonals.Should().BeEmpty();
+            grid.Slopes.Should().BeEmpty();
+            grid.Slopes.Should().BeEmpty();
         }
     }
 
@@ -92,13 +92,13 @@ public class GridBuilderTests
         };
 
         var grid = GridBuilder.FromInput(input)
-            .IncludeDiagonals()
+            .IncludeSlopes()
             .Build();
 
         using (new AssertionScope())
         {
-            grid.UpwardDiagonals.Should().HaveCount(expected.Length);
-            grid.UpwardDiagonals.Should().BeEquivalentTo(expected);
+            grid.Slopes.Should().HaveCount(expected.Length);
+            grid.Slopes.Should().BeEquivalentTo(expected);
             grid.Rows.Should().BeEmpty();
             grid.Columns.Should().BeEmpty();
         }
@@ -130,13 +130,13 @@ public class GridBuilderTests
         };
 
         var grid = GridBuilder.FromInput(input)
-            .IncludeDiagonals()
+            .IncludeSlopes()
             .Build();
 
         using (new AssertionScope())
         {
-            grid.DownwardDiagonals.Should().HaveCount(expected.Length);
-            grid.DownwardDiagonals.Should().BeEquivalentTo(expected);
+            grid.Slopes.Should().HaveCount(expected.Length);
+            grid.Slopes.Should().BeEquivalentTo(expected);
             grid.Rows.Should().BeEmpty();
             grid.Columns.Should().BeEmpty();
         }

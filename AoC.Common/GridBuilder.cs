@@ -1,18 +1,29 @@
-using System.Spatial;
 using System.Text;
 
 namespace AoC.Common;
 
 public class GridBuilder
 {
-    private string[] _input;
+    private readonly string[] _input;
     private bool _includeRows;
     private bool _includeColumns;
-    private bool _includeDiagonals;
+    private bool _includeSlopes;
+    private readonly Coordinate _topLeftCorner;
+    private readonly Coordinate _topRightCorner;
+    private readonly Coordinate _bottomLeftCorner;
+    private readonly Coordinate _bottomRightCorner;
+    private int _rowCount;
+    private int _columnCount;
 
-    protected GridBuilder(string[] input)
+    private GridBuilder(string[] input)
     {
+        _rowCount = input.Length - 1;
+        _columnCount = input[0].Length - 1;
         _input = input;
+        _topLeftCorner = new Coordinate(0, 0);
+        _topRightCorner = new Coordinate(0, _columnCount);
+        _bottomLeftCorner = new Coordinate(0, _rowCount);
+        _bottomRightCorner = new Coordinate(_rowCount, _columnCount);
     }
 
     public static GridBuilder FromInput(string[] input)
@@ -32,9 +43,9 @@ public class GridBuilder
         return this;
     }
 
-    public GridBuilder IncludeDiagonals()
+    public GridBuilder IncludeSlopes()
     {
-        _includeDiagonals = true;
+        _includeSlopes = true;
         return this;
     }
 
@@ -43,143 +54,76 @@ public class GridBuilder
         return new Grid(
             BuildRows(),
             BuildColumns(),
-            BuildUpwardDiagonals(),
-            BuildDownwardDiagonals()
+            BuildSlopes()
         );
     }
 
-    private IEnumerable<string>? BuildDownwardDiagonals()
-    {
-        if (!_includeDiagonals) return null;
-        
-        var rowCount = _input.Length;
-        var columnCount = _input[0].Length;
-        
-        // start in bottom-left corner moving to up and to the right
-        
-        // range from bottom-left(x: 0, y: input.length - 1) to top-right(x: input[0].length - 1, y: 0) -> fill an array with all coordinates in the range
-        var x = 0;
-        var y = rowCount - 1;
-        // var startingCoordinate = new Coordinate(0, y, _input[y][x].ToString());
-        // var endingCoordinate = new Coordinate(columnCount - 1, 0, _input[0][columnCount - 1].ToString());
-        //
-        // var start = GeometryPoint.Create();
-        
-        // for each value between the two coordinates create the coordinate / get the value
-        
-
-        var diagonals = new HashSet<string>();
-
-        return [];
-    }
-
-    private IEnumerable<string>? BuildUpwardDiagonals()
+    private IEnumerable<string>? BuildSlopes()
     {   
-        if (!_includeDiagonals) return null;
+        if (!_includeSlopes) return null;
+
+        var diagonals = new List<string>();
+
+        var lines = new List<LineSegment>();
         
-        var rowCount = _input.Length;
-        var columnCount = _input[0].Length;
-
-        var diagonals = new HashSet<string>();
-        for (var rowIndex = 0; rowIndex < rowCount; rowIndex++)
+        // negative slope \
+        // get lines above
+        var startX = 0;
+        var startY = 0;
+        var endX = _columnCount;
+        var endY = _rowCount;
+        while (startX != _columnCount && endY != 0)
         {
-            var diagonalBuilder = new StringBuilder();
-            var startingValue = _input[rowIndex][0].ToString();
-            diagonalBuilder.Append(startingValue);
-            
-            var upperRowIndex = rowIndex - 1;
-            var columnIndex = 0;
-            while (upperRowIndex >= 0)
-            {
-                if (columnIndex < columnCount)
-                {
-                    var nextValue = _input[upperRowIndex][columnIndex + 1];
-                    diagonalBuilder.Append(nextValue);
-                    columnIndex++;
-                }
-
-                upperRowIndex--;
-            }
-            
-            diagonals.Add(diagonalBuilder.ToString());
-            diagonalBuilder.Clear();
+            var nextStart = new Coordinate(startX, startY); // y doesn't change
+            var nextEnd = new Coordinate(endX, endY); // x doesn't change
+            lines.Add(new LineSegment(nextStart, nextEnd));
+            startX++;
+            endY--;
         }
         
-        var lastRow = _input[rowCount - 1];
-        for (var columnIndex = 0; columnIndex < columnCount; columnIndex++)
+        // get lines below
+        startX = 0;
+        startY = 0;
+        endX = _columnCount;
+        endY = _rowCount;
+        while (startX != _columnCount && endY != 0)
         {
-            var diagonalBuilder = new StringBuilder();
-            var startingValue = lastRow[columnIndex].ToString();
-            diagonalBuilder.Append(startingValue);
-            
-            var nextColumnIndex = columnIndex + 1;
-            var upperRowIndex = rowCount - 1;
-            while (nextColumnIndex < columnCount)
-            {
-                if (upperRowIndex >= 0)
-                {
-                    upperRowIndex--;
-                    var nextValue = _input[upperRowIndex][nextColumnIndex];
-                    diagonalBuilder.Append(nextValue);
-                }
-                nextColumnIndex++;
-            }
-            
-            diagonals.Add(diagonalBuilder.ToString());
-            diagonalBuilder.Clear();
+            var nextStart = new Coordinate(startX, startY); // x doesn't change
+            var nextEnd = new Coordinate(endX, endY); // y doesn't change
+            lines.Add(new LineSegment(nextStart, nextEnd));
+            startX++;
+            endY--;
         }
         
-        // for (var columnIndex = 0; columnIndex < columnCount - 1; columnIndex++)
-        // {  
-        //     var diagonalBuilder = new StringBuilder();
-        //     var rowIndex = rowCount - 1;
-        //     var startingValue = _input[rowIndex][columnIndex];
-        //     diagonalBuilder.Append(startingValue);
-        //     
-        //     var upperRowIndex = rowIndex - 1;
-        //     var nextColumnIndex = columnIndex;
-        //     while (upperRowIndex >= 0)
-        //     {
-        //         if (nextColumnIndex < columnCount)
-        //         {
-        //             var nextValue = _input[upperRowIndex][nextColumnIndex + 1];
-        //             diagonalBuilder.Append(nextValue);
-        //             nextColumnIndex++;
-        //         }
-        //
-        //         upperRowIndex--;
-        //     }
-        //     
-        //     diagonals.Add(diagonalBuilder.ToString());
-        //     diagonalBuilder.Clear();
-        // }
+        // positive slope /
+        // get lines above
 
-        // do the same thing as above starting in the bottom right corner
-        // this is the logic for the downward diagonals
-        // for (var rowIndex = _input.Length - 1; rowIndex >= 0; rowIndex--)
-        // {
-        //     var diagonalBuilder = new StringBuilder();
-        //     var currentRow = _input[rowIndex];
-        //     var startingValue = currentRow[^1];
-        //     diagonalBuilder.Append(startingValue);
-        //     
-        //     var upperRowIndex = rowIndex - 1;
-        //     var columnIndex = currentRow.Length - 1;
-        //     while (upperRowIndex >= 0)
-        //     {
-        //         if (columnIndex > 0)
-        //         {
-        //             var nextValue = _input[upperRowIndex][columnIndex - 1];
-        //             diagonalBuilder.Append(nextValue);
-        //             columnIndex--;
-        //         }
-        //         
-        //         upperRowIndex--;
-        //     }
-        //     
-        //     diagonals.Add(diagonalBuilder.ToString());
-        //     diagonalBuilder.Clear();
-        // }
+        startX = _topRightCorner.X;
+        startY = _topRightCorner.Y;
+        endX = _bottomLeftCorner.X;
+        endY = _bottomLeftCorner.Y;
+        while (startX != 0 && endY != 0)
+        {
+            var nextStart = new Coordinate(startX, startY); // y stays the same
+            var nextEnd = new Coordinate(endX, endY); // x stays the same
+            lines.Add(new LineSegment(nextStart, nextEnd));
+            startX--;
+            endY--;
+        }
+        
+        // get lines below /|
+        startX = _topRightCorner.X;
+        startY = _topRightCorner.Y;
+        endX = _bottomLeftCorner.X;
+        endY = _bottomLeftCorner.Y;
+        while (startY != _rowCount && endX != _columnCount)
+        {
+            var nextStart = new Coordinate(startX, startY); // x stays the same, y goes to row count
+            var nextEnd = new Coordinate(endX, endY); // y stays the same, x goes to column count
+            lines.Add(new LineSegment(nextStart, nextEnd));
+            startY++;
+            endX++;
+        }
         
         return diagonals;
     }
@@ -209,13 +153,11 @@ public class GridBuilder
 public class Grid(
     IEnumerable<string>? rows = null,
     IEnumerable<string>? columns = null,
-    IEnumerable<string>? upwardDiagonals = null,
-    IEnumerable<string>? downwardDiagonals = null)
+    IEnumerable<string>? slopes = null)
 {
     public readonly IEnumerable<string> Rows = rows ?? [];
     public readonly IEnumerable<string> Columns = columns ?? [];
-    public readonly IEnumerable<string> DownwardDiagonals = downwardDiagonals ?? [];
-    public readonly IEnumerable<string> UpwardDiagonals = upwardDiagonals ?? [];
+    public readonly IEnumerable<string> Slopes = slopes ?? [];
 }
 
 // public class LineSegment(Coordinate start, Coordinate end)
