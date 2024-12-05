@@ -11,7 +11,7 @@ public class Day05 : IDayPartOne, IDayPartTwo
     {
         return input
             .Select(ToLine)
-            .Where(IsStraightLine)
+            .Where(l => l.IsStraightLine)
             .Select(ToCoordinates)
             .SelectMany(c => c)
             .GroupBy(c => c.ToString())
@@ -30,35 +30,20 @@ public class Day05 : IDayPartOne, IDayPartTwo
             .Count(c => c.Value >= 2);
     }
 
-    private static bool IsStraightLine(Line line)
-    {
-        return IsVerticalLine(line) || IsHorizontalLine(line);
-    }
-
-    private static bool IsHorizontalLine(Line line)
-    {
-        return line.Start.Y == line.End.Y;
-    }
-
-    private static bool IsVerticalLine(Line line)
-    {
-        return line.Start.X == line.End.X;
-    }
-
-    private static Line ToLine(string lineDefinition)
+    private static LineSegment ToLine(string lineDefinition)
     {
         var coordinateRegex = new Regex("([0-9]+,[0-9]+)");
         var coordinateMatches = coordinateRegex.Matches(lineDefinition);
         var startCoordinate = GetCoordinate(coordinateMatches[0].Value);
         var endCoordinate = GetCoordinate(coordinateMatches[1].Value);
-        return new Line(startCoordinate, endCoordinate);
+        return new LineSegment(startCoordinate, endCoordinate);
     }
 
-    private static List<Coordinate> ToCoordinates(Line line)
+    private static List<Coordinate> ToCoordinates(LineSegment line)
     {
         var coordinates = new List<Coordinate>();
 
-        if (IsVerticalLine(line))
+        if (line.IsVertical)
         {
             var x = line.Start.X;
             var endY = line.End.Y;
@@ -78,7 +63,7 @@ public class Day05 : IDayPartOne, IDayPartTwo
                 }
             }
         }
-        else if (IsHorizontalLine(line))
+        else if (line.IsHorizontal)
         {
             var y = line.Start.Y;
             var endX = line.End.X;
@@ -151,8 +136,4 @@ public class Day05 : IDayPartOne, IDayPartTwo
 
         return new Coordinate(values[0], values[1]);
     }
-
-    private record Coordinate(int X, int Y);
-
-    private record Line(Coordinate Start, Coordinate End);
 }

@@ -1,5 +1,4 @@
 using AoC.Common;
-using AoC.Common.Math;
 
 namespace AoC._2023;
 

@@ -1,3 +1,4 @@
+using System.Spatial;
 using System.Text;
 
 namespace AoC.Common;
@@ -53,6 +54,19 @@ public class GridBuilder
         
         var rowCount = _input.Length;
         var columnCount = _input[0].Length;
+        
+        // start in bottom-left corner moving to up and to the right
+        
+        // range from bottom-left(x: 0, y: input.length - 1) to top-right(x: input[0].length - 1, y: 0) -> fill an array with all coordinates in the range
+        var x = 0;
+        var y = rowCount - 1;
+        // var startingCoordinate = new Coordinate(0, y, _input[y][x].ToString());
+        // var endingCoordinate = new Coordinate(columnCount - 1, 0, _input[0][columnCount - 1].ToString());
+        //
+        // var start = GeometryPoint.Create();
+        
+        // for each value between the two coordinates create the coordinate / get the value
+        
 
         var diagonals = new HashSet<string>();
 
@@ -203,3 +217,21 @@ public class Grid(
     public readonly IEnumerable<string> DownwardDiagonals = downwardDiagonals ?? [];
     public readonly IEnumerable<string> UpwardDiagonals = upwardDiagonals ?? [];
 }
+
+// public class LineSegment(Coordinate start, Coordinate end)
+// {
+//     private readonly Coordinate _start = start;
+//     private readonly Coordinate _end = end;
+//     private List<Coordinate> _vertices = new();
+//     
+//     public List<Coordinate> Vertices => _vertices.Any() ? _vertices : CalculateVertices();
+//
+//     private List<Coordinate> CalculateVertices()
+//     {
+//         var vertices = new List<Coordinate>();
+//         // TODO: fill this out
+//         
+//         _vertices = vertices;
+//         return vertices;
+//     }
+// }

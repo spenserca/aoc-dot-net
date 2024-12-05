@@ -1,4 +1,4 @@
-namespace AoC.Common.Math;
+namespace AoC.Common;
 
 public static class MathExtensions
 {

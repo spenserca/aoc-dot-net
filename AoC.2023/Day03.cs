@@ -44,8 +44,8 @@ public class Day03 : IDayPartOne, IDayPartTwo
     public object PartTwo(string[] input)
     {
         var enginePart = string.Empty;
-        var adjacentGears = new List<Coordinate>();
-        var gearsWithAdjacentEngineParts = new Dictionary<Coordinate, List<string>>();
+        var adjacentGears = new List<ValueCoordinate>();
+        var gearsWithAdjacentEngineParts = new Dictionary<ValueCoordinate, List<string>>();
 
         var grid = new CoordinateGrid(input);
         var isSymbolAdjacent = false;

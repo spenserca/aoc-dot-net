@@ -2,7 +2,7 @@
 
 public class CoordinateGrid
 {
-    public List<Coordinate> Coordinates { get; } = new();
+    public List<ValueCoordinate> Coordinates { get; } = new();
 
     public CoordinateGrid(IReadOnlyList<string> input)
     {
@@ -12,12 +12,12 @@ public class CoordinateGrid
 
             for (var x = 0; x < row.Length; x++)
             {
-                Coordinates.Add(new Coordinate(x, y, row[x].ToString()));
+                Coordinates.Add(new ValueCoordinate(x, y, row[x].ToString()));
             }
         }
     }
 
-    public IEnumerable<Coordinate> GetSurroundingCoordinates(Coordinate coordinate)
+    public IEnumerable<ValueCoordinate> GetSurroundingCoordinates(ValueCoordinate coordinate)
     {
         return Coordinates.Where(
             c =>
