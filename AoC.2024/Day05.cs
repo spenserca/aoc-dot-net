@@ -34,6 +34,7 @@ public class PagesToUpdate(string value)
     public bool IsCorrectlyOrdered(List<PageOrderingRule> rules)
     {
         var pagesAreOrdered = new List<bool>();
+        
         foreach (var rule in rules)
         {
             if (_pages.Contains(rule.FirstPage) && _pages.Contains(rule.SecondPage))
@@ -48,7 +49,7 @@ public class PagesToUpdate(string value)
                 pagesAreOrdered.Add(firstPageIndex > secondPageIndex);
             }
         }
-        return pagesAreOrdered.All(_ => true);
+        return pagesAreOrdered.All(v => v);
     }
 
     public int MiddlePageNumber => _pages[_pages.Count / 2];
