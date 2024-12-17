@@ -11,7 +11,7 @@ public class Day05 : IDayPartOne
         var pageOrderingRules = input.Where(v => v.Contains("|"))
             .Select(v => new PageOrderingRule(v)).ToList();
         var pagesToUpdate = input.Where(v => v.Contains(","))
-            .Select(v => new PagesToUpdate(v));
+            .Select(v => new ListOfPages(v));
 
         return pagesToUpdate.Where(p => p.IsCorrectlyOrdered(pageOrderingRules))
             .Sum(p => p.MiddlePageNumber);
@@ -27,7 +27,7 @@ public class PageOrderingRule(string value)
     public bool IsIncrementingOrder => FirstPage < SecondPage;
 }
 
-public class PagesToUpdate(string value)
+public class ListOfPages(string value)
 {
     private readonly List<int> _pages = value.Split(',').Select(int.Parse).ToList();
 
@@ -49,8 +49,25 @@ public class PagesToUpdate(string value)
                 pagesAreOrdered.Add(firstPageIndex > secondPageIndex);
             }
         }
-        return pagesAreOrdered.All(v => v);
+        return pagesAreOrdered.Any(v => !v);
     }
 
     public int MiddlePageNumber => _pages[_pages.Count / 2];
+}
+
+public interface ISpecification<in T>
+{
+    bool IsSatisfiedBy(T candidate);
+}
+
+public class PageOrderingRuleSpecification(string value) : ISpecification<ListOfPages>
+{
+    private readonly List<int> _pageOrder = value.Split('|').Select(int.Parse).ToList();
+    private int FirstPage => _pageOrder[0];
+    private int SecondPage => _pageOrder[1];
+    
+    public bool IsSatisfiedBy(ListOfPages candidate)
+    {
+        throw new NotImplementedException();
+    }
 }

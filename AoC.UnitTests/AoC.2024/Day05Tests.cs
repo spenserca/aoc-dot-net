@@ -54,7 +54,7 @@ public class Day05Tests
             "53|13",
         }.Select(v => new PageOrderingRule(v)).ToList();
         
-        var actual = new PagesToUpdate(pages).IsCorrectlyOrdered(pageOrderingRules);
+        var actual = new ListOfPages(pages).IsCorrectlyOrdered(pageOrderingRules);
         
         actual.Should().Be(expected);
     }
