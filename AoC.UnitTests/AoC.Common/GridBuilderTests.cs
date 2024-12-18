@@ -42,4 +42,41 @@ public class GridBuilderTests
             }
         }
     }
+
+    [Fact(DisplayName = "can build a grid with columns")]
+    public void CanBuildGridWithColumns()
+    {
+        var input = new[]
+        {
+            "89010123",
+            "78121874",
+            "87430965",
+            "96549874",
+            "45678903",
+            "32019012",
+            "01329801",
+            "10456732"
+        };
+
+        var actual = GridBuilder.FromInput(input)
+            .WithColumns()
+            .Build();
+
+        using (new AssertionScope())
+        {
+            var startingX = input[0].Select((v, i) => i);
+            foreach (var x in startingX)
+            {
+                var expected = new List<NewCoordinate>();
+                var y = 0;
+                while (y < input.Length)
+                {
+                    expected.Add(new NewCoordinate(x, y));
+                    y++;
+                }
+                
+                actual.Columns[x].Should().BeEquivalentTo(expected);
+            }
+        }
+    }
 }
