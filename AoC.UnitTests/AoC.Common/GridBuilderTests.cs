@@ -31,11 +31,11 @@ public class GridBuilderTests
             foreach (var row in input)
             {
                 var x = input.ToList().FindIndex(v => v.Equals(row));
-                var expected = new List<NewCoordinate>();
+                var expected = new List<ValueCoordinate>();
                 var max = row.Length;
                 for (var i = 0; i < max; i++)
                 {
-                    expected.Add(new NewCoordinate(x, i));
+                    expected.Add(new ValueCoordinate(x, i, new Number(input[x][i])));
                 }
 
                 actual.Rows[x].Should().BeEquivalentTo(expected);
@@ -67,14 +67,14 @@ public class GridBuilderTests
             var startingX = input[0].Select((v, i) => i);
             foreach (var x in startingX)
             {
-                var expected = new List<NewCoordinate>();
+                var expected = new List<ValueCoordinate>();
                 var y = 0;
                 while (y < input.Length)
                 {
-                    expected.Add(new NewCoordinate(x, y));
+                    expected.Add(new ValueCoordinate(x, y, new Number(input[x][y])));
                     y++;
                 }
-                
+
                 actual.Columns[x].Should().BeEquivalentTo(expected);
             }
         }

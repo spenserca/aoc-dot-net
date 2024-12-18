@@ -6,7 +6,7 @@ public class GridBuilder
     private bool _includeRows;
     private bool _includeColumns;
 
-    protected GridBuilder(string[] grid)
+    private GridBuilder(string[] grid)
     {
         _grid = grid;
     }
@@ -35,34 +35,46 @@ public class GridBuilder
         return new Grid(rows, columns);
     }
 
-    private List<NewCoordinate[]> BuildColumns()
+    private List<ValueCoordinate[]> BuildColumns()
     {
         var columnLength = _grid.Length;
-        var rowLength = _grid[0].Length;
-        var columns = new List<NewCoordinate[]>();
-        for (var x = 0; x < rowLength; x++)
+        var columns = new List<ValueCoordinate[]>();
+        for (var x = 0; x < _grid[0].Length; x++)
         {
-            var column = new NewCoordinate[columnLength];
+            var column = new ValueCoordinate[columnLength];
             for (var y = 0; y < columnLength; y++)
             {
-                column[y] = new NewCoordinate(x, y);
+                column[y] = new ValueCoordinate(x, y, new Number(_grid[x][y]));
             }
+
             columns.Add(column);
         }
-        
+
         return columns;
     }
 
-    private NewCoordinate[] BuildRow(string row, int rowNumber)
+    private ValueCoordinate[] BuildRow(string row, int rowNumber)
     {
-        return row.Select((c, i) => new NewCoordinate(rowNumber, i)).ToArray();
+        return row.Select((c, i) => new ValueCoordinate(rowNumber, i, new Number(_grid[rowNumber][i]))).ToArray();
     }
 }
 
-public record NewCoordinate(int X, int Y);
-
-public class Grid(List<NewCoordinate[]> rows, List<NewCoordinate[]> columns)
+public record Number
 {
-    public List<NewCoordinate[]> Rows { get; } = rows;
-    public List<NewCoordinate[]> Columns { get; } = columns;
+    private readonly string _value;
+
+    public Number(char value)
+    {
+        _value = value.ToString();
+    }
+
+    public int Value => int.Parse(_value);
+}
+
+public record ValueCoordinate(int X, int Y, Number Value);
+
+public class Grid(List<ValueCoordinate[]> rows, List<ValueCoordinate[]> columns)
+{
+    public List<ValueCoordinate[]> Rows { get; } = rows;
+    public List<ValueCoordinate[]> Columns { get; } = columns;
 }
