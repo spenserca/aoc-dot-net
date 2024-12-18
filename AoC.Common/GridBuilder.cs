@@ -3,8 +3,7 @@ namespace AoC.Common;
 public class GridBuilder
 {
     private readonly string[] _grid;
-    private bool _includeRows;
-    private bool _includeColumns;
+    private Predicate<ValueCoordinate>? _findValuesPredicate;
 
     private GridBuilder(string[] grid)
     {
@@ -16,46 +15,24 @@ public class GridBuilder
         return new GridBuilder(input);
     }
 
-    public GridBuilder WithRows()
+    public GridBuilder IncludeFilteredSubset(Predicate<ValueCoordinate> predicate)
     {
-        _includeRows = true;
+        _findValuesPredicate = predicate;
         return this;
     }
 
-    public GridBuilder WithColumns()
+    public ValueGrid Build()
     {
-        _includeColumns = true;
-        return this;
-    }
-
-    public Grid Build()
-    {
-        var rows = (_includeRows ? _grid.Select(BuildRow) : []).ToList();
-        var columns = (_includeColumns ? BuildColumns() : []).ToList();
-        return new Grid(rows, columns);
-    }
-
-    private List<ValueCoordinate[]> BuildColumns()
-    {
-        var columnLength = _grid.Length;
-        var columns = new List<ValueCoordinate[]>();
-        for (var x = 0; x < _grid[0].Length; x++)
+        var coords = new List<ValueCoordinate>();
+        for (var y = 0; y < _grid.Length; y++)
         {
-            var column = new ValueCoordinate[columnLength];
-            for (var y = 0; y < columnLength; y++)
+            for (var x = 0; x < _grid[0].Length; x++)
             {
-                column[y] = new ValueCoordinate(x, y, new Number(_grid[x][y]));
+                coords.Add(new ValueCoordinate(x, y, new Number(_grid[x][y])));       
             }
-
-            columns.Add(column);
         }
-
-        return columns;
-    }
-
-    private ValueCoordinate[] BuildRow(string row, int rowNumber)
-    {
-        return row.Select((c, i) => new ValueCoordinate(rowNumber, i, new Number(_grid[rowNumber][i]))).ToArray();
+        
+        return new ValueGrid(coords, _findValuesPredicate);
     }
 }
 
@@ -68,13 +45,12 @@ public record Number
         _value = value.ToString();
     }
 
-    public int Value => int.Parse(_value);
+    public int AsInt => int.Parse(_value);
 }
 
 public record ValueCoordinate(int X, int Y, Number Value);
 
-public class Grid(List<ValueCoordinate[]> rows, List<ValueCoordinate[]> columns)
+public record ValueGrid(List<ValueCoordinate> Coordinates, Predicate<ValueCoordinate>? Predicate)
 {
-    public List<ValueCoordinate[]> Rows { get; } = rows;
-    public List<ValueCoordinate[]> Columns { get; } = columns;
+    public List<ValueCoordinate> FilteredSubset => Predicate is null ? [] : Coordinates.Where(v => Predicate.Invoke(v)).ToList();
 }
