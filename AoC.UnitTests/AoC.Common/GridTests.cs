@@ -6,7 +6,7 @@ namespace AoC.UnitTests.AoC.Common;
 
 public class GridTests(ITestOutputHelper logger)
 {
-    [Fact(DisplayName = "")]
+    [Fact(DisplayName = "displays the grid when calling the tostring method")]
     public void Test()
     {
         var input = new[]
