@@ -60,12 +60,22 @@ public class GridTests(ITestOutputHelper logger)
         }
     }
 
-    [Theory(DisplayName = "can get the coordinates around the current coordinate when they have a value")]
-    [InlineData(4, 1, ".", Direction.Up, 4 , 0, "#")]
-    [InlineData(8, 6, ".", Direction.Down, 8 , 7, "#")]
-    [InlineData(5, 6, ".", Direction.Left, 4 , 6, "^")]
-    [InlineData(8, 1, ".", Direction.Right, 9 , 1, "#")]
-    public void GetCoodinatesAroundWithValues(int currentX, int currentY, string currentValue, Direction direction, int nextX, int nextY, string nextValue)
+    [Theory(
+        DisplayName = "can get the coordinates around the current coordinate when they have a value"
+    )]
+    [InlineData(4, 1, ".", Direction.Up, 4, 0, "#")]
+    [InlineData(8, 6, ".", Direction.Down, 8, 7, "#")]
+    [InlineData(5, 6, ".", Direction.Left, 4, 6, "^")]
+    [InlineData(8, 1, ".", Direction.Right, 9, 1, "#")]
+    public void GetCoodinatesAroundWithValues(
+        int currentX,
+        int currentY,
+        string currentValue,
+        Direction direction,
+        int nextX,
+        int nextY,
+        string nextValue
+    )
     {
         var input = new[]
         {
@@ -81,7 +91,10 @@ public class GridTests(ITestOutputHelper logger)
             "......#..."
         };
 
-        var actual = new Grid(input).GetValueInDirection(new GridCoordinate(currentX, currentY, currentValue), direction);
+        var actual = new Grid(input).GetValueInDirection(
+            new GridCoordinate(currentX, currentY, currentValue),
+            direction
+        );
 
         using (new AssertionScope())
         {
@@ -91,13 +104,20 @@ public class GridTests(ITestOutputHelper logger)
             actual.Value.Should().Be(nextValue);
         }
     }
-    
-    [Theory(DisplayName = "can get the coordinates around the current coordinate when they don't have a value")]
+
+    [Theory(
+        DisplayName = "can get the coordinates around the current coordinate when they don't have a value"
+    )]
     [InlineData(4, 0, ".", Direction.Up)]
     [InlineData(8, 9, ".", Direction.Down)]
     [InlineData(0, 6, ".", Direction.Left)]
     [InlineData(9, 1, ".", Direction.Right)]
-    public void GetCoordinatesAroundWithoutValues(int currentX, int currentY, string currentValue, Direction direction)
+    public void GetCoordinatesAroundWithoutValues(
+        int currentX,
+        int currentY,
+        string currentValue,
+        Direction direction
+    )
     {
         var input = new[]
         {
@@ -113,7 +133,10 @@ public class GridTests(ITestOutputHelper logger)
             "......#..."
         };
 
-        var actual = new Grid(input).GetValueInDirection(new GridCoordinate(currentX, currentY, currentValue), direction);
+        var actual = new Grid(input).GetValueInDirection(
+            new GridCoordinate(currentX, currentY, currentValue),
+            direction
+        );
 
         using (new AssertionScope())
         {

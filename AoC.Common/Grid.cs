@@ -6,7 +6,7 @@ public class Grid
 {
     private string[] _input;
     private List<GridCoordinate> Coordinates { get; } = new();
-    
+
     public Grid(string[] input)
     {
         _input = input;
