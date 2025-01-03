@@ -28,14 +28,14 @@ public class Grid
 
     public GridCoordinate? GetValueInDirection(GridCoordinate current, Direction direction)
     {
-        switch (direction)
+        return direction switch
         {
-            case Direction.Up: return GetValueAtLocation(current.X, current.Y - 1);
-            case Direction.Down: return GetValueAtLocation(current.X, current.Y + 1);
-            case Direction.Left: return GetValueAtLocation(current.X - 1, current.Y);
-            case Direction.Right: return GetValueAtLocation(current.X + 1, current.Y);
-            default: return null;
-        }
+            Direction.Up => GetValueAtLocation(current.X, current.Y - 1),
+            Direction.Down => GetValueAtLocation(current.X, current.Y + 1),
+            Direction.Left => GetValueAtLocation(current.X - 1, current.Y),
+            Direction.Right => GetValueAtLocation(current.X + 1, current.Y),
+            _ => null
+        };
     }
 
     private GridCoordinate? GetValueAtLocation(int x, int y)
