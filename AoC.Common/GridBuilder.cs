@@ -28,10 +28,10 @@ public class GridBuilder
         {
             for (var x = 0; x < _grid[0].Length; x++)
             {
-                coords.Add(new ValueCoordinate(x, y, new Number(_grid[x][y])));       
+                coords.Add(new ValueCoordinate(x, y, new Number(_grid[x][y])));
             }
         }
-        
+
         return new ValueGrid(coords, _findValuesPredicate);
     }
 }
@@ -52,5 +52,17 @@ public record ValueCoordinate(int X, int Y, Number Value);
 
 public record ValueGrid(List<ValueCoordinate> Coordinates, Predicate<ValueCoordinate>? Predicate)
 {
-    public List<ValueCoordinate> FilteredSubset => Predicate is null ? [] : Coordinates.Where(v => Predicate.Invoke(v)).ToList();
+    public List<ValueCoordinate> FilteredSubset =>
+        Predicate is null ? [] : Coordinates.Where(v => Predicate.Invoke(v)).ToList();
+
+    public List<ValueCoordinate> GetSurroundingCoordinates(ValueCoordinate centralCoordinate)
+    {
+        var above = (ValueCoordinate a) => a.X == centralCoordinate.X && a.Y == centralCoordinate.Y - 1;
+        var below = (ValueCoordinate a) => a.X == centralCoordinate.X && a.Y == centralCoordinate.Y + 1;
+        var left = (ValueCoordinate a) => a.X == centralCoordinate.X - 1 && a.Y == centralCoordinate.Y;
+        var right = (ValueCoordinate a) => a.X == centralCoordinate.X + 1 && a.Y == centralCoordinate.Y;
+
+        return Coordinates.Where(coordinate =>
+            above(coordinate) || below(coordinate) || left(coordinate) || right(coordinate)).ToList();
+    }
 }
